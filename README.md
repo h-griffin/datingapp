@@ -1,5 +1,8 @@
-## ======= SECTION 1 =======
-- API project
+# Dating app 
+![tools](API/assets/tools.png)
+
+# ======= SECTION 1 =======
+### API project
 - walking skeleton 
     - put data in database
     - make api to get data
@@ -14,6 +17,7 @@
     - config and env variables
     - source control (github)
 
+### set up & run application
 - check if dotnet sdk is installed
     - `> $ dotnet --info `
 - template : ASP.NET Core Web API 
@@ -50,6 +54,8 @@
 
 - `dotnet watch run` shows file changes
 
+### adding entity framework to project
+
 - creating entity
     - add get set properties to **Entities/AppUser.cs**
 
@@ -66,8 +72,7 @@
         - built in conventions 
         - migrations (schema)
 
-- adding entity framework to project
-- extensions
+- add extensions
     - nuget gallery by pcislo
         - install Microsoft.EntityFrameworkCore.Sqlite by Microsoft
         - adds < package reference > in API.csproj
@@ -76,5 +81,39 @@
     - create constructor
     
 - add AddDbContext in ConfugureServices in Startup.cs
-    - sql lite connection string ok to be public in files.
-    - 
+    - appsettings.development.json 
+        - sql lite connection string ok to be public in files.
+        - name of file to store database - "Data source=datingapp.db"
+    
+- install notnet-ef
+- `dotnet tool install --global dotnet-ef --version 5.0.1`
+- `dotnet ef migrations add InitailCreate -o Data/Migrations`
+- error for Microsoft.EntityFrameworkCore.Design
+- run again added migrations file
+    - **initial create .cs**
+    - create table called users
+        - two columsn
+            - id - integer primary/auto increment
+            - username
+
+## create database
+- stop api runnung 
+- `dotnet ef database update`
+
+- sql extension SQLite by alexcvzz
+- command shift p 
+    - use sql lite open database
+    - sqlite explorer pannel view
+    - right click on users
+        - new query insert
+        - write queries
+            - highlight adn right click, run queries
+            - rightclick users, show table
+
+## finsihing walking skeleton
+-  adding new controller
+    - add endpoints - users & user
+- making code asynchronus & scalable
+    - async Task & await
+- saving changes into source control
+    - use github
