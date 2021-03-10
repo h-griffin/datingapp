@@ -76,4 +76,5 @@
     - create constructor
     
 - add AddDbContext in ConfugureServices in Startup.cs
-
+    - sql lite connection string ok to be public in files.
+    - 
