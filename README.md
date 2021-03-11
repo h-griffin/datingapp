@@ -117,3 +117,25 @@
     - async Task & await
 - saving changes into source control
     - use github
+
+
+# ========= SECTION 2 =========
+- learning goals
+    - use angular cli
+    - how to create angular app
+    - algular project files
+    - angular bootstrap process
+    - using angular http client service
+    - run angular app over https
+    - add packages with npm
+        - font awesom e
+        - bootstrap
+
+## create angular app client
+- inside datingapp dir
+- `npm install -g @angular/cli`
+    - `npm install -g @angular/cli@7.1.0`
+- `ng new datingapp-client`
+    - use angular routing
+    - css
+
