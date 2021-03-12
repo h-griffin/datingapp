@@ -1260,11 +1260,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/haleygriffin/udemy/c#/datingapp/API/API.csproj",
+      "projectUniqueName": "/Users/haleygriffin/udemy/csharp/datingapp/API/API.csproj",
       "projectName": "API",
-      "projectPath": "/Users/haleygriffin/udemy/c#/datingapp/API/API.csproj",
+      "projectPath": "/Users/haleygriffin/udemy/csharp/datingapp/API/API.csproj",
       "packagesPath": "/Users/haleygriffin/.nuget/packages/",
-      "outputPath": "/Users/haleygriffin/udemy/c#/datingapp/API/obj/",
+      "outputPath": "/Users/haleygriffin/udemy/csharp/datingapp/API/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/haleygriffin/.nuget/NuGet/NuGet.Config"
