@@ -131,11 +131,39 @@
         - font awesom e
         - bootstrap
 
-## create angular app client
+## create angular app client (angular cli)
 - inside datingapp dir
-- `npm install -g @angular/cli`
-    - `npm install -g @angular/cli@7.1.0`
-- `ng new datingapp-client`
-    - use angular routing
-    - css
+- `npm install -g @angular/cli@7.1.0`
+- `ng new client --skip-tests --style=css`
+    - yes strict (should have said no)
+    - yes angular routing
+- cd client
+- `ng serve`
 
+- contents
+    - angular apps are single page
+    - <app-root> class
+    - typescript decorator (@Component) - normal class can be used as componenet
+
+- interpilation : give data from component to template view
+    - set variable in comp and use with double braces {{}}
+
+## vs code extensions to use angular
+- angular language service by angular
+- angular snippets by john papa
+- bracket pair colorizer 2 by conraadS
+
+## HTTP requests in angular component
+- add angular module **app.module.ts**
+    - imports :[ HttpClientModule ]
+
+- http naturally async req 
+    - angular component constructor too early for async req
+    - use initilization lifecycle
+
+- typescript gives typesafety unless you use `any` as user property;
+- observable : how Typescript handles asynchronus code
+- subscribe : 
+
+## adding cors in API
+- cross origin rescource sharing

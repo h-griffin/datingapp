@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QuCREVbJqDEBx+Dx88WFvH2EivVUQFey5FeOU4DpWuw3bVjo1uWeN3UMyf8pzgW6KsPZg6Zx07rAPxSczmbNJA==",
+  "dgSpecHash": "rNzoZmsvTt8lq/FJDmyMrcwFlA6uym/hfrCwH3g1KdYdVHtESMqAqJ4Ga13JZTJqiP8uyA1irS1ReqK5Dv6Cpg==",
   "success": true,
-  "projectFilePath": "/Users/haleygriffin/udemy/c#/datingapp/API/API.csproj",
+  "projectFilePath": "/Users/haleygriffin/udemy/csharp/datingapp/API/API.csproj",
   "expectedPackageFiles": [
     "/Users/haleygriffin/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
