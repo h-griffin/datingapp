@@ -167,3 +167,35 @@
 
 ## adding cors in API
 - cross origin rescource sharing
+- blocks all front end request from any api not in same origin (local ports are different)
+- must supply header to specify its ok
+
+- add service for cors
+    - configure services -order doesnt matter
+    - configure - must be between routing and endpoints, and before use auth
+
+## display users in client
+- li component : doesnt display without the content, displays for dynamic content
+- curly braces in html
+
+## adding bootstrap and fontawesome
+- using jquery to adjust messes with angular 
+- use angular bootstrap (ngx botostrap)
+- `ng add ngx-bootstrap`
+- `npm install font-awesome`
+
+## using https in mac OSX
+- set up angular to use ssl
+- take certificate and key from file (development only cert)
+- double click cert, expand trust, always trust
+- turn on ssl
+```
+serve{
+"sslCert": "./ssl/server.crt",
+"sslKey": "./ssl/server.key",
+"ssl": true,
+```
+
+- https cors error, must allow https
+
+- .gitignore ssl folder (cert and key)
