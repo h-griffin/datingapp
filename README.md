@@ -1,6 +1,11 @@
 # Dating app 
 ![tools](API/assets/tools.png)
 
+## about app
+- asp.net c# API
+- angular typescript Client
+- 
+
 # ======= SECTION 1 =======
 ### API project
 - walking skeleton 
@@ -120,7 +125,7 @@
 
 
 # ========= SECTION 2 =========
-- learning goals
+## learning goals
     - use angular cli
     - how to create angular app
     - algular project files
@@ -128,7 +133,7 @@
     - using angular http client service
     - run angular app over https
     - add packages with npm
-        - font awesom e
+        - font awesome
         - bootstrap
 
 ## create angular app client (angular cli)
@@ -199,3 +204,107 @@ serve{
 - https cors error, must allow https
 
 - .gitignore ssl folder (cert and key)
+
+# ========= SECTION 3 =========
+
+## learning goals
+- basic authentication and storing passwords
+- inheritance in c# (DRY do not repeat yourself)
+- using c# debugger
+- using data transfer objects (DTOs)
+- validation
+- JSON web tokens (JWTs)
+- using services in c#
+- middle ware
+- extension methods - DRY
+
+## where do i start
+- requirements
+- users should
+    - log in 
+    - register
+    - view other users
+    - message other users
+
+## storing passwords in the database
+- **X** storing in clear text
+- use ssl to encrypt 
+```
+id  user  password
+1   bob   pass
+2   tom   passowrod
+3   jane  pw
+```
+
+- **X** use a password hasher
+- hash is the same
+```
+id  user  password
+1   bob   324234 <
+2   tom   355334
+3   jane  324234 <
+```
+
+- **√** hash and salting password
+- scrambles the hash
+```
+id  user  password   passwordSalt
+1   bob   324234 <  436463 <
+2   tom   355334    646868 
+3   jane  324234 <  323534 < 
+```
+
+## update user entity
+- add properties
+- create new migration
+    - stop API
+    - `dotnet ef migrations add UserPasswordAdded`
+    - `dotnet ef database update`
+- byte property shows as 'blob' this is ok
+
+## new controller to manage login/registration
+- create Base Api controller
+- users controller now derives from baseapicontroller instead of base controller
+
+## create account controller and register users
+- create account controller
+- HMAC - built in disposal
+
+- register user test (postman)
+    - 404 restart server (added new controller)
+
+- why?
+    - user : 500
+    - user string : 200 
+
+## using the debugger
+- mac vscode
+    - breakpoint at register user
+    - exe - windows // dll - mac
+
+- api controller cannot find pws (must be sent as an object) tell where to find
+    - GetBytes(password) cannot take null 
+
+## adding validation (prevent empty string username)
+- add validation at DTO level
+- validation comes built in because of API controller tag
+
+## clear/reset database
+- `dotnet ef database drop`
+- `dotnet ef database update`
+
+## token authentication
+- json webtoken 
+    - industry standard
+    - self contained, can contail
+        - credentials
+        - claims
+        - other info
+    
+    - structure : long string seperated by period
+        - header : algorithm and type
+            - algorithm used to encrypt in 3rd part
+        - payload : identifiers and claims
+        - signature : encrypted
+            - encrypted by server key that never leaves server
+
