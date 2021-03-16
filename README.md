@@ -7,7 +7,7 @@
 - 
 
 # ======= SECTION 1 =======
-### API project
+## API learning goals
 - walking skeleton 
     - put data in database
     - make api to get data
@@ -22,7 +22,7 @@
     - config and env variables
     - source control (github)
 
-### set up & run application
+## set up & run application
 - check if dotnet sdk is installed
     - `> $ dotnet --info `
 - template : ASP.NET Core Web API 
@@ -59,7 +59,7 @@
 
 - `dotnet watch run` shows file changes
 
-### adding entity framework to project
+## adding entity framework to project
 
 - creating entity
     - add get set properties to **Entities/AppUser.cs**
@@ -125,7 +125,8 @@
 
 
 # ========= SECTION 2 =========
-## learning goals
+
+## Angular Client learning goals
     - use angular cli
     - how to create angular app
     - algular project files
@@ -207,7 +208,7 @@ serve{
 
 # ========= SECTION 3 =========
 
-## learning goals
+## Authentication learning goals
 - basic authentication and storing passwords
 - inheritance in c# (DRY do not repeat yourself)
 - using c# debugger
@@ -357,7 +358,7 @@ id  user  password   passwordSalt
 
 # ========= SECTION 4 =========
 
-## learning goals
+## client log in/register learning goals
 - create components with angular cli
     - components must be registerd
 - angular template forms
@@ -484,7 +485,7 @@ id  user  password   passwordSalt
 
 # ========= SECTION 5 =========
 
-## learning goals
+## routing learning goals
 - angular routing (single page application)
     - navigate different components rather than pages
 - adding bootstrap theme
@@ -519,5 +520,36 @@ id  user  password   passwordSalt
 
 ## prevent acces to routes - route guards
 - cd src/app/_guards
-- ng g guards auth --skip-tests
+- `ng g guards auth --skip-tests`
     - canActivate interface
+
+- authguard automatically subscribes to all observables
+- add dummy route to group all proted paths together
+    - paths []
+
+- ng container - for conditionsls 
+    - doenst generate html so does not affect syling 
+    - appears as comment in element inspection
+
+## adding a new BS theme
+- cd client
+- `npm install bootswatch`
+- add stylesheet in sngular .json
+- restart client
+
+- welcome 'user' username
+- grab user value from ng if account servoce
+- use title case pipe
+
+## use shared module
+- cd client/scr/app
+- nkdir _modules
+- cd _modules
+- ` ng g m shared --flat`
+    - generate module (flat no foler) (modules have no test files)
+- replace files in shared module with shared module import in app module
+
+# ========= SECTION 6 =========
+
+## error handling learning goals
+- 
