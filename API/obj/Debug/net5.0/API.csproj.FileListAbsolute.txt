@@ -108,3 +108,10 @@
 /Users/haleygriffin/udemy/csharp/datingapp/API/obj/Debug/net5.0/ref/API.dll
 /Users/haleygriffin/udemy/csharp/datingapp/API/obj/Debug/net5.0/API.pdb
 /Users/haleygriffin/udemy/csharp/datingapp/API/obj/Debug/net5.0/API.genruntimeconfig.cache
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll

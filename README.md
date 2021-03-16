@@ -238,6 +238,7 @@ id  user  password
 
 - **X** use a password hasher
 - hash is the same
+- protects full database execpt the one passowrd
 ```
 id  user  password
 1   bob   324234 <
@@ -247,6 +248,7 @@ id  user  password
 
 - **√** hash and salting password
 - scrambles the hash
+- protects people that use same password
 ```
 id  user  password   passwordSalt
 1   bob   324234 <  436463 <
@@ -308,3 +310,214 @@ id  user  password   passwordSalt
         - signature : encrypted
             - encrypted by server key that never leaves server
 
+- token authentication
+    - send un pw to server
+    - server sends token to store on machine
+    - sends token back for each req
+    - server that signed token has access to key
+    - server verifies token anad sends back response
+- benifits
+    - no session to manage
+    - single token with multiple backends (if they share same signature/key)
+    - no cookies required (mobile friendly)
+    - once given a token no need to ask for verification again
+
+## create jwt service
+- receive app user and create/return jwt to account controller
+- interface
+    - contract between self and class
+    - interface gets this classes properties/methods/events
+    - no implementation logic only functionality provided by signature
+- preficx interfaces with I
+
+- add in startup.cs configureservices
+    - add scoped (lifetime of http request)
+- dont need interfaece for token service, easier to test an interface
+
+## creating token handler / jwt token
+- System.IdentityModel.Tokens.Jwt 
+- create key, creds, decoder
+
+- add to log in register 
+- change account controller returning user to UserDTO
+
+## authentication middleware
+- add authorized attribute
+- add middleware to authenticate jwt token
+- Microsoft.AspNetCore.Authentication.JwtBearer
+
+- 401 unauthorized
+    - need to send jwt with req
+    - for now add in manually in header
+
+## adding extension methods
+- add methods to existing types without creating or modifying type
+- extension needs to be static : does not need new instance
+- use this before spicifying typ eof extension
+
+# ========= SECTION 4 =========
+
+## learning goals
+- create components with angular cli
+    - components must be registerd
+- angular template forms
+- angular services (vs API calls)
+- understanding observables (api calls)
+- structural direcives (conditionally display elements)
+- component communication using input and output properties
+    - parent to child
+    - child to parent
+
+## adding nav bar componoent
+- `cd client/src/app`
+- `ng g -h` ng generate help
+- `ng g c nav --skip-tests` skip test file
+    - generate componenet nav 
+- nav added to ng declarations in app.module.ts
+- add app-nav tag in app component.html
+- https://getbootstrap.com/docs/5.0/examples/carousel/ copy nav element into nav.component.html
+- adjust html 
+
+## filling out form and getting token
+- import andular forms module in app module.ts
+- #loginform="ngForm" attribute makes it an angular fomr
+
+- `[(ngModel)]="binding"`
+    - ng model "bannana in a box" 
+    - square[] receive from component
+    - both is two way binding with component
+
+- `cd client/src/app/_services`
+- `ng g s account --skip-tests`
+    - generate service account
+- service can be injected into other components and services 
+- angular service is singlton
+    - once initialized it will stay initilized until application is disposed (user closes browser)
+    - angular components are destroyed when not in use - services stay
+- account service will make req to API
+- =assign :type
+
+## injecting services into components
+- inject in nav.component.ts
+- login returns an observable : does nothing until you subscribe
+
+## conditionals
+- hide links until logged in
+- `*ngIf="loggedIn"` bool set in nav component
+
+- adding drop down functionality
+- for root : has services and components that need to be initilized 
+
+- bootstrap style shortcuts "mt-3" = margin-top: 3px
+
+## observables 
+- standard for ES7 (ES2016) (compatible is ES2015)
+- introduced in angular v2
+- lazy collections of multiple values over time
+    - going to use for http request and components change for value changes
+- news letter, only subscribers get print
+- promise (.then)
+    - single future value
+    - not lazy (regardless if no one is listening)
+    - can not cnacel
+- observabale
+    - multiple values over time
+    - lazy (no one subscribe)
+    - able to cancel
+    - can use with map, filter, reduce, etc
+        - can use map to edit data before passing it along
+        - chain a pipe to chain funtions to edit data
+        - .subscribe (what to do next)
+        - .error (if theres an error)
+        - () anon , console log
+        - can use ToPromise()
+        - loses extra functionality but is simple
+    - can use asyn pipe | to automatically sub/unsub
+    
+## persisting log in
+- store in lovcalstorage
+- interface in typescript - specify something is a type of spmething
+- replay subject - buffer object stores values and each subscribe opmits last value inside it (or more)
+- observable gets $ at end
+- !!user;  turns obj into boolean
+
+- async pipe in nav component
+
+## adding home poage component
+- cd client/src/app 
+- `ng g c home --skip-tests`
+- add <app-home> comp in app component html
+
+## create form 
+- cd client/src/app 
+- `ng g c register --skip-tests`
+- use ng ifs for dynamic display
+
+## parse data from parent to child
+- down from home to register
+- move get users functionality from app to home
+
+- inside home app register tag [usersFromHomeComponent]="users"
+
+- inside register option selector tag
+*ngFor="let user of usersFromHomeComponent" [value]="user.userName" 
+
+- must call getUSErs in init
+
+## child to parent
+- cancel button in register needs to turn off task in home
+- needs to turn off register mode
+- 1 output property
+- 2 what to emit when clicked
+- [home com template] inside child
+    - receiveing []
+    - output ()
+- 3 add cancel register method in home component
+- 4 call method in element
+
+## finish registration
+- register users from client
+- account service register()
+- register component register with account services
+    - register then hide form
+
+
+# ========= SECTION 5 =========
+
+## learning goals
+- angular routing (single page application)
+    - navigate different components rather than pages
+- adding bootstrap theme
+- angular route guards
+- using shared module (rahter than just app)
+
+## more components to route to
+- cd app
+- mkdir members
+- cd members
+- `ng g c member-list --skip-tests`
+- `ng g c member-detail --skip-tests`
+- cd .. (app)
+- `ng g c lists --skip-tests`
+- `ng g c messages --skip-tests`
+
+- app routing genereated from app set up (yes to angular routing)
+- set up routes in app-routing-module
+
+## add nav links
+- replace href with angular routing routerLink="/"
+- apply active with   routerLinkActive="active" on each a tag
+
+- routing in code
+- inject router in nav comp
+- once logged in router tomembers page
+- clear user information from login form on logout later
+
+- toast service for notifications
+- cd client
+- npm install ngx-toastr
+
+## prevent acces to routes - route guards
+- cd src/app/_guards
+- ng g guards auth --skip-tests
+    - canActivate interface
