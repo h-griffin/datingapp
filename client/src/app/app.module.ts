@@ -11,11 +11,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown/';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
-import { MemberDetialComponent } from './members/member-detial/member-detial.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ToastrModule } from 'ngx-toastr';
-import { AuthComponent } from './_guards/guard/auth/auth.component';
+import { SharedModule } from './_module/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,10 +24,9 @@ import { AuthComponent } from './_guards/guard/auth/auth.component';
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
-    MemberDetialComponent,
+    MemberDetailComponent,
     ListsComponent,
-    MessagesComponent,
-    AuthComponent
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +34,7 @@ import { AuthComponent } from './_guards/guard/auth/auth.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot(),
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
-    })
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

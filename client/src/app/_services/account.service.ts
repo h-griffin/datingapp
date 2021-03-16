@@ -11,7 +11,7 @@ export class AccountService {
   baseUrl = 'https://localhost:5001/api/';
 
   // observable to store user in
-  private currentUserSource = new ReplaySubject<User>(1);
+  private currentUserSource = new ReplaySubject<User>(1); // so other components can observe (auth guard subscribes)
   currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
