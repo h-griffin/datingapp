@@ -552,4 +552,78 @@ id  user  password   passwordSalt
 # ========= SECTION 6 =========
 
 ## error handling learning goals
-- 
+- api middleware
+    - client and api
+- angular intercepters
+    - requests adn responses
+- trouble shooting exceptions
+
+## error controller
+- add controllers to return errors
+- errors successfuly set up in buggy
+    - 401 unauthorized
+    - 404 not found
+    - 500 null ref exception
+    - 400 bad request
+- user/pw validation set up in register dt
+    - username exists
+    - password 4 - 8 characters
+
+- null ref comes from dev exception page from startup cs
+- without dev page 500 
+- without dev page use try catch blocks
+
+- exception caught inside block does not appear in console (bad) only too client
+
+## building exception handling middleware
+- create apiException class to return for all exceptopns
+
+- create exception middleware class
+    - rewuest delegate : what happends next in middleware pipeline
+    - ILogger : log exception in terminal
+    - IHostEnvironment : what environment (production?development?)
+- passing context to next middleware will pass exception up the tree until something can handle it
+- context writes message to repsonse
+
+## handling erros in the client
+- cd client/src/app/errors
+- `ng g c test-errors --skip-tests`
+- add methods in test errors component.ts
+- display in test errors temolate
+- add route in app routing module
+- add nav link to error page
+
+## use http interceptors
+- handle erros at gloabal level
+- cd client/app
+- mkdir _interceptors
+- cd _interceptors
+- `ng g interceptor error --skip-tests`
+
+- inject router for erros that have a page
+- inject toastr for errors that just need notification
+
+- 400 validation error
+    - provide interceptor in app module privders
+    - this is custom interceptor being added to other built in interceptors
+    - add newer version (es2019)of js in tsconfig.json
+        - so you cna use .flat() on error interceptor
+- 404 not found
+    - add component to reroute to
+    - cd client/src/app/errors 
+    - `ng g c not-found --skip-tests`
+    - add component
+    - add new link/route app routing module
+
+- remove error handling inside login() nav component ts to remove double toast
+
+- 500 server error
+    - add component to reroute to
+    - cd client/src/app/errors 
+    - `ng g c server-error --skip-tests`
+    - add component
+    - add new link/route app routing module
+
+ - probalem is not with angular/client if you can reproduce in postman
+- stack trace will not be visible in production
+- wild route component switch to not found page
