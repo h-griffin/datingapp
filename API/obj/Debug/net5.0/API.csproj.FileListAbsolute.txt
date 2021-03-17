@@ -115,3 +115,6 @@
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Data/UserSeedData.json
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/AutoMapper.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
