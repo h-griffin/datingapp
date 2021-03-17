@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "HRJjLn1pj6fWPFUNd5XdyYNEmY8TY15m69k5RrJw55nXqUOgfR0qBhklI1lzoYwT5BQjR9eENhWhG8RL1DpZuA==",
+  "dgSpecHash": "cz+Jvo2t9JtIs/HOgexKaxhDeIbAXt+CUcnHBE7ExykQCQzQA43pJInSwkJ95/54ADScb8O4RPYgH/qlHHTcmQ==",
   "success": true,
   "projectFilePath": "/Users/haleygriffin/udemy/csharp/datingapp/API/API.csproj",
   "expectedPackageFiles": [
+    "/Users/haleygriffin/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
+    "/Users/haleygriffin/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/5.0.4/microsoft.aspnetcore.authentication.jwtbearer.5.0.4.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
@@ -46,6 +48,7 @@
     "/Users/haleygriffin/.nuget/packages/system.diagnostics.diagnosticsource/5.0.0/system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/system.identitymodel.tokens.jwt/6.8.0/system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/Users/haleygriffin/.nuget/packages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/system.security.cryptography.cng/4.5.0/system.security.cryptography.cng.4.5.0.nupkg.sha512"
   ],
   "logs": []

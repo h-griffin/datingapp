@@ -9,5 +9,6 @@ namespace API.Data
         {
         }
         public DbSet<AppUser> Users { get; set; }
+        // dont need dbset for photoclass - gets name from table tag in photo entity
     }
 }

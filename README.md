@@ -4,7 +4,11 @@
 ## about app
 - asp.net c# API
 - angular typescript Client
-- 
+- sqlite database
+- jwt authentication and validation
+- angular routing
+- error handling and client testing
+- multiple entities
 
 # ======= SECTION 1 =======
 ## API learning goals
@@ -627,3 +631,267 @@ id  user  password   passwordSalt
  - probalem is not with angular/client if you can reproduce in postman
 - stack trace will not be visible in production
 - wild route component switch to not found page
+
+- building blocks in place to expand appliction safely
+
+# ========= SECTION 7 =========
+
+## extenidng API learning goals
+- implement further functionality of API
+- entity framework relationships (currently one flat table)
+- entity framework conventions
+- seeding data into database
+- repository pattern
+    - abstracting away from db context class
+- using auto mapper
+    - for big entities to send one property to another
+
+## extending user entity 
+- add properties for user info
+- add phot class for photo information to store in db
+
+## generating data of birth with extension methods
+- put logic for calculating age in extension and return age in appuser
+
+## entity framework relationships
+- relationship between user and photos
+- one to many - one user can have many photos
+
+- stop api
+- `dotnet ef migrations add ExtendedUserEntity`
+
+- photos column
+    - id
+    - url
+    - ismain
+    - pubic id
+    - user id <<<<
+- entity framework recodnizes relationship with user and generats appuser 
+- generated foreign key to user table [app user id as foreign key]
+    - app user is allowed to be null !!! this can remove a way to get the photos without a user
+
+- on delete referential action restrict
+    - user delete does not remove photos
+
+- remove migration
+- `dotnet ef migrations remove`
+- enable cascading delete and dont let user be nullable
+    - fully defining relationship
+- tell photo entity abou tapp user class
+
+- new migration 
+- `dotnet ef migrations add ExtendedUserEntity`
+- `dotnet ef database update`
+- command+shift+p open sqllite db to check tables
+
+## populate table with seed data
+- lazy and effiecient
+- generate json data to insert
+- https://www.json-generator.com/
+
+```
+[
+  '{{repeat(5)}}',
+  {
+    UserName: '{{firstName("female")}}',
+    Gender: 'female',
+    DateOfBirth: '{{date(new Date(1950,0,1), new Date(1999, 11, 31), "YYYY-MM-dd")}}',
+    KnownAs: function(){ return this.UserName; },
+    Created: '{{date(new Date(2019, 0, 1), new Date(2020,5,30), "YYYY-MM-dd")}}',
+    LastActive: '{{date(new Date(2020, 4, 1), new Date(2020,5,30), "YYYY-MM-dd")}}',
+    Introduction: '{{lorem(1, "paragraphs")}}',
+    LookingFor: '{{lorem(1, "paragraphs")}}',
+    Interests: '{{lorem(1, "sentences")}}',
+    City: '{{city()}}',
+    Country: '{{country()}}',
+    Photos: [
+        {
+          Url: function(num) {
+          return 'https://randomuser.me/api/portraits/women/' + num.integer(1,99) + '.jpg';
+        },
+        IsMain: true
+      }
+    ]
+  }
+]
+```
+
+- 5 femlae users
+    - teri
+    - Lucy
+    - Zoey
+    - anne
+    - katherine
+- 5 male users
+    - todd
+    - luke
+    - dave
+    - mike
+    - john
+
+## sseding data (put in db)
+- create seed class
+- read json file and put in db
+- create static (one instance)
+- pull users from json file and convert to appuser obj
+- hard code pw for seed users
+
+- seed data where application starts (program.cs)
+-  `dotnet ef database update`
+    - now just restart application
+
+- drop existing database
+- `dotnet ef database drop`
+- restart api
+- `dotnet watch run`
+
+## repository pattern
+- a preopisitory mediates between teh domain and data mapping layers, acting like an inmemory domain pbject collection
+
+```
+web server
+  v    ^
+controller   <> db context
+                  v    ^
+                database
+
+controller talks to dbcontext
+```
+
+- req into api 
+- requests come into request controllers,
+- conterollers have dbcontext injected,
+- represents session in database and sees queries written in controller 
+- and gets them from database
+
+- changin so controller does not go directly to dbcontext
+- goes to repository which uses db context
+
+- just adding another layer
+
+```
+web server
+  v    ^
+controller <> repository <> db context
+                            v    ^
+                            database
+
+controller talks to repository
+```
+
+- db set in dbcontext is like repository 
+- encapsulates the logic
+- reduce duplicate query logic 
+
+```
+        controllers
+user        message     likes
+set user    set user    set user
+
+        repository
+        set user
+```
+
+- easier to test against interface of repository rather than dbcontext
+- repositorys will have interfaces and implementations classes with log
+- testing can be mocked
+- 
+
+- advantages
+- minimizes duplicate query logic
+- decouples application from persistance framework (entity already does)
+- all database queries are centralized and not scattered thorughout app  (entity does not)
+- allows us to change ORM easily * (dont usually change orm)
+- easily mock repository interface
+
+- disadvantages
+- abstraction of abstraction
+    - entity framework already abstraction of database, repository is abstraction from entity framework
+- each root entity should have tis own repository which means more code
+- also need to implement usit of work pattern to control transactions
+
+## creating a repository
+- create tasks the users can do (update save etc) IUserRepository.cs
+- fill actions in userrepository.scs
+- add repository to app in application service extensions
+
+## updating users repositoyr
+- replace datacontext with repository in user cotroller
+- eager loading : load photos
+- for each photo it will try to return an app user (will loop eachother)
+- shape data before return ing using a DTO
+
+## adding a DTO for members
+- copy app user props into member dto
+- move photo info into photdto 
+- instead of app uesr return memberdto in usercontroller
+
+## adding auto mapper
+- AutoMapper.Extensions.Microsoft.DependencyInjection by Jimmy Bogard
+- create api/Helpers
+- automapperprofiles
+- maps from one obj to another
+- <> map from - to
+- add to application to service extensions to be able to inject in other classe
+
+## Using auto mapper
+- use mapper in users controller to get user/s
+- smart enough to recodnize properties that are named the same (app user and memberdto)
+- member dto us Username (not UserName) to use in angular applicatino
+- automapper will automattically canculate age because of getage() in appuser
+- auto populates all the feilds exept for 
+photo url with main photo url
+
+## configuring autoMApper
+- populate photo url with main photo url
+- use formember to tell it how to get to the photo
+
+- not very effecient
+- easy is not optimal
+
+`CreateMap<AppUser, MemberDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url));`
+
+## automapper queryable extensions
+- first must get user from db and include photos then pass it back to controller 
+- controller puts entity in memory then map from one obj from anoother
+- can this be efficient?
+
+- add get member methods in IUser repository that return member dtos instead of appuser
+-  implement the new methods in userepositoru with logic 
+- currently selecting all properties even those we dont need to return 
+- not very effecient
+
+```
+// no automapper
+return await _context.Users 
+    .Where(x => x.UserName == username)
+    .Select(user => new MemberDto{
+        Id = user.Id,
+        Username = user.UserName
+        // etc mannually map out every property
+    }).SingleOrDefaultAsync();
+```
+
+```
+return await _context.Users
+    .Where(x => x.UserName == username)
+    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+    .SingleOrDefaultAsync();
+```
+
+- still selecting extra properties
+- because of get age in app user
+- if it wants to automattically use getage in app user it must pull the full file
+- comment out get user in 
+
+```
+CreateMap<AppUser, MemberDto>()
+                .ForMember(dest => dest.PhotoUrl, opt => opt        // grab from memberdto
+                .MapFrom(src => src.Photos                          //
+                .FirstOrDefault(x => x.IsMain).Url))                //
+                .ForMember(dest => dest.Age, opt => opt             // 
+                .MapFrom(src => src.DateOfBirth.CalculateAge()));
+```
+- more efficient to import calculate age inline so it only pulls what we need
+- with projection we dont need include (photos)
