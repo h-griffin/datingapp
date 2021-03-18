@@ -989,3 +989,95 @@ interface Car {
 - timing error - execution order
 
 - move get imagesto end of load member 
+
+# ========= SECTION 8 =========
+
+## update resscources learning goals
+- angular template forms
+- can Deactivate route guard
+    - promt user when they click away mid form
+- @viewChild decorator
+- persisting changes to api
+    - update user
+- loading indicators in client
+- caching data in angular services
+
+## member edit component
+- cd app/members
+- `ng g c member-edit --skip-tests`
+- add rout fo rcomponent in app routing 
+- put link in nav component (dropdown)
+- load up current signed in user to edit
+
+## edit form template
+- copy all of member detail into member edit
+- convert to inputs
+- copy member detail css to member edit (because of encapsulation)
+
+## 
+- convert form to ng form
+- connect save changes button to form 
+- if form is dirty display alert
+- reset form state after savw chages
+- form name bust be same as property or text will disapear on save
+
+## cn deactivate route guard
+- save changes before leaving page
+
+- cd guards
+- `ng g guard prevnt-unsaved-changes --skip-tests`
+- can deactivate
+
+- add confirm in prevent unsahved changes
+- add guard in app routing 
+- closing tab or going outside angular application does not work
+
+## persisting changes made
+- member update dto
+- want to map into user entity 
+- create new automapper for update
+
+- http put wil be th eonly put so it is unique from httpget
+
+- dont need to send obj back client already has what is updated
+- get username from token used to authenticate
+
+- mapper.map from-to
+    - without youd have to manually set all properties, not with automapper
+- check in postman that updates update
+
+## updating user in client
+- add update member method in member service
+- update the update member method in member edit cop
+
+## adding loading indicators
+- make app slower its too fast/jarring
+- https://www.npmjs.com/package/ngx-spinner
+- cd client
+- `ng add ngx-spinner`
+    - err needs angular cdk
+- `npm install @angular/cdk`
+    - updates upp module
+    - does not need to be in shared module
+
+- cd src/app/_services
+- `ng g s busy --skip-tests`
+
+- set up ethods to show and hide spinner
+
+- cd _interceptors
+- `ng g interceptor loading --skip-tests`
+
+- inject busu service
+- add interceptor in app module
+- add spinenr component 
+
+- add spinner in app component.html (root)
+
+- member service is singleton once loaded it lives until page quit
+- services good place for state (kind of like redux)
+
+- adjust methods to hold members after first load
+- change member array to abservable of member array in member list component
+
+- 
