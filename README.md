@@ -895,3 +895,97 @@ CreateMap<AppUser, MemberDto>()
 ```
 - more efficient to import calculate age inline so it only pulls what we need
 - with projection we dont need include (photos)
+
+# ========= SECTION 8 =========
+
+## building out user interface learning goals
+- implement components that make up user interface 
+- using typescript types
+- using async pipe to retrieve data
+- using bootstrap for styling
+- basic ccs tricks to enhanc elook
+- using 3rd party photo gallery
+
+## using typescript
+- type script inferring - can guess you value type if not specified
+- can user pype to allow more than one type
+
+```let data: number | string = 42;
+
+data = "10"
+```
+```
+interface Car {
+  color: string;
+  model: string;
+  topSpeed?: number; << optional 
+}
+```
+
+## create types for what is returned from api members
+- types for members
+- take member json returned in postman
+- http://www.jsontots.com/
+
+## creating memebrs service
+- move base url string to enviromnet
+- cd app/_services
+- `ng g s members --skip-tests`
+- specify teh types that the http get req is getting
+
+## getting members from member list component
+- cd app/members
+- `ng g c member-card --skip-tests`
+
+- css encapsulation
+- with this ^^ you cannot reach elements inside another with css
+- to use global css set encapsulation to none in member card components
+- use component css file to prevent global overrides
+
+## add animated buttons
+- profile 
+- like
+- messages
+
+- absolute position buttons
+- relatively positioned wrapper
+
+## using interceptor to send token
+- cd app/_interceptors
+- `ng g interceptor jwt --skip-tests`
+
+- user is currently observable
+- must pull user out of observable to get token (subscribe)
+- .pipe(take(1) ) unsub when the user completed taking 
+- bearer bust have a space between the token
+- this sends token with each request now
+-  no longer need hhtpsoptions in mebers service
+- provide interceptor in app modules
+
+## member detail page
+- on profile click use the username to reach user route
+- cannot read from undefined
+- order of execution
+- angular creates tempalte after users
+- add ng conditional to add member if there is one
+
+## tab component
+- https://valor-software.com/ngx-bootstrap/#/tabs
+
+- tabs does not turn off encapsulation
+- cant style much inside angular coponent
+- give class an dadjust in gloobal style sheet
+- add tabsheet styles from assets
+
+## add photo gallery
+- https://www.npmjs.com/package/@kolkov/ngx-gallery
+
+- cd client
+- `npm install @kolkov/ngx-gallery`
+- add in shared module
+
+- galler images in init
+- cannot read photos of undefines 
+- timing error - execution order
+
+- move get imagesto end of load member 
