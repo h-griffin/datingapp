@@ -1003,7 +1003,7 @@ interface Car {
 
 - move get images to end of load member 
 
-# ========= SECTION 8 =========
+# ========= SECTION 9 =========
 
 ## update resources learning goals
 - angular template forms
@@ -1094,4 +1094,50 @@ interface Car {
 - adjust methods to hold members after first load
 - change member array to observable of member array in member list component
 
-- 
+# ========= SECTION 10 =========
+
+## photo upload learning goals
+- photo storage options
+    - keep in mind aspect ratio
+- adding related entities
+    - cannot add directly, must be added to user entity 
+- third party api
+- using the debugger (again)
+- update and delete resources in api controller
+- what to return when creating rescources in a REST api
+    - 'REST' representational state transfer
+    - standards that apply to apis
+    - this will not be fully restful
+
+## storing photos
+- database as binary large objects
+    - not efficient with large objects
+    - space consumption
+- file system
+    - optimized for serving files
+    - space consumption
+- cloud service
+    - storage unlimited
+
+- cloudinary (10 gb free)
+    - provides image transform
+    - this app will be square images only
+
+## image upload
+- drag and drop
+- only authenticatd users can 
+- 1 client uploads photo to api with jwt
+- 2 securely upload photo to cloudinary (api keys)
+- 3 cloudinary stores photo and sends reponse
+    - api saves url
+    - cloud gives public id of image (save this in db)
+    - saved in db and given auto generated id
+    - 201 created response sent to client with location header
+    - 
+
+- https://cloudinary.com/
+- square image site (easy css)
+- cloudinary gives auto crop
+
+## install configuring cloudinary in api
+- nuget extension: CloudinaryDotNet by Cloudinary
