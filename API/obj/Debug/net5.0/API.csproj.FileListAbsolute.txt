@@ -118,3 +118,5 @@
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Data/UserSeedData.json
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/AutoMapper.dll
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/CloudinaryDotNet.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Newtonsoft.Json.dll
