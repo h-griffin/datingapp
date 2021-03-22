@@ -17,33 +17,29 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  login(model: any){
+  login(model: any) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
-      // rxjs operators in here (pipe)
       map((response: User) => {
         const user = response;
-        if(user){
-          localStorage.setItem('user', JSON.stringify(user));
-          this.currentUserSource.next(user);
+        if (user) {
+          this.setCurrentUser(user);
         }
       })
     )
   }
 
-  //log in once regisetred
-  register(model: any){
+  register(model: any) {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
-      map((user: User) =>{
-        if(user){
-          localStorage.setItem('user',JSON.stringify('user'));
-          this.currentUserSource.next(user);
+      map((user: User) => {
+        if (user) {
+         this.setCurrentUser(user);
         }
-        return user; // dont need
       })
     )
   }
 
-  setCurrentUser(user: User){
+  setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
 

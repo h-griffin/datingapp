@@ -1141,3 +1141,104 @@ interface Car {
 
 ## install configuring cloudinary in api
 - nuget extension: CloudinaryDotNet by Cloudinary
+
+- configure in app setting s.json (not on github safe for api keys)
+- stongly typed
+- set props in cloudinary settings .cs
+- add in application service extensions
+- access config via cloudinary settings class in spplication service extensions
+
+## adding photo service
+- adding deleting photos
+- one responsibility
+    - receice file
+    - upload and receive url from clud
+    - upload results to who needs it
+
+- interface photo servece
+- each phot has public id, use this to delete
+- implement interface in photo service
+- new account settings must be 
+    - cloud name
+    - api key
+    - api secret
+
+- upload image and crop to 500x500 centered on face
+- add service in application service extensions 
+
+## updating user controller
+- allow add photo
+- client neeeds to know id and if it is main
+- add extension method to get username faster
+
+## testing photo uploading
+- add breakpoint on var result line
+- watch each step as request populates file ingo and cloudinary info
+
+- photos wil lnot get their own route, only see user ohotos at member detail page
+
+## created at route methof
+- return photo in body of request
+
+```
+("GetUser", _mapper.Map<PhotoDto>(photo));     // return 201 with route to user that has ohotos
+                                                                                // doesnt work route req parameters
+```
+
+## photo editing component
+- add photos in client
+- cd client/src/app/members
+- `ng g c photo-editor --skip-tests`
+
+- in comps.ts : receive meber from parent component
+    - parent component is memebr edit
+
+## photot upload component
+- ng2-file-upload
+- https://valor-software.com/ng2-file-upload/
+- cd client
+- `npm install ng2-file-upload --save`
+- line 17 to 116
+
+- add fileUploadModule in shared module
+- set up configs in editor component
+- adjust html template for client
+
+## set main photo
+- user controller 
+- find current main and remove
+- set current photo to main
+
+## adding main photo in nav bar
+- return user photo with uesr object - user dto
+- account controller return photot url in account controller log in method
+
+- add photo in user.ts
+- account service
+    change local storage from register to set current ueser
+- acc service now has access to main photo
+- nav component html
+- 500 server error
+    - account controller l66
+    - return new user dto
+    - first or default tells if source is empty(system argument null exception) 
+    - why does user ohtos have no object/source?
+    - injecting data context in account controller (not return photo with login )
+    - eager load photos in login
+
+## update mian image in client
+- set main photo method in member service
+- set main photo method in photo editor componentts
+    these can go anywehre compoter can figure out, location is for passing down and where human can remember
+    - set main photo: reset current user to load observable and local storage img
+    - loop thorugh each photo to reset what is main
+- photot editor comp html
+
+## delete photo in client
+- users controller 
+- memebr service
+    - add delete photo
+- photot editor component
+    - delete photot method
+- photo editor template html
+    - add button methods
