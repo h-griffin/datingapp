@@ -1242,3 +1242,76 @@ interface Car {
     - delete photot method
 - photo editor template html
     - add button methods
+
+# ========= SECTION 11 =========
+
+## reactive forms learning goals
+- use reactive forms
+    - easier to test
+- angular validation inputs
+- custom validators
+- implement reusable form controls
+- working with date inputs
+
+## registration of users 
+- import reactive forms module in app module
+- initialize form settings in register component
+- instead of template ref variable (#) replace w input prop form group []=""
+    - ng models replaces with form control name
+
+## client side validation
+- add angular validators, multi in array
+- need custom for confirm password
+
+## custom validators
+- check validator values again st eachother
+- extra check for pw change after pw check is valid
+- bs style on inputs 
+- bs feedback when invalid
+- template has error for min length cannot be camel case like it is in ts
+
+- reuse validators to replace all the validation html
+
+## reusable text input
+- cd app/_forms
+- `ng g c text-input --skip-tests`
+- add control value accessor
+- inject control into constructor 
+- setup injectables into text input template to use in register component html
+
+## form builder service
+- convert new form group and new form control with arrays of fb group injected in register component
+
+## expanidn form 
+- order not important in register component
+- radio buttons dont need validator
+- add in template
+
+## adding a reusable date input
+- html5 date picker is not implemented on all browsers (safari has none)
+- use java scrip tot create date picker
+- ng angular packages comes with date picker 
+- add in shared module
+
+- cd _forms
+- ng g c date-input --skip-tests
+- https://valor-software.com/ngx-bootstrap/#/datepicker
+
+- set max year in register component for 18+
+
+## updating api register method
+- update register dto with new properties
+- update auto mapper to map from register dtop to app user
+- add known as to userdto to return in account controller
+- pass back in register and log in (use in nav bar)
+
+## client side registration
+- adjust register method in register component to send user to members page after
+- server side validation is teh div above the register buttons
+- disable buttons if form inst valid
+- register accepts enter and button
+- add register form .valid with the click event to prevent enter submit before valid
+
+- default img doesnt display in dav, add or || in nav
+- from fresh upload, auto main does not populate nav and main img
+- in photo editor componennt in on success item() 
