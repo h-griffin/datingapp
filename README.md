@@ -645,6 +645,8 @@ id  user  password   passwordSalt
 
 - building blocks in place to expand application safely
 
+
+
 # ========= SECTION 7 =========
 
 ## Extending API learning goals
@@ -909,6 +911,8 @@ CreateMap<AppUser, MemberDto>()
 - more efficient to import calculate age inline so it only pulls what we need
 - with projection we do not need include (photos)
 
+
+
 # ========= SECTION 8 =========
 
 ## building out user interface learning goals
@@ -1094,7 +1098,9 @@ interface Car {
 - adjust methods to hold members after first load
 - change member array to observable of member array in member list component
 
-# ========= SECTION 10 =========
+
+
+# ========= SECTION 11 =========
 
 ## photo upload learning goals
 - photo storage options
@@ -1243,7 +1249,9 @@ interface Car {
 - photo editor template html
     - add button methods
 
-# ========= SECTION 11 =========
+
+
+# ========= SECTION 12 =========
 
 ## reactive forms learning goals
 - use reactive forms
@@ -1315,3 +1323,12 @@ interface Car {
 - default img doesnt display in dav, add or || in nav
 - from fresh upload, auto main does not populate nav and main img
 - in photo editor componennt in on success item() 
+
+
+# ========= SECTION 12 =========
+
+## paging and sorting learning goals
+- adding a paging class
+- adding soting to the api
+
+
