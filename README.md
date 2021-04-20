@@ -837,7 +837,7 @@ set user    set user    set user
 ## adding a DTO for members
 - copy app user props into member dto
 - move photo info into photDto 
-- instead of app user return memberdDo in userController
+- instead of app user return memberDTo in userController
 
 ## adding auto mapper
 - nuget gallery extension: AutoMapper.Extensions.Microsoft.DependencyInjection by Jimmy Bogard
@@ -1196,8 +1196,8 @@ interface Car {
 - cd client/src/app/members
 - `ng g c photo-editor --skip-tests`
 
-- in comps.ts : receive meber from parent component
-    - parent component is memebr edit
+- in comps.ts : receive member from parent component
+    - parent component is member edit
 
 ## photot upload component
 - ng2-file-upload
@@ -1216,36 +1216,36 @@ interface Car {
 - set current photo to main
 
 ## adding main photo in nav bar
-- return user photo with uesr object - user dto
-- account controller return photot url in account controller log in method
+- return user photo with user object - user dto
+- account controller return photo url in account controller log in method
 
 - add photo in user.ts
 - account service
-    change local storage from register to set current ueser
+    change local storage from register to set current user
 - acc service now has access to main photo
 - nav component html
 - 500 server error
     - account controller l66
     - return new user dto
     - first or default tells if source is empty(system argument null exception) 
-    - why does user ohtos have no object/source?
+    - why does user photos have no object/source?
     - injecting data context in account controller (not return photo with login )
     - eager load photos in login
 
 ## update mian image in client
 - set main photo method in member service
-- set main photo method in photo editor componentts
-    these can go anywehre compoter can figure out, location is for passing down and where human can remember
+- set main photo method in photo editor components
+    these can go anywhere computer can figure out, location is for passing down and where human can remember
     - set main photo: reset current user to load observable and local storage img
-    - loop thorugh each photo to reset what is main
-- photot editor comp html
+    - loop through each photo to reset what is main
+- photo editor comp html
 
 ## delete photo in client
 - users controller 
 - memebr service
     - add delete photo
-- photot editor component
-    - delete photot method
+- photo editor component
+    - delete photo method
 - photo editor template html
     - add button methods
 
@@ -1272,7 +1272,7 @@ interface Car {
 - need custom for confirm password
 
 ## custom validators
-- check validator values again st eachother
+- check validator values against each other
 - extra check for pw change after pw check is valid
 - bs style on inputs 
 - bs feedback when invalid
@@ -1285,12 +1285,12 @@ interface Car {
 - `ng g c text-input --skip-tests`
 - add control value accessor
 - inject control into constructor 
-- setup injectables into text input template to use in register component html
+- setup injectable into text input template to use in register component html
 
 ## form builder service
 - convert new form group and new form control with arrays of fb group injected in register component
 
-## expanidn form 
+## expanding form 
 - order not important in register component
 - radio buttons dont need validator
 - add in template
@@ -1309,7 +1309,7 @@ interface Car {
 
 ## updating api register method
 - update register dto with new properties
-- update auto mapper to map from register dtop to app user
+- update auto mapper to map from registerDTO to app user
 - add known as to userdto to return in account controller
 - pass back in register and log in (use in nav bar)
 
@@ -1322,7 +1322,7 @@ interface Car {
 
 - default img doesnt display in dav, add or || in nav
 - from fresh upload, auto main does not populate nav and main img
-- in photo editor componennt in on success item() 
+- in photo editor component in on success item() 
 
 
 # ========= SECTION 12 =========
@@ -1330,5 +1330,18 @@ interface Car {
 ## paging and sorting learning goals
 - adding a paging class
 - adding soting to the api
+- sorting on the client
+- formatting dates
 
 
+
+# ========= SECTION 13 =========
+
+## like user feature learning goals
+- 
+
+
+# ========= SECTION 14 =========
+
+## messaging feature learning goals
+- 
