@@ -1297,7 +1297,7 @@ interface Car {
 
 ## adding a reusable date input
 - html5 date picker is not implemented on all browsers (safari has none)
-- use java scrip tot create date picker
+- use java scrip to create date picker
 - ng angular packages comes with date picker 
 - add in shared module
 
@@ -1328,20 +1328,58 @@ interface Car {
 # ========= SECTION 12 =========
 
 ## paging and sorting learning goals
-- adding a paging class
-- adding soting to the api
-- sorting on the client
-- formatting dates
+- implement pagination on api and clinet
+- deferred execution using IQueryable
+- how to implement filtering on api and client
+- sorting on api and client
+- using action filters
+- adding time ago pipe
+- caching the client for paginated rescources
+
+## pagination
+- helos avoid preformance problems
+- parameters are passed by query string (in url)
+- page size should be limited
+- always page results
+
+## deferred execution
+- expression tree
+```
+context.Users  (IQueryable<USer>)
+    .where()
+    .orderby()
+    . take(5)   << pagination
+    . skip(5)   << pagination
+    .asQueryable() 
+
+ // execution of query
+    .tolistasync()
+    .toarrayasync()
+    .todictionaryasync()
+
+    .count()   << singleton query
+```
+
+## api pagination
+- not paging in user repository
+- add helper for pagedList
+- add helper class for paginationHeader information
+    - client will pull from api request header
+    
+- add extension method to add header to http response
+- pass extension props to helper in the same order helper expects them
+- serialize header name as json
+- add cors header to make custom header available
+- create helper class to receive pagination perameters from user(UserParams)
+    - check if user set page size is not greater than default max page size
+- update i/userrepository to return paged list and take in userparams
+- pass info fron the paged list created in user repository to the http response header in user controller
+- add pagination header in users controller 
+- add [FromQuery] sttribute tag to users controller to get the parameters from query string
+- add options to change json response for pagination header be camelcase not titlecase
+
+## client pagination
 
 
 
-# ========= SECTION 13 =========
 
-## like user feature learning goals
-- 
-
-
-# ========= SECTION 14 =========
-
-## messaging feature learning goals
-- 
