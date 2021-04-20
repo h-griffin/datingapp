@@ -37,14 +37,14 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        // api/users/3
+        // api/users/username
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             return await _userRepository.GetMemberAsync(username);
         }
 
-        [HttpPut]
+        [HttpPut]// api/users/updateUser
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {    // dont need to send obj back
              // get username from token used to authenticate
