@@ -1379,7 +1379,25 @@ context.Users  (IQueryable<USer>)
 - add options to change json response for pagination header be camelcase not titlecase
 
 ## client pagination
+- give pagination a typescript model in _models
+    - must be the same as in response header
+- create class for pagination in the ts file
+- modify get members method in member service
+    - turn off caching for now
+- HttpParams takes care of serializing and adding params to query string
+- {observe} now gives full response body
 
+- change how to return members in  member list component
+    - change menber observable back to membeber type
+    - use loadmembers to give props mannually for now
+    - adjust component tempalte from members$ to members
+    
+- bootstrap pagination component
+- https://valor-software.com/ngx-bootstrap/#/pagination
+- add in shared module
+- for root () angular boot strap components
+- add in member list template
+- add page changed method in component
 
 
 
