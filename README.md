@@ -1399,5 +1399,43 @@ context.Users  (IQueryable<USer>)
 - add in member list template
 - add page changed method in component
 
+## filtering api
+- dont return logged in user
+- choose gender to return 
 
+- add in user params
+    - current username
+    - gender
 
+- user controller
+    - add default opposite gender unless specified
+
+- user repository 
+    - add .AsQueryable()
+    - query is currently off of member dto dont want that
+    - want to map to member dto AFTER filtering 
+
+- adding additional filter parameters
+    - add props in user params
+    - user repository
+
+- user Dto
+    - send back gender with UserDto
+- Account controller
+    - update DTOs to return gender
+- User.ts
+    - add knwon as nad gender
+    - add known as to known as in nav
+- userParams.ts in _models
+    - create class to store user params
+- member service takes in userPArams model
+    - refactor paginated header code to be reusable
+- member list component
+    - refactor code in member list
+
+## adding filter buttons to the client
+- add reset filters function in member list component
+- member list template
+- member card template to add age to display card
+
+## sorting api
