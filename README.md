@@ -1297,7 +1297,7 @@ interface Car {
 
 ## adding a reusable date input
 - html5 date picker is not implemented on all browsers (safari has none)
-- use java scrip tot create date picker
+- use java scrip to create date picker
 - ng angular packages comes with date picker 
 - add in shared module
 
@@ -1328,20 +1328,114 @@ interface Car {
 # ========= SECTION 12 =========
 
 ## paging and sorting learning goals
-- adding a paging class
-- adding soting to the api
-- sorting on the client
-- formatting dates
+- implement pagination on api and clinet
+- deferred execution using IQueryable
+- how to implement filtering on api and client
+- sorting on api and client
+- using action filters
+- adding time ago pipe
+- caching the client for paginated rescources
 
+## pagination
+- helos avoid preformance problems
+- parameters are passed by query string (in url)
+- page size should be limited
+- always page results
 
+## deferred execution
+- expression tree
+```
+context.Users  (IQueryable<USer>)
+    .where()
+    .orderby()
+    . take(5)   << pagination
+    . skip(5)   << pagination
+    .asQueryable() 
 
-# ========= SECTION 13 =========
+ // execution of query
+    .tolistasync()
+    .toarrayasync()
+    .todictionaryasync()
 
-## like user feature learning goals
-- 
+    .count()   << singleton query
+```
 
+## api pagination
+- not paging in user repository
+- add helper for pagedList
+- add helper class for paginationHeader information
+    - client will pull from api request header
+    
+- add extension method to add header to http response
+- pass extension props to helper in the same order helper expects them
+- serialize header name as json
+- add cors header to make custom header available
+- create helper class to receive pagination perameters from user(UserParams)
+    - check if user set page size is not greater than default max page size
+- update i/userrepository to return paged list and take in userparams
+- pass info fron the paged list created in user repository to the http response header in user controller
+- add pagination header in users controller 
+- add [FromQuery] sttribute tag to users controller to get the parameters from query string
+- add options to change json response for pagination header be camelcase not titlecase
 
-# ========= SECTION 14 =========
+## client pagination
+- give pagination a typescript model in _models
+    - must be the same as in response header
+- create class for pagination in the ts file
+- modify get members method in member service
+    - turn off caching for now
+- HttpParams takes care of serializing and adding params to query string
+- {observe} now gives full response body
 
-## messaging feature learning goals
-- 
+- change how to return members in  member list component
+    - change menber observable back to membeber type
+    - use loadmembers to give props mannually for now
+    - adjust component tempalte from members$ to members
+    
+- bootstrap pagination component
+- https://valor-software.com/ngx-bootstrap/#/pagination
+- add in shared module
+- for root () angular boot strap components
+- add in member list template
+- add page changed method in component
+
+## filtering api
+- dont return logged in user
+- choose gender to return 
+
+- add in user params
+    - current username
+    - gender
+
+- user controller
+    - add default opposite gender unless specified
+
+- user repository 
+    - add .AsQueryable()
+    - query is currently off of member dto dont want that
+    - want to map to member dto AFTER filtering 
+
+- adding additional filter parameters
+    - add props in user params
+    - user repository
+
+- user Dto
+    - send back gender with UserDto
+- Account controller
+    - update DTOs to return gender
+- User.ts
+    - add knwon as nad gender
+    - add known as to known as in nav
+- userParams.ts in _models
+    - create class to store user params
+- member service takes in userPArams model
+    - refactor paginated header code to be reusable
+- member list component
+    - refactor code in member list
+
+## adding filter buttons to the client
+- add reset filters function in member list component
+- member list template
+- member card template to add age to display card
+
+## sorting api
