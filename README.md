@@ -1438,4 +1438,16 @@ context.Users  (IQueryable<USer>)
 - member list template
 - member card template to add age to display card
 
-## sorting api
+## sorting api (ordering)
+- userparams.cs add order by
+- user repository 
+    - add switch for order by 
+
+- action filter
+- sorting on client
+- dates
+- restore caching for members settings
+- remember filters
+
+- adding like user entity
+- adding messaging filter
