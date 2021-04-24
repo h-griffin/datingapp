@@ -1450,4 +1450,9 @@ context.Users  (IQueryable<USer>)
 - remember filters
 
 - adding like user entity
+    - padingation for likes
+
 - adding messaging filter
+    - repositories
+    - chat history
+    - delete messages
