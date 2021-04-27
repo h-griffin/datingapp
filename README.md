@@ -1456,3 +1456,12 @@ context.Users  (IQueryable<USer>)
     - repositories
     - chat history
     - delete messages
+
+- identity and role managment
+- signal IR
+- unit of work pattern and finishing touches
+- publish 
+    - postgres
+    - heroku 
+        - use same link ofr api 
+    
