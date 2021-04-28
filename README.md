@@ -1455,10 +1455,19 @@ context.Users  (IQueryable<USer>)
     - go to where controllers are deriving from (base api controller)
     - add attribute to base api controller to give access to action filter
     - mske a reuest on postman and see last active time change
-    
+- currently using get user by username async, ineffiecient because it incluces all photots, should switch to get user by id async.
+- set id in token so token has access to id and username
+    - use unique name for username and name id for id on new claim in token service
+    - upodate claims prinicpal extension now that username type is different
+    - replace name identifier with name for unique name 
+    - create new extension to get id and return int of id
+    - in log iser activity swap username for user id and use get user id
 
 
 - sorting on client
+
+
+
 - dates
 - restore caching for members settings
 - remember filters
