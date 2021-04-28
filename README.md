@@ -1444,6 +1444,20 @@ context.Users  (IQueryable<USer>)
     - add switch for order by 
 
 - action filter
+- do somethign before or after an action
+- access to context before and action executed after context
+    - check if logged in
+    - access username
+    - access repository
+    - access user object
+    - set user last active property
+    - add as service in application service extesions
+    - go to where controllers are deriving from (base api controller)
+    - add attribute to base api controller to give access to action filter
+    - mske a reuest on postman and see last active time change
+    
+
+
 - sorting on client
 - dates
 - restore caching for members settings
