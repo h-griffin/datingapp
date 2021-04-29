@@ -1488,3 +1488,23 @@ context.Users  (IQueryable<USer>)
     - heroku 
         - use same link ofr api 
     
+- dates
+- restore caching for members settings
+- remember filters
+
+- adding like user entity
+    - padingation for likes
+
+- adding messaging filter
+    - repositories
+    - chat history
+    - delete messages
+
+- identity and role managment
+- signal IR
+- unit of work pattern and finishing touches
+- publish 
+    - postgres
+    - heroku 
+        - use same link ofr api 
+    
