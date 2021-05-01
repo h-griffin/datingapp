@@ -1467,6 +1467,8 @@ context.Users  (IQueryable<USer>)
 - sorting on client
     - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
 
+    - two way binding with 3 buttons to switch off true and false for what way to sort on client
+
 
 - dates
 - restore caching for members settings
