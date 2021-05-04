@@ -1468,6 +1468,29 @@ context.Users  (IQueryable<USer>)
     - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
 
     - two way binding with 3 buttons to switch off true and false for what way to sort on client
+    - 
+
+
+- dates
+- restore caching for members settings
+- remember filters
+
+- adding like user entity
+    - padingation for likes
+
+- adding messaging filter
+    - repositories
+    - chat history
+    - delete messages
+
+- identity and role managment
+- signal IR
+- unit of work pattern and finishing touches
+- publish 
+    - postgres
+    - heroku 
+        - use same link ofr api 
+    
 
 
 - dates
