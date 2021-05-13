@@ -1477,6 +1477,11 @@ context.Users  (IQueryable<USer>)
 
 - adding like user entity
     - padingation for likes
+    - entity
+    - repository 
+    - controller 
+    - component
+    - paging
 
 - adding messaging filter
     - repositories
