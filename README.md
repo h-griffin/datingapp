@@ -1469,34 +1469,18 @@ context.Users  (IQueryable<USer>)
 
     - two way binding with 3 buttons to switch off true and false for what way to sort on client
     - sort by sctive or created on with filters by age 
-
+    - modify members service to send order by param in query string
 
 - dates
-- restore caching for members settings
-- remember filters
+    - time ago (last active time)
+    - {{member.created | date}}
+        - date: 'mediumDate'
+        - date: 'dd MMM yyyy'
+    - ngx time ago 
+        - `npm install ngx-timeago`
+        - https://www.npmjs.com/package/ngx-timeago
+        - {{member.lastActive | timeago}}
 
-- adding like user entity
-    - padingation for likes
-    - entity
-    - repository 
-    - controller 
-    - component
-    - paging
-
-- adding messaging filter
-    - repositories
-    - chat history
-    - delete messages
-
-- identity and role managment
-- signal IR
-- unit of work pattern and finishing touches
-- publish 
-    - postgres
-    - heroku 
-        - use same link ofr api 
-    
-- dates
 - restore caching for members settings
 - remember filters
 
