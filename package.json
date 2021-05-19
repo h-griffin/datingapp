@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-timeago": "^2.0.0"
+  }
+}
