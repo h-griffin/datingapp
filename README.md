@@ -1482,29 +1482,24 @@ context.Users  (IQueryable<USer>)
         - {{member.lastActive | timeago}}
 
 - restore caching for members settings
-- remember filters
+    - remember filters
+        - remember queries of page and gender etc
+        - look in members service
+        - use user params as key
+        - for each key/query store response
+        - use map to store key adn vfalues
+    - go to api get members and dont have them in cache, if in cache and query is identical then retrive from cache
+        - stores page results in memory if query is same
 
-- adding like user entity
-    - padingation for likes
-    - entity
-    - repository 
-    - controller 
-    - component
-    - paging
+- save member cache settings for member detail page
+    - extract member from map with matching key 
+    - load member detail from cache and not api
+    - navigation extras can get details of teh member >> will not work in future <<
+    - member object is available in detail page after visiting the members results, just need to extract it from the list of results (observe in console by visiting both pages)
+ 
 
-- adding messaging filter
-    - repositories
-    - chat history
-    - delete messages
 
-- identity and role managment
-- signal IR
-- unit of work pattern and finishing touches
-- publish 
-    - postgres
-    - heroku 
-        - use same link ofr api 
-    
+
 - adding like user entity
     - padingation for likes
     - entity
