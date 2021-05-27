@@ -41,8 +41,8 @@ export class MembersService {
   }
 
   getMember(username: string){
-    const member = this.members.find(x => x.username === username);  // check if members have already came from api
-    if (member !== undefined) return of(member);
+    // find individual member inside mao
+    console.log(this.memberCache);
 
     return this.http.get<Member>(this.baseUrl + 'users/' + username); // getting member from api
   }
