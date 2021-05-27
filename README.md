@@ -1495,7 +1495,7 @@ context.Users  (IQueryable<USer>)
     - extract member from map with matching key 
     - load member detail from cache and not api
     - navigation extras can get details of teh member >> will not work in future <<
-    - member object is available in detail page after visiting the members results, just need to extract it from the list of results (observe in console by visiting both pages)
+    - member object is available in detail page after visiting the members results, just need to extract it from the list of results 
  
 
 
