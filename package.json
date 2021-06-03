@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "ngx-timeago": "^2.0.0"
+    "ngx-timeago": "^2.0.0",
+    "tslib": "^2.2.0"
   }
 }

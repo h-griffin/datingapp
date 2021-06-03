@@ -1496,13 +1496,11 @@ context.Users  (IQueryable<USer>)
     - load member detail from cache and not api
     - navigation extras can get details of teh member >> will not work in future <<
     - member object is available in detail page after visiting the members results, just need to extract it from the list of results 
- 
-- save member cache settings for member detail page
-    - extract member from map with matching key 
-    - load member detail from cache and not api
-    - navigation extras can get details of teh member >> will not work in future <<
-    - member object is available in detail page after visiting the members results, just need to extract it from the list of results 
- 
+    - get all values of member cache, dont need keys
+    
+    - user educe function now that there are two ararys of members
+    - concat results into empty array;
+    - members can be duplicated in 
 
  
 
