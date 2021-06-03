@@ -41,8 +41,9 @@ export class MembersService {
   }
 
   getMember(username: string){
-    // find individual member inside mao
-    console.log(this.memberCache);
+    const member = [...this.memberCache.values()]
+      .reduce((arr, el) => arr.concat(el.result), []);
+    // console.log(this.memberCache);
 
     return this.http.get<Member>(this.baseUrl + 'users/' + username); // getting member from api
   }
