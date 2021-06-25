@@ -1526,3 +1526,6 @@ context.Users  (IQueryable<USer>)
     - heroku 
         - use same link ofr api 
     
+
+# Member Service .ts
+- getMember() having TSlib error
