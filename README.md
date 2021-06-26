@@ -1498,12 +1498,31 @@ context.Users  (IQueryable<USer>)
     - navigation extras can get details of teh member >> will not work in future <<
     - member object is available in detail page after visiting the members results, just need to extract it from the list of results 
     - get all values of member cache, dont need keys
+    - having an array of users in memory and going to member detail of member not in memory will produce a second array, only want one array to find all users in
+        - paginated results, paginated result
     
-    - user educe function now that there are two ararys of members
+    - use reduce function now that there are two ararys of members
     - concat results into empty array;
-    - members can be duplicated in 
-
+        - each new member loaded will be added to the array of loaded members 
+    - members can be duplicated in this arr from two different queries
+        - lisa stored from age filter and one lisa from 5 users with no filter
+        - this is ok because users will be found by first match to search
+    - user params stored in component get lost everytime, move them to service to keep
  
+- caching filters in member list coponent
+    - acc service is injected into memberserviec beware circular references, acc service cannot go back to member serviec
+    - set user params in component constructor, get them from mem service
+        - still updating inside component, must update service from component
+        - before getting members set current user params
+        - update component reset filters from service filters
+        - in member list component add user param updates to reset filters and page changed before loading members again
+    
+
+
+
+
+
+
 
 - adding like user entity
     - padingation for likes
