@@ -1326,7 +1326,7 @@ interface Car {
 - in photo editor component in on success item() 
 
 
-# ========= SECTION 12 =========
+# ========= SECTION 13 =========
 
 ## paging and sorting learning goals
 - implement pagination on api and clinet
@@ -1516,9 +1516,42 @@ context.Users  (IQueryable<USer>)
         - before getting members set current user params
         - update component reset filters from service filters
         - in member list component add user param updates to reset filters and page changed before loading members again
-    
 
 
+# ========= SECTION 14 =========   
+## adding like user entity learning goals
+- many to many relationships
+- configure entities in the DBcontext
+    - AppUser can be liked by many AppUsers
+    - AppUser can like many AppUsers
+    - .net5 can create table automatically, but doesnt work well with this relationship
+    - self referencing many to many
+    - use join table called user like
+        - source user id
+        - liked user id
+- fluent api
+    - tell api 
+        - APPUSER has one SOURCEUSER with many LIKEDUSERS
+        - APPUSER has one LIKEDUSER with many LIKEDBYUSERS
+
+## adding a likes entity
+- give app user two new collections
+    - users they like
+    - users have liked 
+- create join entity
+    - add 4 props to UserLike for source user and liked user and their ids
+    - add two ICollections of UserLike to AppUser entity
+- configure in datacontexg
+    - photos didnt need a dbset because were not doing anything with them, this needs configuring
+    - create an override for entity framework builder
+        - specify that it has a key, because we did not specify a primary key fo rthe entity
+        - combination of source user id and liked user id
+        - define primary key and relationships
+- make new migration
+    - creates table likes with two columns source user id and likes user id
+
+## adding likes repository
+- 
 
 
 
