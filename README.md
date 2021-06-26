@@ -1326,7 +1326,7 @@ interface Car {
 - in photo editor component in on success item() 
 
 
-# ========= SECTION 12 =========
+# ========= SECTION 13 =========
 
 ## paging and sorting learning goals
 - implement pagination on api and clinet
@@ -1498,12 +1498,64 @@ context.Users  (IQueryable<USer>)
     - navigation extras can get details of teh member >> will not work in future <<
     - member object is available in detail page after visiting the members results, just need to extract it from the list of results 
     - get all values of member cache, dont need keys
+    - having an array of users in memory and going to member detail of member not in memory will produce a second array, only want one array to find all users in
+        - paginated results, paginated result
     
-    - user educe function now that there are two ararys of members
+    - use reduce function now that there are two ararys of members
     - concat results into empty array;
-    - members can be duplicated in 
-
+        - each new member loaded will be added to the array of loaded members 
+    - members can be duplicated in this arr from two different queries
+        - lisa stored from age filter and one lisa from 5 users with no filter
+        - this is ok because users will be found by first match to search
+    - user params stored in component get lost everytime, move them to service to keep
  
+- caching filters in member list coponent
+    - acc service is injected into memberserviec beware circular references, acc service cannot go back to member serviec
+    - set user params in component constructor, get them from mem service
+        - still updating inside component, must update service from component
+        - before getting members set current user params
+        - update component reset filters from service filters
+        - in member list component add user param updates to reset filters and page changed before loading members again
+
+
+# ========= SECTION 14 =========   
+## adding like user entity learning goals
+- many to many relationships
+- configure entities in the DBcontext
+    - AppUser can be liked by many AppUsers
+    - AppUser can like many AppUsers
+    - .net5 can create table automatically, but doesnt work well with this relationship
+    - self referencing many to many
+    - use join table called user like
+        - source user id
+        - liked user id
+- fluent api
+    - tell api 
+        - APPUSER has one SOURCEUSER with many LIKEDUSERS
+        - APPUSER has one LIKEDUSER with many LIKEDBYUSERS
+
+## adding a likes entity
+- give app user two new collections
+    - users they like
+    - users have liked 
+- create join entity
+    - add 4 props to UserLike for source user and liked user and their ids
+    - add two ICollections of UserLike to AppUser entity
+- configure in datacontexg
+    - photos didnt need a dbset because were not doing anything with them, this needs configuring
+    - create an override for entity framework builder
+        - specify that it has a key, because we did not specify a primary key fo rthe entity
+        - combination of source user id and liked user id
+        - define primary key and relationships
+- make new migration
+    - creates table likes with two columns source user id and likes user id
+
+## adding likes repository
+- 
+
+
+
+
 
 - adding like user entity
     - padingation for likes
