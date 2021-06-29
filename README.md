@@ -1535,6 +1535,16 @@ context.Users  (IQueryable<USer>)
         - APPUSER has one SOURCEUSER with many LIKEDUSERS
         - APPUSER has one LIKEDUSER with many LIKEDBYUSERS
 
+
+- adding new entity
+    - padingation for likes
+    - entity
+    - repository 
+    - controller 
+    - component
+    - paging
+ 
+
 ## adding a likes entity
 - give app user two new collections
     - users they like
@@ -1552,23 +1562,51 @@ context.Users  (IQueryable<USer>)
     - creates table likes with two columns source user id and likes user id
 
 ## adding likes repository
+- methods
+    - get individual likes
+        - <UserLike>
+    - get user with thier likes
+        - <AppUser>
+    - get likes for a user
+        - <IEnumerable<LikeDto>>
+        - liked
+        - liked by
+- return a DTO
+    - to select properties interested in for returning 
+    - only info needed to create a member card
+
+- create likes data class and inherit interface
+- inject datacontext
+- plug in application service extensions 
+    - add scoped repository, implementation class
+
+## implementing likes repository
+- use find async for get user like
+- user include and first or default to get list of users user has liked
+- for get user likes return IEnumerable lists of who the user has liked or who the user likes
+    - use the userid for the join table and has if statements to decide which side of teh id it will return 
+        - users like this user
+            - right side of table
+        - user likes these users
+            - left side of table
+    - the return Dto does not have enough properties to need AutoMapper, would write equal code to configure it anyways
+
+## contorller methods for likes
+- need acces to/inject lieks and user repositroies
+- dont need to return to client, already know the primary key of created entity is going to be, client does not need it
+
+- post man check
+    - send post /add like for todd from lucy
+    - 404 not found
+        - common
+        - restart api
+        - file watcher needs a restart for new endpoints
+    - 200 response
+        - lucys likes : todd
+        - lucys liked by : none
+
+## setting up the likes functions in the angular app
 - 
-
-
-- adding like user entity
-    - padingation for likes
-    - entity
-    - repository 
-    - controller 
-    - component
-    - paging
-- adding like user entity
-    - padingation for likes
-    - entity
-    - repository 
-    - controller 
-    - component
-    - paging
 
 
 
