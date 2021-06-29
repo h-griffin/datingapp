@@ -1465,7 +1465,7 @@ context.Users  (IQueryable<USer>)
     - in log iser activity swap username for user id and use get user id
 
 
-- sorting on client
+## sorting on client
     - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
 
     - two way binding with 3 buttons to switch off true and false for what way to sort on client
@@ -1482,7 +1482,7 @@ context.Users  (IQueryable<USer>)
         - https://www.npmjs.com/package/ngx-timeago
         - {{member.lastActive | timeago}}
 
-- restore caching for members settings
+## restore caching for members settings
     - remember filters
         - remember queries of page and gender etc
         - look in members service
@@ -1518,7 +1518,8 @@ context.Users  (IQueryable<USer>)
         - in member list component add user param updates to reset filters and page changed before loading members again
 
 
-# ========= SECTION 14 =========   
+# ========= SECTION 14 =========  
+
 ## adding like user entity learning goals
 - many to many relationships
 - configure entities in the DBcontext
@@ -1554,9 +1555,6 @@ context.Users  (IQueryable<USer>)
 - 
 
 
-
-
-
 - adding like user entity
     - padingation for likes
     - entity
@@ -1564,6 +1562,16 @@ context.Users  (IQueryable<USer>)
     - controller 
     - component
     - paging
+- adding like user entity
+    - padingation for likes
+    - entity
+    - repository 
+    - controller 
+    - component
+    - paging
+
+
+
 
 - adding messaging filter
     - repositories
