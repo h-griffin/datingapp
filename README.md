@@ -1606,24 +1606,89 @@ context.Users  (IQueryable<USer>)
         - lucys liked by : none
 
 ## setting up the likes functions in the angular app
-- 
+- user member service for likes
+    - add like
+    - get likes
+        - liked or liked by
+
+- member card.ts
+    - inject member service and toastr service
+    - add like
+
+- member card template .html
+    - add click event to heart button
+    - 400 error not coming from API
+        - httop error response displaying status text, not error message (custom)
+
+- error.interceptor.ts
+    - check of error is an object and add an else when it is just a string, this will give us our custom string messages
+
+## adding likes component
+- lists.component.ts
+    - store members 
+        - not full members so user Partial, now optional properties for coplete member
+    - inject members service
+    - update return type for members, cannot be observable since it is a partial member
+
+- members service.ts getlikes
+    - returns <Partial<Member[]>>
+
+
+- list component. html
+    - add turnary for what the predicate is/ what is displaying
+    - add buttons to change predicate and reload likes
+    - add ng for to display members that fit the queryable
+
+    - likes displaying all users 
+    - check network tab and check request, predicate is not making it into the query URL
+- membersservice.ts
+    - getlikes http get 
+    - WAS (this.baseUrl + 'likes?=' + predicate)
+    - SHOULD BE (this.baseUrl + 'likes?predicate=' + predicate)
+
+## paginate API and client likes
+- take pagination from user params
+- create a new class to store user params pagination and any other classes that need it can inherit 
+- inherit Pagination Params inside userparams and likes params
+- likes params needs predicate and user id
+
+- ilikes repository
+    - instead of returning ienumerable return paged list
+    - replace the string predicate and int user id, pass in likes params 
+
+- likes repository implementation class
+    - configure to paginate
+    - return paged list
+    - recive predicate and user id from likes params
+
+- likes controller
+    - replace predicate and user id with likesparams
+    - now returns a paginated response
+    - check in postman that pagination headers are appearing
+        - curretn page
+        - page size
+        - total count
+        - total pages
+
+## paginatin glikes on the client
+- members service
+    - get likes needs pagination headers now
+    - reuse methods to get pagination headers and return paginated result
+    - get likes needs predicate page number and page size
+    - instead of creating a class for 3 properties, just add them to the list componetn mannually
+- list component
+    - create page number and size properties 
+    - pass into load likes, get likes
+- members service
+    - get likes, get paginated results should be type <Partial<Member[]>>
+
+- member list component html
+ copy paste pagination into list ocmonent html
+
+- check network tab 
+    - request > headers > pagination headers are there
+    - drop page size to 2 to check pagination works
 
 
 
 
-- adding messaging filter
-    - repositories
-    - chat history
-    - delete messages
-
-- identity and role managment
-- signal IR
-- unit of work pattern and finishing touches
-- publish 
-    - postgres
-    - heroku 
-        - use same link ofr api 
-    
-
-# Member Service .ts
-- getMember() having TSlib error

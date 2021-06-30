@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,26 +31,26 @@ namespace API.Data
                 .Include(x => x.LikedUsers)
                 .FirstOrDefaultAsync(x => x.Id == userId);
         }
-        public async Task<IEnumerable<LikeDto>> GetUserLikes(string predicate, int userId)
+        public async Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams)
         {
             // get list of users user has liked -> user id is source user
             var users = _context.Users.OrderBy(u => u.UserName).AsQueryable();
             // users have liked user 
             var likes = _context.Likes.AsQueryable();
 
-            if (predicate == "liked")
+            if (likesParams.Predicate == "liked")
             {
-                likes = likes.Where(like => like.SourceUserId == userId);  
+                likes = likes.Where(like => like.SourceUserId == likesParams.UserId);  
                 users = likes.Select(like => like.LikedUser);  // users from likes table, liked user is app user
             }
 
-            if (predicate == "likedBy")
+            if (likesParams.Predicate == "likedBy")
             {
-                likes = likes.Where(like => like.LikedUserId == userId);  
+                likes = likes.Where(like => like.LikedUserId == likesParams.UserId);  
                 users = likes.Select(like => like.SourceUser);  // users from liked table, source user is app user
             }
 
-            return await users.Select(user => new LikeDto 
+            var likedUsers = users.Select(user => new LikeDto 
             {
                 // not enough props to need AutoMapper
                 Username = user.UserName,
@@ -59,7 +60,9 @@ namespace API.Data
                 City = user.City,
                 Id = user.Id
 
-            }).ToListAsync();
+            });
+
+            return await PagedList<LikeDto>.CreateAsync(likedUsers, likesParams.PageNumber, likesParams.PageSize);
         }
     }
 }
