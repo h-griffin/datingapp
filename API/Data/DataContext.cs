@@ -12,6 +12,10 @@ namespace API.Data
         // dont need dbset for photoclass - gets name from table tag in photo entity
 
         public DbSet<UserLike> Likes {get; set;}
+
+        public DbSet<Message> Messages { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder){
             base.OnModelCreating(builder);
 
@@ -29,6 +33,23 @@ namespace API.Data
                 .WithMany(l => l.LikedByUsers)
                 .HasForeignKey(s => s.LikedUserId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Recipient)
+                .WithMany(m => m.MessagesRecived)
+                .OnDelete(DeleteBehavior.Restrict); // only if both parties have deleted
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict); // only if both parties have deleted
+        
+        
         }
+
+
+
     }
 }
