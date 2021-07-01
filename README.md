@@ -1716,6 +1716,11 @@ context.Users  (IQueryable<USer>)
     - configure builder keys and restrict server deletion (only if both parties delete)
 
 
+- data context
+    - add messages table
+    - configure builder keys and restrict server deletion (only if both parties delete)
+
+
 
 
 
