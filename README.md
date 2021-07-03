@@ -1796,7 +1796,34 @@ context.Users  (IQueryable<USer>)
     - no additional routes because it will come up via query string
 
 - test inbox outbox in postman
+
+## getting message thread
+- instead of user IDs use strings of current username and string of recipient username
+    - for consistency, used everywhere else
+    - always have access to curerent username from context in controller
     - 
 
+- mark any messages not read as read
+    - get messages in memory
+    - do sometihing 
+    - map to dtp
+        - cannot work with dto to update database
+        - execute request into list and work with messages in memory
+- get messages where recipient is equal to user and vice versa for sender
 
+- when thread is open messages are marked as read
+- because not projecting, eagerly load photos for users 
 
+- any unread messages where recipient is current usernam ewill be marked as read
+
+- steps of get messages thread ()
+    - get convo
+    - find out if unread of current user
+    - mark as read
+    - return essage dtos
+
+- message controller
+    - takes in name of other user, already have access to current user
+
+## setting up message thread in angular client
+- 

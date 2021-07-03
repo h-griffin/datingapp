@@ -24,7 +24,7 @@ namespace API.Controllers
             _userRepository = userRepository;
         }
 
-        // create
+        // create message
         [HttpPost]
         public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
         {
@@ -53,7 +53,7 @@ namespace API.Controllers
             return BadRequest("failed to send message");
         }
 
-        // 
+        // get message
         [HttpGet] // uses query string
         public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessagesForUser([FromQuery]MessageParams messageParams)
         {
@@ -66,6 +66,13 @@ namespace API.Controllers
             return messages;
         }
 
+        // get message thread
+        [HttpGet("thread/{username}")] // username of other user / already have current user
+        public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
+        {
+            var currentUsername = User.GetUsername();
+            return Ok(await _messageRepository.GetMessageThread(currentUsername, username));
+        }
 
 
 
