@@ -19,6 +19,8 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder builder){
             base.OnModelCreating(builder);
 
+            // likes
+
             builder.Entity<UserLike>()
                 .HasKey(k => new {k.SourceUserId, k.LikedUserId}); // primary key for table
 
@@ -35,10 +37,11 @@ namespace API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
 
+            // messages
 
             builder.Entity<Message>()
                 .HasOne(u => u.Recipient)
-                .WithMany(m => m.MessagesRecived)
+                .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict); // only if both parties have deleted
 
             builder.Entity<Message>()
