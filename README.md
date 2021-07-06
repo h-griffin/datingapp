@@ -1826,4 +1826,96 @@ context.Users  (IQueryable<USer>)
     - takes in name of other user, already have access to current user
 
 ## setting up message thread in angular client
+- need interface in _models
+    - in postman copy message object an dcopy paste into [Json to ts](http://json2ts.com/)
+
+- new service for messages
+    - cd client/src/app/_services 
+    -  ng g s message --skip-tests
+
+- message.service.ts
+    - inject httpclient 
+    - need baseurl
+    - method to get messages
+    - get messages is a paginated result so we need access t opage number size and container 
+    - dont have access to these methods in client ts file
+        - they are private in member service.ts
+        - could copy them into their own file but...
+            - need to think baout paginated result, need to use http
+            - can pass http as parameter and service can inject it
+            - could copy paste them into services
+    - _services paginataed result helper.ts
+        - cut and paste from members service
+        - since they are not inside a class so now they need to be functions
+        - export both functions
+    - go back to members ts and fix errors
+        - fix get likes and get members
+        - remove this. 
+        - inject htis.http
+
+     - fill out get messages in message service
+
+- messages component .ts
+    - fill out load messages and paginate result
+
+- messages template .html
+    - loop through messages
+
+- restart api and angular to check if messages show
+    - for testing change container status from unread to outbox and inbox
+
+## designing the inbox
+- add radio buttons with click handlers to change container displayin gunreads/inbox/outbox
+- check if it is asking for inbox or outbox and show messages for reciving or sending
+- add photos
+- add css to round photos and max width
+
+
+## adding message thread in client
+- message thread will be through user card message icon, or user detail message tab
+- message service .ts
+    - get message thread
+    - no pagination for now, add later
+
+- new comp for messages
+    - src/app/members
+    - ng g c member-messages --skip-tests
+
+- members-messages.ts component
+    - load messages ()
+
+- members messages html
+    - ng for loop message of messages and display content fof test
+
+- member detail .html template
+    - add messages component
+
+- two loading icons when member detail opens
+    - loading member
+    - loading messages
+    - need to load messages at the same time as meber later
+
+## styling the message thread
+- last html code in application
+
+- member messages .html
+    - use card
+    - check if there are no messages 
+    - display sender images
+    - display read or unread and timestamps of read
+    - message content and text box for sending messsage
+
+## activating message tab
 - 
+
+# add later list
+- unlike user feature
+- paginate message thread
+
+
+
+
+
+
+
+
