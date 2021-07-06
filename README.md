@@ -1906,7 +1906,38 @@ context.Users  (IQueryable<USer>)
     - message content and text box for sending messsage
 
 ## activating message tab
-- 
+- messages loading when messages tab not clicked
+    - messages child ofmember detail
+    - when detail is constructed it constructs child inputs
+    - in ng on init it calls toload messages
+    - dont load messages until tab is clicked
+
+- member detail template .html
+    - use tabset to note if tab is clicked
+    - use tempalte reference variable to tabset
+        - memberTabs
+
+- member detail component .ts
+    - add decorator viewchild membertabs
+    - each tab will have a tab directive
+    - get active tab heading(from data) to see if it is messages tab
+    - tranfer load messgaes info from member detail
+
+- messages component.ts and member detail component need message [] = [] to use length checks for checking messages
+
+- member detail component .ts
+    - inject message servie
+    - get username from member 
+    - add extra && check in tab activated to check if switching tabs an dmesssages are already loaded do not reload messages
+
+- member messages component .ts
+    - pass messages as input property instead of getting username
+
+- member detail template .html
+    - in card instead of passing username pass messages
+    - give each tab (selectTab)="onTabActivated($event)
+
+
 
 # add later list
 - unlike user feature
