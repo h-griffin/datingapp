@@ -2047,12 +2047,44 @@ context.Users  (IQueryable<USer>)
 
 ## fixing photo loading in messages tab (outbox)
 - addd flag to say loading
+- hide messages until everything ready
+
+- messages component .ts
+    - add laoding flag, set to true or false in load messages before and after
+
+- messages template .html
+    - TR ng for message of messages
+    - add [hidden]="loading" to hide messages until user photos are ready
+    - hide pagination while loading 
+        - add && !loading to existing pagination check
+
+## deleting messages on the API
+- message controller .cs
+    - add rotute http delete take in message id
+    - deletes dont return anything, use task action result
+    - check if user deleting is one of the two parties /sender or reciver
+    - mark sender/receiver deleted after checking the username
+        - if both, delete from server
+    - save and send bad req if it doesn send
+    - add check in repo to only return messages for sender/recipient
+        - dont show to receiver if they deleted it
+        - dont show to sender if they deleted it
+
+- message repository .cs
+    - getmessagesfor user()
+        - add checks ofr message boxes if messag is deleted
+    - get message thread()
+        - checks in .where()
+
+## deleting message on client
 - 
 
 
 # add later list
 - unlike user feature
 - paginate message thread
+- hide pagination bar for no messages in message outbox
+
 
 
 
