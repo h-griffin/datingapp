@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
@@ -13,7 +14,7 @@ import { MessageService } from 'src/app/_services/message.service';
   styleUrls: ['./member-detail.component.css']
 })
 export class MemberDetailComponent implements OnInit {
-  @ViewChild('memberTabs') memberTabs: TabsetComponent;
+  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
   member: Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -24,6 +25,10 @@ export class MemberDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loadMember();
+
+    this.route.queryParams.subscribe(params => {
+      params.tab ? this.selectTab(params.tab) : this.selectTab(0);
+    })
 
     this.galleryOptions = [
       {
@@ -69,6 +74,10 @@ export class MemberDetailComponent implements OnInit {
     if (this.activeTab.heading === "Messages" && this.messages.length === 0){
       this.loadMessages();
     }
+  }
+
+  selectTab(tabId: number){
+    this.memberTabs.tabs[tabId].active = true;
   }
 
 }

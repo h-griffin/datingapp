@@ -63,6 +63,7 @@ export class MembersService {
       }))
   }
 
+  // could use navigation extras but member detailed resolver cannot use it
   getMember(username: string){
     const member = [...this.memberCache.values()]
       .reduce((arr, el) => arr.concat(el.result), []) //previous arr, do to each element- concat new to previous arr
