@@ -1906,7 +1906,99 @@ context.Users  (IQueryable<USer>)
     - message content and text box for sending messsage
 
 ## activating message tab
-- 
+- messages loading when messages tab not clicked
+    - messages child ofmember detail
+    - when detail is constructed it constructs child inputs
+    - in ng on init it calls toload messages
+    - dont load messages until tab is clicked
+
+- member detail template .html
+    - use tabset to note if tab is clicked
+    - use tempalte reference variable to tabset
+        - memberTabs
+
+- member detail component .ts
+    - add decorator viewchild membertabs
+    - each tab will have a tab directive
+    - get active tab heading(from data) to see if it is messages tab
+    - tranfer load messgaes info from member detail
+
+- messages component.ts and member detail component need message [] = [] to use length checks for checking messages
+
+- member detail component .ts
+    - inject message servie
+    - get username from member 
+    - add extra && check in tab activated to check if switching tabs an dmesssages are already loaded do not reload messages
+
+- member messages component .ts
+    - pass messages as input property instead of getting username
+
+- member detail template .html
+    - in card instead of passing username pass messages
+    - give each tab (selectTab)="onTabActivated($event)
+
+## using query params
+- activate message tab from message button on member detail
+- member detail compnoent .ts
+    - create select tab method and bind to message button
+
+- member detaul template .html
+    - add click even tto message button
+    - because no other tabs need this, hard code message tab id (3) 
+        - 0 about
+        - 1 interests
+        - 2 photos
+        - 3 messages
+
+- access tab from outside comonent
+    - from matches page go stright to message tab from message button
+    - on messages outbox/inbox page load messages tab from there
+
+- member card template .html
+    - add query params and router link to message button
+
+- add query param to messaegs template.html after the router link
+
+- access query params inside component
+
+- member detial component .ts
+    - on init, check query param for specified tab and if none go to 0, first tab
+    - cant read property tab from undefined
+        - ng if
+        - because in member detail template .html there is a conditional at the top
+        - in component has view child
+        - when component is being constructed it is undefined
+    
+    - make view child static
+    - remove conditional, too many errors without checking member before displaying info on page
+
+    - route resolvers
+
+## using route resolvers
+- either turn off feature to go stright to messages and dont use viewchild
+    - cheap
+- or add optional chaining to all properties
+    - lots of pop ups
+
+- use route resolvers
+    - get access to data before component is constructed
+    - will have everything we need when component is constructed
+    - conditional still needs to go
+    - keep static view child
+    - get data for member a different way
+
+- create client/src/app/_resolvers
+    - no ng command must add manually
+    - add file member-detailed.resolver.ts
+    - implements angular resolver
+    - not a component so needs @Injectable
+    - provided in : root
+        - resolvers are instatniated in teh same was as services
+    
+    - member detailed uses member service to get member from cache because resolver cannot use navigation extras
+    
+
+
 
 # add later list
 - unlike user feature
