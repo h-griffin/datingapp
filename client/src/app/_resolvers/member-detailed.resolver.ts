@@ -4,19 +4,18 @@ import { Observable } from "rxjs";
 import { Member } from "../_models/member";
 import { MembersService } from "../_services/members.service";
 
-@Injectable({
+@Injectable({  // not a component
   providedIn: 'root'
-})   // not a component
+})
 export class MemberDetailedResolver implements Resolve<Member>{
 
-  constructor(private memberService: MembersService){}
+  constructor(private membersService: MembersService){}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Member | Observable<Member> | Promise<Member> {
-    throw new Error("Method not implemented.");
+  resolve(route: ActivatedRouteSnapshot): Observable<Member> {
+    return this.membersService.getMember(route.paramMap.get('username'));
   }
 
 }
 
 
 
- 

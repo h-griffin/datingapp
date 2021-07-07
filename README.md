@@ -1997,8 +1997,27 @@ context.Users  (IQueryable<USer>)
     
     - member detailed uses member service to get member from cache because resolver cannot use navigation extras
     
+    - specify a method in service to return observable and router will subscribe automatically and deal with unsibscripton
 
+- app routing module
+    - give path access to resolver for member detail
+    - can now get data from inside route
 
+- member detail component
+    - dont need to load member but still need gallery images
+    - now get member from route
+    - cut and past gallery options under gallery options in ng on init
+    - remove load member ()
+    
+- test page
+    - go to member detail, refresh
+    - go to message tab, refresh
+        - should load messages
+    - go to adbout, refresh
+        - should go to/load messages
+
+## sending messages
+- 
 
 # add later list
 - unlike user feature
