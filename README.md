@@ -2017,7 +2017,38 @@ context.Users  (IQueryable<USer>)
         - should go to/load messages
 
 ## sending messages
+- message service.ts
+    - send message method
+        - take in username(send to) and content
+        - will get back a type message DTO so send in Message type
+        - send opject of content to give to create message dto
+
+- membermessages component t.s
+    - add member service
+    - add send message()
+    - add message to message array to view in thread
+
+- member detail template .html
+    - add [username] back to member messages card
+
+- member message template .html
+    - use form as template form (simple)
+    - bind text input to message content
+    - disable button if form is not valid
+    - clear textbox after message is sent...
+
+- member messages component.ts
+    - use viewchild to get access to message form from component
+    - after adding message to thread array, reset form
+
+- test 
+    - send message
+    - refresh to check persist
+
+## fixing photo loading in messages tab (outbox)
+- addd flag to say loading
 - 
+
 
 # add later list
 - unlike user feature
