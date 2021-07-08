@@ -1997,12 +1997,128 @@ context.Users  (IQueryable<USer>)
     
     - member detailed uses member service to get member from cache because resolver cannot use navigation extras
     
+    - specify a method in service to return observable and router will subscribe automatically and deal with unsibscripton
+
+- app routing module
+    - give path access to resolver for member detail
+    - can now get data from inside route
+
+- member detail component
+    - dont need to load member but still need gallery images
+    - now get member from route
+    - cut and past gallery options under gallery options in ng on init
+    - remove load member ()
+    
+- test page
+    - go to member detail, refresh
+    - go to message tab, refresh
+        - should load messages
+    - go to adbout, refresh
+        - should go to/load messages
+
+## sending messages
+- message service.ts
+    - send message method
+        - take in username(send to) and content
+        - will get back a type message DTO so send in Message type
+        - send opject of content to give to create message dto
+
+- membermessages component t.s
+    - add member service
+    - add send message()
+    - add message to message array to view in thread
+
+- member detail template .html
+    - add [username] back to member messages card
+
+- member message template .html
+    - use form as template form (simple)
+    - bind text input to message content
+    - disable button if form is not valid
+    - clear textbox after message is sent...
+
+- member messages component.ts
+    - use viewchild to get access to message form from component
+    - after adding message to thread array, reset form
+
+- test 
+    - send message
+    - refresh to check persist
+
+## fixing photo loading in messages tab (outbox)
+- addd flag to say loading
+- hide messages until everything ready
+
+- messages component .ts
+    - add laoding flag, set to true or false in load messages before and after
+
+- messages template .html
+    - TR ng for message of messages
+    - add [hidden]="loading" to hide messages until user photos are ready
+    - hide pagination while loading 
+        - add && !loading to existing pagination check
+
+## deleting messages on the API
+- message controller .cs
+    - add rotute http delete take in message id
+    - deletes dont return anything, use task action result
+    - check if user deleting is one of the two parties /sender or reciver
+    - mark sender/receiver deleted after checking the username
+        - if both, delete from server
+    - save and send bad req if it doesn send
+    - add check in repo to only return messages for sender/recipient
+        - dont show to receiver if they deleted it
+        - dont show to sender if they deleted it
+
+- message repository .cs
+    - getmessagesfor user()
+        - add checks ofr message boxes if messag is deleted
+    - get message thread()
+        - checks in .where()
+
+## deleting message on client
+- message service .ts
+    - delete message ()
+    - take in message id
+
+- messages conponent .ts
+    - delete messages ()
+    - take in message id & use splie to cut from messages
+    - use find index() and delete 1 message
+
+- messages component template .html
+    - add click event to delete button
+    - router will try and route on delete click, add extra click event
+        - $event.stopPropagation
+
+- test
+    - 500 server error
+    - message controller 87
+    - getting message sender and recipient username 
+    - did we eagerly load both sender and recipient in get message method in message repositoru
+
+- message repository .cs
+    - want access to related acces need to eitehr project or eager load
+    - not projecting inside here
+    - change type, cant use include with find async
+    - ise single or default async and includes for sender receiver
+
+- currently if you log in as two users in two browsers and send messages between users
+- messages are not poping up on another users browse
+    - dont maintain a connection to api
+    - dont have a way to do that now... will do later
 
 
+# ========= SECTION 16 =========  
+
+## identity and role management feature learning goals
+- 
 
 # add later list
 - unlike user feature
 - paginate message thread
+- hide pagination bar for no messages in message outbox
+
 
 
 
