@@ -2112,7 +2112,70 @@ context.Users  (IQueryable<USer>)
 # ========= SECTION 16 =========  
 
 ## identity and role management feature learning goals
+- refactor to use asp.net identity
+- role meanagement
+- policy based authorization
+- identity types
+    - user manager<t>
+    - sign in manager<t>
+    - role manager<t>
+
+- why? asp.net identity?
+    - battle harened, written and tested by microsoft
+    - comes with a password hasher with 10,000 salt itterations
+        - ours does 1 salt itteration
+        - passwords  an always be gotten from hash if DB is compromised, 10k is more complex than 1
+    - full framework for managing members and roles
+    - provides entity framework schema to create needed tables
+        - highly customizable
+    
+- scratingh the surface of identity 
+    - not covering email validation
+    - not covering forgotten passwords
+
+## setting up the entities
+- app user.cs
+    - derive from identityUSer
+        - give key type int
+        - creates feilds for us
+        - can see id username and passwordhash are trying to override from parent class (identity built in)
+        - delete id username passwprd hash and salts
+
+- app role.cs
+    - derive from app role : Identity role<int>
+    - many to many relationship
+        - list of roles user are in
+        - each app user can have multiple roles and each role can contain multiple users
+    
+- app user role .cs
+    - join entities
+    - prop for User and Role
+
+- app role.cs
+    - add colelction of user roles
+    - do same thins in app user class to complete relationship
+
+- app user.cs
+    - add collection of user roles
+
+- app user role is acting as join table
+
+- app user role.cs
+    - derive from Identity user role<int>
+
+- fix errors from changing classes
+
+- account controller
+    - password salt is here and in seed data
+    - remove anything related to creating pw hash and salt
+    - in register() and login()
+
+- seed.cs
+    - remove pw hash salt in foreach in seed users
+
+## configuring db context
 - 
+
 
 # add later list
 - unlike user feature

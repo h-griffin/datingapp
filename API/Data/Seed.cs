@@ -18,11 +18,8 @@ namespace API.Data
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);        // make string into object (appuser)
             foreach (var user in users)
             {
-                using var hmac = new HMACSHA512();
                 user.UserName = user.UserName.ToLower();
-                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
-                user.PasswordSalt = hmac.Key;
-
+ 
                 context.Users.Add(user); // *tracking* doesnt touch db yet
             }
             await context.SaveChangesAsync(); // save to database
