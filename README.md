@@ -2245,7 +2245,34 @@ context.Users  (IQueryable<USer>)
     - want users creeated with identity passwords
 
 ## updating the seed method
+- seed.cs
+    - replace datacontext with user namager from identity
+    - find by id and find by name ... full crud methods
+    - access tousers table, returns iqueryable of users if store is iqueryable userstore
+        - our store is an iqueryable
+        - this means we can use it just like the data context
+    
+    - users table contains a normalized username (ALLCAPS)
+        - we will still convert to lowercase for us
+    
+    - userManager takes care fo saving changes to dataabse when done
+
+- Program.cs
+    - uncomment seed
+    - get user manager
+    - pass usermanager to seedusers() instead of context
+
+- stop api
+- drop data
+    - dotnet of database drop
+- restart (reseed)
+    - dotnet watch run
+
+- data recreated with new usermanager
+
+## update account controller
 - 
+
 
 
 
