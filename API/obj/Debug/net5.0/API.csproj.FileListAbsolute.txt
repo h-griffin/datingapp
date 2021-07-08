@@ -120,3 +120,9 @@
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/CloudinaryDotNet.dll
 /Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Newtonsoft.Json.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.Extensions.Identity.Core.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/Microsoft.Extensions.Identity.Stores.dll
+/Users/haleygriffin/udemy/csharp/datingapp/API/bin/Debug/net5.0/System.Diagnostics.DiagnosticSource.dll

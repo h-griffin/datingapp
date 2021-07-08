@@ -2112,13 +2112,205 @@ context.Users  (IQueryable<USer>)
 # ========= SECTION 16 =========  
 
 ## identity and role management feature learning goals
+- refactor to use asp.net identity
+- role meanagement
+- policy based authorization
+- identity types
+    - user manager<t>
+    - sign in manager<t>
+    - role manager<t>
+
+- why? asp.net identity?
+    - battle harened, written and tested by microsoft
+    - comes with a password hasher with 10,000 salt itterations
+        - ours does 1 salt itteration
+        - passwords  an always be gotten from hash if DB is compromised, 10k is more complex than 1
+    - full framework for managing members and roles
+    - provides entity framework schema to create needed tables
+        - highly customizable
+    
+- scratingh the surface of identity 
+    - not covering email validation
+    - not covering forgotten passwords
+
+## setting up the entities
+- app user.cs
+    - derive from identityUSer
+        - give key type int
+        - creates feilds for us
+        - can see id username and passwordhash are trying to override from parent class (identity built in)
+        - delete id username passwprd hash and salts
+
+- app role.cs
+    - derive from app role : Identity role<int>
+    - many to many relationship
+        - list of roles user are in
+        - each app user can have multiple roles and each role can contain multiple users
+    
+- app user role .cs
+    - join entities
+    - prop for User and Role
+
+- app role.cs
+    - add colelction of user roles
+    - do same thins in app user class to complete relationship
+
+- app user.cs
+    - add collection of user roles
+
+- app user role is acting as join table
+
+- app user role.cs
+    - derive from Identity user role<int>
+
+- fix errors from changing classes
+
+- account controller
+    - password salt is here and in seed data
+    - remove anything related to creating pw hash and salt
+    - in register() and login()
+
+- seed.cs
+    - remove pw hash salt in foreach in seed users
+
+## configuring db context
+- derive from IdentityDbContext
+    - install in nuget gallery
+    - shift command p
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore by Microsoft
+
+    - identity db context provides with tabls we need with identity
+    - no longer need users db set
+    
+    - userroles are key type int instead of strings
+    - provide type params 
+        - IdentityDbContext<AppUser, AppRole, int>
+        - we want a list of roles later so add all types
+        - DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, 
+        AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+        
+    - configure builder
+    - user and user roles
+
+    - configure identity in application service extensions
+
+## configuring start up class
+- configure identity in start up 
+- open identity service extensions
+
+- AddIdentity<>
+    - if MVC app where client side was served by net and user=ing razor pages and served by dotnet server
+    - full set up give pages needed and cookie based authentication
+    - user is walsy maintining session with server, because html pages is generated from server itself
+
+- AddIdentityCore<>
+    - single page application with angular with token absed authentication
+    - we get basics adn will add on extra stuff and chain to config
+
+- identity service extensions .cs
+    - default options can be configured
+        - default password is complex
+        - can turn off non alphanumeric character
+    - chain on services
+        - app roles
+        - AddRoleManager<RoleManager<AppRole>>()
+            - will give 500 server error is role manager is not specified inside
+        - each serive has its own type that must be specified or will give 500 error
+        - 
+
+## refactoring and adding migration
+- stop api server
+- dotnet wf add migration IDentityAdded
+    - warnign about data loss
+    - OK because salt table was removed, no longer needed
+- sqllite not compatible with new migration
+    - migrations limitations
+    - add/drop foreign key alter column
+    - try and use
+
+- Program.cs
+    - comment out seed class
+    - havent modified yet
+
+- dotnet watch run
+- WILL NOTWORK UNLESS USING DOTNET 5
+    - if not in 5, remove previous migrations, then run
+
+- check in sql lite preview
+    - shift command p
+    - select dating app.db
+
+- still need tpo drop data and reseed to work with clean data
+    - pw hashes not valid for identity
+    - want users creeated with identity passwords
+
+## updating the seed method
+- seed.cs
+    - replace datacontext with user namager from identity
+    - find by id and find by name ... full crud methods
+    - access tousers table, returns iqueryable of users if store is iqueryable userstore
+        - our store is an iqueryable
+        - this means we can use it just like the data context
+    
+    - users table contains a normalized username (ALLCAPS)
+        - we will still convert to lowercase for us
+    
+    - userManager takes care fo saving changes to dataabse when done
+
+- Program.cs
+    - uncomment seed
+    - get user manager
+    - pass usermanager to seedusers() instead of context
+
+- stop api
+- drop data
+    - dotnet of database drop
+- restart (reseed)
+    - dotnet watch run
+
+- data recreated with new usermanager
+
+## update account controller
+- replace data context injection with user manager and sign in manager
+
+- register()
+    - replace create lines with usernamanger create async
+    - check if save was successful and return bad req if not
+    
+- login()
+    - add toLower() to end of getting username
+    - use signin manager to sign in 
+        - take in username and pw (from logindto)
+        - takes boolean to lock out user if they get it wrong
+    - check if sign in succeded adn return unauthroized if failed
+
+- user exists()
+    - replace context wiht usermanager.any async
+
+- check in postman  
+    - section 9
+        - update user
+        - returns 204 no content
+    - section 12
+        - get user
+        - view updated info
+
+## adding roles to the application
 - 
+
+
+
+
+
 
 # add later list
 - unlike user feature
 - paginate message thread
 - hide pagination bar for no messages in message outbox
-
+- identity
+    - email validation
+    - forgotten passwords
+- possible choose avatars pfp ?
 
 
 
