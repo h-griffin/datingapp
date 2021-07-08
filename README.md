@@ -2271,8 +2271,32 @@ context.Users  (IQueryable<USer>)
 - data recreated with new usermanager
 
 ## update account controller
-- 
+- replace data context injection with user manager and sign in manager
 
+- register()
+    - replace create lines with usernamanger create async
+    - check if save was successful and return bad req if not
+    
+- login()
+    - add toLower() to end of getting username
+    - use signin manager to sign in 
+        - take in username and pw (from logindto)
+        - takes boolean to lock out user if they get it wrong
+    - check if sign in succeded adn return unauthroized if failed
+
+- user exists()
+    - replace context wiht usermanager.any async
+
+- check in postman  
+    - section 9
+        - update user
+        - returns 204 no content
+    - section 12
+        - get user
+        - view updated info
+
+## adding roles to the application
+- 
 
 
 
