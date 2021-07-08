@@ -34,6 +34,12 @@ export class MessagesComponent implements OnInit {
     })
   }
 
+  deleteMessage(id: number){
+    this.messageService.deleteMessage(id).subscribe(() => {
+      this.messages.splice(this.messages.findIndex(m => m.id === id), 1); // (index/id, delete 1)
+    })
+  }
+
   pageChanged(event: any){
     this.pageNumber = event.page;
     this.loadMessages();

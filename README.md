@@ -2077,8 +2077,42 @@ context.Users  (IQueryable<USer>)
         - checks in .where()
 
 ## deleting message on client
-- 
+- message service .ts
+    - delete message ()
+    - take in message id
 
+- messages conponent .ts
+    - delete messages ()
+    - take in message id & use splie to cut from messages
+    - use find index() and delete 1 message
+
+- messages component template .html
+    - add click event to delete button
+    - router will try and route on delete click, add extra click event
+        - $event.stopPropagation
+
+- test
+    - 500 server error
+    - message controller 87
+    - getting message sender and recipient username 
+    - did we eagerly load both sender and recipient in get message method in message repositoru
+
+- message repository .cs
+    - want access to related acces need to eitehr project or eager load
+    - not projecting inside here
+    - change type, cant use include with find async
+    - ise single or default async and includes for sender receiver
+
+- currently if you log in as two users in two browsers and send messages between users
+- messages are not poping up on another users browse
+    - dont maintain a connection to api
+    - dont have a way to do that now... will do later
+
+
+# ========= SECTION 16 =========  
+
+## identity and role management feature learning goals
+- 
 
 # add later list
 - unlike user feature
