@@ -23,7 +23,7 @@ namespace API
             try{
                 var context = services.GetRequiredService<DataContext>();
                 await context.Database.MigrateAsync();  // create database if it doesnt exist ('dotnet ef database update')
-                await Seed.SeedUsers(context);
+                // await Seed.SeedUsers(context);
 
             }catch (Exception ex){
                 var logger = services.GetRequiredService<ILogger<Program>>();

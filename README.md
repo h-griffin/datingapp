@@ -2219,7 +2219,34 @@ context.Users  (IQueryable<USer>)
         - 
 
 ## refactoring and adding migration
+- stop api server
+- dotnet wf add migration IDentityAdded
+    - warnign about data loss
+    - OK because salt table was removed, no longer needed
+- sqllite not compatible with new migration
+    - migrations limitations
+    - add/drop foreign key alter column
+    - try and use
+
+- Program.cs
+    - comment out seed class
+    - havent modified yet
+
+- dotnet watch run
+- WILL NOTWORK UNLESS USING DOTNET 5
+    - if not in 5, remove previous migrations, then run
+
+- check in sql lite preview
+    - shift command p
+    - select dating app.db
+
+- still need tpo drop data and reseed to work with clean data
+    - pw hashes not valid for identity
+    - want users creeated with identity passwords
+
+## updating the seed method
 - 
+
 
 
 
