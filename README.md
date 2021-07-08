@@ -2195,14 +2195,44 @@ context.Users  (IQueryable<USer>)
     - configure identity in application service extensions
 
 ## configuring start up class
+- configure identity in start up 
+- open identity service extensions
+
+- AddIdentity<>
+    - if MVC app where client side was served by net and user=ing razor pages and served by dotnet server
+    - full set up give pages needed and cookie based authentication
+    - user is walsy maintining session with server, because html pages is generated from server itself
+
+- AddIdentityCore<>
+    - single page application with angular with token absed authentication
+    - we get basics adn will add on extra stuff and chain to config
+
+- identity service extensions .cs
+    - default options can be configured
+        - default password is complex
+        - can turn off non alphanumeric character
+    - chain on services
+        - app roles
+        - AddRoleManager<RoleManager<AppRole>>()
+            - will give 500 server error is role manager is not specified inside
+        - each serive has its own type that must be specified or will give 500 error
+        - 
+
+## refactoring and adding migration
 - 
+
+
+
 
 
 # add later list
 - unlike user feature
 - paginate message thread
 - hide pagination bar for no messages in message outbox
-
+- identity
+    - email validation
+    - forgotten passwords
+- possible choose avatars pfp ?
 
 
 
