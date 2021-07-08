@@ -2174,6 +2174,27 @@ context.Users  (IQueryable<USer>)
     - remove pw hash salt in foreach in seed users
 
 ## configuring db context
+- derive from IdentityDbContext
+    - install in nuget gallery
+    - shift command p
+    - Microsoft.AspNetCore.Identity.EntityFrameworkCore by Microsoft
+
+    - identity db context provides with tabls we need with identity
+    - no longer need users db set
+    
+    - userroles are key type int instead of strings
+    - provide type params 
+        - IdentityDbContext<AppUser, AppRole, int>
+        - we want a list of roles later so add all types
+        - DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, 
+        AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+        
+    - configure builder
+    - user and user roles
+
+    - configure identity in application service extensions
+
+## configuring start up class
 - 
 
 
