@@ -2422,12 +2422,72 @@ context.Users  (IQueryable<USer>)
     - reuturn users roles
 
 - test in postman
-    - 
+    - edit lucy roles as admin (add mod)
+    - get new token for lisa
+    - lisa can now see moderator page
 
 ## adding admin componnent to client
+- create folder admin
+- cd client/src/app/admin
+- ng g c admin-panel --skip-tests
+
+- create route for comonent
+
+- app routing midule .ts
+    - add route for admin with admin panel compoennt
+
+- nav conponent .html
+    - add link for admin page
+    - hide nav link fo rnon admins
+    - block/route guard for non admins navigating directly to route /admin
+
+## adding admin route guard
+- account service .ts
+    - look inside token from account service
+        - havent needed this becquse been returning info as obj and token as token
+        - need method to get decoded token
+    
+    - get decoded token ()
+        - atob - token is not encrypted only signature is (just like in jwt.io)
+        - token is string
+            - string of 3 [0,1,2] header, payload, signature // payload [1]
+    - update user type
+
+- user.ts
+    - add roles: string[];
+
+- account service.ts
+    - add roles array
+    - decode token
+
+- test in postman
+    - admin has array of roles
+    - bob has one string
+    - always want an array of strings even if just onw
+
+- account services.ts
+    - check if roles is an array
+    - if yes set user.roles to roles(var [])
+    - if no push string to array of roles(var [])
+    - populated wihth array of roles or populate empty array with single role/string
+    - can now use inside new giard
+
+- cd _guards
+    - ng g guard admin --skip-tests
+    - can activate
+
+- admin guard .ts
+    - give constructor to access acc service and toastr
+    - see if roles include admin or moderator
+
+- app routing module .ts
+    - add guard to admin route
+
+    - 403 forbidden for members and mods trying to see matches...
+    - forgot to remove temp testing auth guards in users controller
+
+## adding a custom directive
 - 
-
-
 
 
 # add later list
