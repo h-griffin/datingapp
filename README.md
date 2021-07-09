@@ -2296,11 +2296,198 @@ context.Users  (IQueryable<USer>)
         - view updated info
 
 ## adding roles to the application
+- not common to have many roles
+- seed 3 roles
+    - admin
+    - moderator
+    - member
+
+- bring in role manager into seed
+
+- seed.cs
+    - creat role list
+    - add each role to manager
+    - add user to role
+        - dont need to add checks because user is not interacting with this, it runs only one when db is clean
+        - usually dont seed data anyways
+
+    - create admin user
+        - create password
+        - add roles
+    
+- program .cs
+    -  add role manager
+    - pass into seed users
+
+- dotnet ef databased rop
+- dotnet watch run
+    - add roles
+
+## adding roles to JWT token
+- token service.cs
+    - add claim to token
+    - safe place to put roles, user cannot modify role to trick server into thinking admin
+    - aadd user manager
+    
+    - create token()
+        - user manager get roles async
+        - create token is just a public string, must convert to async task<string>
+        - update interface to return tssk string
+        - claim types instread of jwt registered claim names because it does not have an option for roles
+    - upate acc controller now that using async method
+
+- account contorller .cs
+    - add awiat with token service in 
+        - register()
+        - login()
+    - registetr()
+        - defualt new users into members role
+        - send back bad req errors if fails
+    
+- users controller
+- check roles
+    - get users()
+        - [Authorize(Roles = "Admin")]
+        - only admins can access full list of users
+    - get user()
+        - [Authorize(Roles = "Member")]
+        - members can get one user
+    
+    
+- test in post man 
+    - register new user in member role
+    - test admin can get list adn mem get one
+    
+    - register as bob adn copy token
+    - paste token into [jwt.io](https://jwt.io/)
+    - view token has role: "Member"
+    
+    - log in as lisa
+    - get users (admin only)
+        - 403 forbidden
+        - user was valid but user is not allowed
+    - log in as admin
+        - get all and single user
+    
+    - remove authorize tags from controller, this was just a test
+
+## policy based authorization
+- create admincontroller.cs
+    - derive from base api
+    - create Get user with roles()
+    - create get photos fro moderation ()
+    - add authorize tag to both and set policy
+    - both just return OK with message of who can see for now
+
+    - set up policies
+
+- identity service extensions
+    - add service authentications and set policy name and admin roles
+
+- test in postman
+    - get roles with admin token - ok
+    - get roles with lucys token (member) - 403forbidden
+    - same for photos to moderate ^^
+    - policys are working
+
+    - do something with users-with-roles in admin controller
+
+## getting the users with roles
+- return users with their roles
+- user manager does not come with functionality 
+- use query to get all users with thier roles
+- admin should be able to edit users roles
+
+- Admin controller.cs
+    - add constructor
+    - inject user manager
+    
+    - get users with roles()
+        - make async task actionresult
+        - reutrn anonymus object that contains a list of user id username and roles 
+        - return Ok(users)
+    - not paginating these results
+
+- test in postman
+
+## editing user roles
+- Admin controller
+    - new http post called edit-roles with params username and roles
+    - getting these from query string/url
+    - gettin username from route param
+        - check if have user in string
+    - get roles
+    - add roles to user except for roles user is already in 
+    - remove roles from user except for roles selected (route params)
+    - reuturn users roles
+
+- test in postman
+    - edit lucy roles as admin (add mod)
+    - get new token for lisa
+    - lisa can now see moderator page
+
+## adding admin componnent to client
+- create folder admin
+- cd client/src/app/admin
+- ng g c admin-panel --skip-tests
+
+- create route for comonent
+
+- app routing midule .ts
+    - add route for admin with admin panel compoennt
+
+- nav conponent .html
+    - add link for admin page
+    - hide nav link fo rnon admins
+    - block/route guard for non admins navigating directly to route /admin
+
+## adding admin route guard
+- account service .ts
+    - look inside token from account service
+        - havent needed this becquse been returning info as obj and token as token
+        - need method to get decoded token
+    
+    - get decoded token ()
+        - atob - token is not encrypted only signature is (just like in jwt.io)
+        - token is string
+            - string of 3 [0,1,2] header, payload, signature // payload [1]
+    - update user type
+
+- user.ts
+    - add roles: string[];
+
+- account service.ts
+    - add roles array
+    - decode token
+
+- test in postman
+    - admin has array of roles
+    - bob has one string
+    - always want an array of strings even if just onw
+
+- account services.ts
+    - check if roles is an array
+    - if yes set user.roles to roles(var [])
+    - if no push string to array of roles(var [])
+    - populated wihth array of roles or populate empty array with single role/string
+    - can now use inside new giard
+
+- cd _guards
+    - ng g guard admin --skip-tests
+    - can activate
+
+- admin guard .ts
+    - give constructor to access acc service and toastr
+    - see if roles include admin or moderator
+
+- app routing module .ts
+    - add guard to admin route
+
+    - 403 forbidden for members and mods trying to see matches...
+    - forgot to remove temp testing auth guards in users controller
+
+## adding a custom directive
 - 
-
-
-
-
 
 
 # add later list
@@ -2311,7 +2498,8 @@ context.Users  (IQueryable<USer>)
     - email validation
     - forgotten passwords
 - possible choose avatars pfp ?
-
+- paginate get user with roles() in admincontroller
+- 
 
 
 

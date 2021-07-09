@@ -54,7 +54,7 @@ namespace API.Controllers
             return await _userRepository.GetMemberAsync(username);
         }
 
-        [HttpPut]// api/users/updateUser
+        [HttpPut] // api/users/updateUser
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {    // dont need to send obj back
              // get username from token used to authenticate

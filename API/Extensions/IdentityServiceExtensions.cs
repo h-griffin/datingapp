@@ -34,6 +34,14 @@ namespace API.Extensions
                         ValidateAudience = false
                     };      
                 });
+
+            // policies for controller / page access
+            services.AddAuthorization(opt => {
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+            });
+
+
             return services;
         }
     }
