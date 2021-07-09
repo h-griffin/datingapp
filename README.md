@@ -2411,7 +2411,22 @@ context.Users  (IQueryable<USer>)
 - test in postman
 
 ## editing user roles
+- Admin controller
+    - new http post called edit-roles with params username and roles
+    - getting these from query string/url
+    - gettin username from route param
+        - check if have user in string
+    - get roles
+    - add roles to user except for roles user is already in 
+    - remove roles from user except for roles selected (route params)
+    - reuturn users roles
+
+- test in postman
+    - 
+
+## adding admin componnent to client
 - 
+
 
 
 
