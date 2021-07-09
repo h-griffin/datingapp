@@ -2372,8 +2372,46 @@ context.Users  (IQueryable<USer>)
     - remove authorize tags from controller, this was just a test
 
 ## policy based authorization
-- 
+- create admincontroller.cs
+    - derive from base api
+    - create Get user with roles()
+    - create get photos fro moderation ()
+    - add authorize tag to both and set policy
+    - both just return OK with message of who can see for now
 
+    - set up policies
+
+- identity service extensions
+    - add service authentications and set policy name and admin roles
+
+- test in postman
+    - get roles with admin token - ok
+    - get roles with lucys token (member) - 403forbidden
+    - same for photos to moderate ^^
+    - policys are working
+
+    - do something with users-with-roles in admin controller
+
+## getting the users with roles
+- return users with their roles
+- user manager does not come with functionality 
+- use query to get all users with thier roles
+- admin should be able to edit users roles
+
+- Admin controller.cs
+    - add constructor
+    - inject user manager
+    
+    - get users with roles()
+        - make async task actionresult
+        - reutrn anonymus object that contains a list of user id username and roles 
+        - return Ok(users)
+    - not paginating these results
+
+- test in postman
+
+## editing user roles
+- 
 
 
 
@@ -2385,7 +2423,8 @@ context.Users  (IQueryable<USer>)
     - email validation
     - forgotten passwords
 - possible choose avatars pfp ?
-
+- paginate get user with roles() in admincontroller
+- 
 
 
 
