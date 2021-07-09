@@ -31,6 +31,7 @@ namespace API.Controllers
         // == endpoints ==
 
         // api/users
+        [Authorize(Roles = "Admin")] //temp
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {   
@@ -48,13 +49,14 @@ namespace API.Controllers
         }
 
         // api/users/username
+        [Authorize(Roles = "Member")]
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             return await _userRepository.GetMemberAsync(username);
         }
 
-        [HttpPut]// api/users/updateUser
+        [HttpPut] // api/users/updateUser
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {    // dont need to send obj back
              // get username from token used to authenticate

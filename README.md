@@ -2296,9 +2296,83 @@ context.Users  (IQueryable<USer>)
         - view updated info
 
 ## adding roles to the application
+- not common to have many roles
+- seed 3 roles
+    - admin
+    - moderator
+    - member
+
+- bring in role manager into seed
+
+- seed.cs
+    - creat role list
+    - add each role to manager
+    - add user to role
+        - dont need to add checks because user is not interacting with this, it runs only one when db is clean
+        - usually dont seed data anyways
+
+    - create admin user
+        - create password
+        - add roles
+    
+- program .cs
+    -  add role manager
+    - pass into seed users
+
+- dotnet ef databased rop
+- dotnet watch run
+    - add roles
+
+## adding roles to JWT token
+- token service.cs
+    - add claim to token
+    - safe place to put roles, user cannot modify role to trick server into thinking admin
+    - aadd user manager
+    
+    - create token()
+        - user manager get roles async
+        - create token is just a public string, must convert to async task<string>
+        - update interface to return tssk string
+        - claim types instread of jwt registered claim names because it does not have an option for roles
+    - upate acc controller now that using async method
+
+- account contorller .cs
+    - add awiat with token service in 
+        - register()
+        - login()
+    - registetr()
+        - defualt new users into members role
+        - send back bad req errors if fails
+    
+- users controller
+- check roles
+    - get users()
+        - [Authorize(Roles = "Admin")]
+        - only admins can access full list of users
+    - get user()
+        - [Authorize(Roles = "Member")]
+        - members can get one user
+    
+    
+- test in post man 
+    - register new user in member role
+    - test admin can get list adn mem get one
+    
+    - register as bob adn copy token
+    - paste token into [jwt.io](https://jwt.io/)
+    - view token has role: "Member"
+    
+    - log in as lisa
+    - get users (admin only)
+        - 403 forbidden
+        - user was valid but user is not allowed
+    - log in as admin
+        - get all and single user
+    
+    - remove authorize tags from controller, this was just a test
+
+## policy based authorization
 - 
-
-
 
 
 
