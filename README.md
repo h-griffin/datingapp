@@ -2487,7 +2487,134 @@ context.Users  (IQueryable<USer>)
     - forgot to remove temp testing auth guards in users controller
 
 ## adding a custom directive
+- been using angular directives
+- creating structural directive
+    - dont show admin if user in in certain role
+
+- client/app/_directives
+
+- ng g d has-role --skip-tests
+    - created directive
+    - updated app module
+        - directives go inside declaration swith components
+
+- has role directive .ts
+    - @directive decorator and selector
+    - directives/selectors we have been using
+        - *ngIf
+        - *ngFor
+        - bsRadio
+    - because it is a structural directive, selector using will be 
+        - *appHasRole
+
+- constructor
+    - inject view container ref
+        - represents container where one or more views can be attached to component
+
+    - inject template ref
+        - two versions are identitcal
+        - embeded template can be used to instantiate embeded views
+
+    - need to get current user
+
+    - selector takes in an array of which roles the user needs to use whatever is being used
+
+- add @Input for access to parameters
+
+- on init
+    - when building check users roles
+    - use template ref if role is in like of roles needed (passed into tag)
+        - *appHasRole='["Admin"]'
+        - if user is admin it will use templtate ref(the comp using the tag,, in this case the admin link in nav bar)
+
+- nav component. html
+    - add `*appHasRole="['Admin', 'Moderator']"` to admin nav link
+
+## adding edit roles component
+- cd admin
+    - ng g c user-management --skip-tests
+    - ng g c photo-managment --skip-tests
+
+- admin panel tempalte .html
+    - ad tabset for user and photo management
+    - mod can see photos admin can see both
+
+- want to display list of users and their roles under user management 
+
+- cd client/app/_services
+    - ng g s admin --skip-tests
+
+- admin service .ts
+    - set base url
+    - constructor inject http
+    - get users with roles
+        - will only return partial users
+
+- user management component .ts
+    - get users with roles and set users to array to display in component
+
+- users management template .html
+    - add table and NGFOR of users
+
+- admin doesnt have username...
+    - add user knwon as or username to welcome bar
+
+## setting up modals
+- edit roles modal show check boxes
+- [ngx bottstrap modal](https://valor-software.com/ngx-bootstrap/modals#service-template)
+    - entry component of angular module: modules can live anywhere: dont need to specifically add anywhere inside template but can access inside service
+
+- shared module.ts
+    - import and export modal module
+    - import { ModalModule } from 'ngx-bootstrap/modal';
+
+- client/app/modals
+    - ng g c roles-modal --skip-tests
+    - add to entry component
+
+- app module .ts
+    - entry components now deprecated
+    - dont need to add entry point porperty wiht angular 9.0
+
+- usermanagement compoent .ts
+    - inject BsModalService
+    - use modal service to show component in openrolesmodak()
+
+- roles modal component template .html
+    - copy modal template from [ng bootstrap](https://valor-software.com/ngx-bootstrap/modals#service-template)
+    - need access to bsmodal ref
+
+- role modal component .ts
+    - inject bs modal ref 
+    - add properties for title list and button close name
+
+- user management component .ts
+    - paste initial state from ngx bootstrap site
+
+- user management template .html
+    - add click event to edit roles button
+    - want to show username and roles with checkboxes
+    - on submit update roles
+
+## editing roles in the client
 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # add later list
@@ -2499,9 +2626,13 @@ context.Users  (IQueryable<USer>)
     - forgotten passwords
 - possible choose avatars pfp ?
 - paginate get user with roles() in admincontroller
+- show user main photo in edit role display
+- display nicer list of user roles
+
+
+## uses
+- custom directive
 - 
-
-
 
 
 
