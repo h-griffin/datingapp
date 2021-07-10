@@ -2560,7 +2560,62 @@ context.Users  (IQueryable<USer>)
     - add user knwon as or username to welcome bar
 
 ## setting up modals
+- edit roles modal show check boxes
+- [ngx bottstrap modal](https://valor-software.com/ngx-bootstrap/modals#service-template)
+    - entry component of angular module: modules can live anywhere: dont need to specifically add anywhere inside template but can access inside service
+
+- shared module.ts
+    - import and export modal module
+    - import { ModalModule } from 'ngx-bootstrap/modal';
+
+- client/app/modals
+    - ng g c roles-modal --skip-tests
+    - add to entry component
+
+- app module .ts
+    - entry components now deprecated
+    - dont need to add entry point porperty wiht angular 9.0
+
+- usermanagement compoent .ts
+    - inject BsModalService
+    - use modal service to show component in openrolesmodak()
+
+- roles modal component template .html
+    - copy modal template from [ng bootstrap](https://valor-software.com/ngx-bootstrap/modals#service-template)
+    - need access to bsmodal ref
+
+- role modal component .ts
+    - inject bs modal ref 
+    - add properties for title list and button close name
+
+- user management component .ts
+    - paste initial state from ngx bootstrap site
+
+- user management template .html
+    - add click event to edit roles button
+    - want to show username and roles with checkboxes
+    - on submit update roles
+
+## editing roles in the client
 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # add later list
 - unlike user feature
@@ -2571,7 +2626,9 @@ context.Users  (IQueryable<USer>)
     - forgotten passwords
 - possible choose avatars pfp ?
 - paginate get user with roles() in admincontroller
-- 
+- show user main photo in edit role display
+- display nicer list of user roles
+
 
 ## uses
 - custom directive
