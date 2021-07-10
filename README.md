@@ -2487,8 +2487,51 @@ context.Users  (IQueryable<USer>)
     - forgot to remove temp testing auth guards in users controller
 
 ## adding a custom directive
-- 
+- been using angular directives
+- creating structural directive
+    - dont show admin if user in in certain role
 
+- client/app/_directives
+
+- ng g d has-role --skip-tests
+    - created directive
+    - updated app module
+        - directives go inside declaration swith components
+
+- has role directive .ts
+    - @directive decorator and selector
+    - directives/selectors we have been using
+        - *ngIf
+        - *ngFor
+        - bsRadio
+    - because it is a structural directive, selector using will be 
+        - *appHasRole
+
+- constructor
+    - inject view container ref
+        - represents container where one or more views can be attached to component
+
+    - inject template ref
+        - two versions are identitcal
+        - embeded template can be used to instantiate embeded views
+
+    - need to get current user
+
+    - selector takes in an array of which roles the user needs to use whatever is being used
+
+- add @Input for access to parameters
+
+- on init
+    - when building check users roles
+    - use template ref if role is in like of roles needed (passed into tag)
+        - *appHasRole='["Admin"]'
+        - if user is admin it will use templtate ref(the comp using the tag,, in this case the admin link in nav bar)
+
+- nav component. html
+    - add `*appHasRole="['Admin', 'Moderator']"` to admin nav link
+
+## adding edit roles component
+- 
 
 # add later list
 - unlike user feature
@@ -2501,7 +2544,9 @@ context.Users  (IQueryable<USer>)
 - paginate get user with roles() in admincontroller
 - 
 
-
+## uses
+- custom directive
+- 
 
 
 

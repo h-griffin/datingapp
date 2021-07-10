@@ -28,6 +28,7 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
     TextInputComponent,
     DateInputComponent,
     MemberMessagesComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    HasRoleDirective
   ],
   imports: [
     BrowserModule,
