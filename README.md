@@ -2531,6 +2531,35 @@ context.Users  (IQueryable<USer>)
     - add `*appHasRole="['Admin', 'Moderator']"` to admin nav link
 
 ## adding edit roles component
+- cd admin
+    - ng g c user-management --skip-tests
+    - ng g c photo-managment --skip-tests
+
+- admin panel tempalte .html
+    - ad tabset for user and photo management
+    - mod can see photos admin can see both
+
+- want to display list of users and their roles under user management 
+
+- cd client/app/_services
+    - ng g s admin --skip-tests
+
+- admin service .ts
+    - set base url
+    - constructor inject http
+    - get users with roles
+        - will only return partial users
+
+- user management component .ts
+    - get users with roles and set users to array to display in component
+
+- users management template .html
+    - add table and NGFOR of users
+
+- admin doesnt have username...
+    - add user knwon as or username to welcome bar
+
+## setting up modals
 - 
 
 # add later list
