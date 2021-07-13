@@ -2673,8 +2673,81 @@ context.Users  (IQueryable<USer>)
         - will pick which service is best for the client, will usually be websocket but will fall back to others if it is not supported
     - offeres cliet side npm package
 
+- example 
+    - lisa and todd are online
+        - server knwos lisa and todd are online
+        - lisa and todd knwo lisa and todd are online
+    - bob loggs on
+        - server knows bob, lisa nad todd are online
+        - bob knows lisa and todd are online
+        - lisa nad todd know bob lisa nad todd are online
+
+
 ## adding a presence hub
+- introduce signal r
+    - create online presence
+    - live messages
+    - notifications for messgaes
+
+- create folder api singal r
+    - create class presence hub.cs
+        - derive from Hub
+            - included with project from aspnetcore
+        - F12 to see methods
+        - virtual methods can be orvirden
+        - ovveride on connected async() and disconected async()
+        
+    - on connected async ()
+        - inside hub have access to Client (clients connected to hub)
+        - clients.others everyone except connection that triggered connection
+        - "UserIsOnline" is the name of method used inside client
+        - get username to pass back to other uers
+
+    - on disconnected async()
+        - one required param is exception, pass up to parent class if there is an exception
+        - pass in method used on client and username
+    
+    - first hub created
+
+- add signal R service to application
+
+- startup .cs
+    - configure services()
+        - services.AddSignalR();
+    - tell routing about api/hub endpoint
+    - configure () 
+        - app.user Endpoints()
+            - endpoints.MapHub<PresenceHub>("hubs/presence");
+    - first hub set up
+
+- authorization
+- hubs are also authenticated
+    - dont want to try and get a username if user is not authenticated
+
+## Authenticating signalR
 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
