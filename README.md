@@ -2597,9 +2597,52 @@ context.Users  (IQueryable<USer>)
     - want to show username and roles with checkboxes
     - on submit update roles
 
-## editing roles in the client
-- 
+## editing roles in the client p1
+- roles modal component .ts
+    - add input for clicking
+    - event emitter will apply changes to the selected orles
+    - hide modal
 
+- roles modal template.html
+    - put username in title
+    - add props to input checkbox for roles
+        - checked - bool
+        - change - ^^
+        - disable if selected is admin.. dont allow admin to remove the admin
+    - add in footer, cancell and submit buttons to either hide or update
+
+## editing roles in the client p2
+- admin service .ts
+    - update user roles ()
+        - pass up query string with empty object
+    
+- user management component .ts
+    - open roles modal()
+        - replace initial state with config{} that has an initial state{} property
+        - pass in user and roles
+        - roles needs a funtion to get what roles the user is already in to populate the checkboxes
+    - get roles array()
+        - have empty roles array
+        - get user roles from user.roles
+        - available roles will have an array of object (name and value) of roles
+        - must loop iover available roles and find out if user have any of the roles na dcheck the checkbox
+        - check yes roles and push, then check no roles and push
+        - roles array will have all possible roles with checked or unchecked
+
+- user management template .html
+    - pass in user to open roles modal()
+
+- user management component .ts
+    - need to deal with update selected event metter, will get roles that have been checked from updateroles() and will pass back into comonent
+
+    - openrolesmodal()
+        - updateselected roles set role array using spread of values that have been checked that come back from modal
+        - filter out anything that hasnt been checked
+        - map element, get name
+        - if there are roles to update use admin service to update roles nad pass in username and roles to update
+        - in subscribe use call back to set user roles to user roles from update list
+        
+- test, may need to refresh browser or restart angular server
 
 
 
