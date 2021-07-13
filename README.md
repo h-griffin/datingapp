@@ -2549,6 +2549,7 @@ context.Users  (IQueryable<USer>)
     - constructor inject http
     - get users with roles
         - will only return partial users
+    - call in ngOnInit
 
 - user management component .ts
     - get users with roles and set users to array to display in component
