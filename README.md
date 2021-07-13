@@ -2725,8 +2725,29 @@ context.Users  (IQueryable<USer>)
     - dont want to try and get a username if user is not authenticated
 
 ## Authenticating signalR
-- 
+- add [Authorize] 
+- will be different from api controllers because signal r / websocket cannot send authentication header but wil send query string with signal r
 
+- identity service extensions .cs
+    - add to jwt bearer to user query string with signal r and api controller will user auth header as normal
+
+    - add authentication()
+        - below opetions for token validation, new jwt bearer events
+        - get access token from query
+        - get path its coming from (since it is a query)
+        - check if there is an access token inside, and check if it comes from /hubs
+            - must match from path in start up .cs
+        - this allows client to send token as a query string
+            - this now needs to add to cors config
+
+- startup .cs
+    - app.useCors + allCredentials
+    - this allows the token from a query tring
+
+- this completes basic server side configs
+
+## client side signalR
+- 
 
 
 
