@@ -2644,9 +2644,37 @@ context.Users  (IQueryable<USer>)
         
 - test, may need to refresh browser or restart angular server
 
+# ========= SECTION 17 =========  
 
+## SignalR feature learning goals
+- realtime funtionality 
+- understand how to use and set up signal r on both api an dthe client
+- implement online presence
+- implement live chat between users
+- what is it?
+    - library provides relatime web funtionality to apps
+    - good for
+        - dashboards and monitoring apps
+        - collabrative apps
+        - apps that require notifications
+        - chat apps
+        - (instant updates)
+    - features
+        - handles connection management automatically
+        - sends messages to all conencted clients simultanieously 
+        - sends messages to specific clients or gorups of clietns
+        - supports
+            - web sockets
+                - protocol, http is porotcol, websockets use different protocol than hhttp but gives 2 way communication between client and server
+            - sersent events
+                - uses http browser will try to subscribe to http stream where server can send events
+            - long polling
+                - last resort, every second or two will reach server to check for someting new
+        - will pick which service is best for the client, will usually be websocket but will fall back to others if it is not supported
+    - offeres cliet side npm package
 
-
+## adding a presence hub
+- 
 
 
 
