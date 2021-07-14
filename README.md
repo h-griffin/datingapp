@@ -2773,7 +2773,7 @@ context.Users  (IQueryable<USer>)
         - send toastrs for demo
     - stop hub connection
         - log error
-        
+
 - call methids from somewhere 
     - create when application starts if user logged in 
     - stop when user logs out
@@ -2795,9 +2795,51 @@ context.Users  (IQueryable<USer>)
     - only time we need to do it is when they log out and go to home page(to possible log in as someone else)
 
 ## adding a presence tracker
+- presence hub .cs
+    - microsoft has not implemented for a reason
+    - service is confined to server it is running on
+    - could use readus? store tracking info in db that can be distributed across any servers
+    - going to create class to track who has connected an dstore in dictionary
+    - not scalable only works for single server not multiple serves
+    - for multiple use readus or db 
+
+- create signalR/presence tracker .cs
+    - every hub connection gets a connection id
+        - users can connect from different device and get diff id, want to store string of username and list of id strings
+    - create empty dictionary
+
+    - Task user connected()
+        - be careful dictionary is shared with everyone connected, and dictionary is not a thread safe source
+        - conncurrent users trying to update at same time will create problems
+            - lock dictionary to lock until method is done before going again
+        - check if we already have dict el with key of logged in user name
+            - if it is add conection id 
+            - or create new dict username with id
+    - Task USerDisconnected
+        - lock dict
+        - check if we have dict el with key of usernmae
+            - if it doesnt return task 
+            - if yes get from dict and remove
+    - Task GetOnline users return strings
+        - get keys (usernmae) and add to array
+        - all happening in memory, dictionary not being stored in database
+
+- presence tracker will be service shared between al connections to server
+- application service extensions
+    - add singleton
+
+- presence hub
+    - inject presence tracker to constructor
+
+    - user connected ()
+        - update presence tracker
+        - send updated list of current users to all clients
+    - user disconected ()
+        - ^^ 
+
+
+## displaying online presence
 - 
-
-
 
 
 
