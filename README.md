@@ -2864,6 +2864,34 @@ context.Users  (IQueryable<USer>)
     - display online now if online
 
 ## creating a message hub
+- live chatting - no refresh
+    - time zones are weird for now
+    - goes off on UTC for now
+
+- singlanR/ message hub
+    - create group for each user
+    - define group name
+    - group name is cobo of usernmaes
+    - want thesse in alphabetical to make sure both users have same message thread
+
+    - onConnectedAsync()
+        - get other users username from query string (messages/user) 
+        - pass into helper to return the name compination in alphabetical order
+        - add users to new group and pass in id and group name
+        - when a user joins group get message thread
+        - send to clients method receive message thread and messages
+            - not optimal to send thread to both users even if one already has them 
+            - will optimize later
+
+    - Task on Disconected()
+        - pass in excpetion
+        - singal r auto removes from group when they disconecte
+
+- start up .cs
+    - add new endpoint
+    - endpoints.MapHub<MessageHub>("hubs/message");
+
+## adding send message method to message hub
 - 
 
 
