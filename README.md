@@ -2839,14 +2839,32 @@ context.Users  (IQueryable<USer>)
 
 
 ## displaying online presence
+- presence service
+    - add online user source variable to hold observable
+        - BehaviorSubject - subject is generic observable 
+        - requires initial value omits current value when it is subscrubed to
+    - create observable variable to use
+
+    - add hub connection get online users
+
+- member card component .ts
+    - inject presence service
+
+- member card template .html
+    - update icon
+    - add [] class 
+
+- member card template .css
+    - animate icon to flash green
+    
+- member detail component .ts
+    - inject presence service
+
+- member detial template .html
+    - display online now if online
+
+## creating a message hub
 - 
-
-
-
-
-
-
-
 
 
 
