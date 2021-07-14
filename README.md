@@ -2747,12 +2747,55 @@ context.Users  (IQueryable<USer>)
 - this completes basic server side configs
 
 ## client side signalR
+- cd client
+    - npm install @microsoft/signalr
+
+- client/environments.ts - environment.prod.ts
+    - hub url
+    - dev 'https://localhost:5001/hubs/'
+    - prod 'hubs/'
+
+- create service to track online presence
+- cs src/app/_serviecs
+    - ng g s presence --skip-tests
+
+- presecne.service .ts
+    - inport hub url
+    - add hub connection
+    - inject toastr service
+
+    - creat hub connecftion()
+        - take in user for token because need to send jwt token for connection, cannot user jwt interceptor these are no longer http request, websocket has no support for authentication header
+    
+    - start hub connection
+        - listen for user is online and user is offline 
+        - ust match method names in presencehub.cs
+        - send toastrs for demo
+    - stop hub connection
+        - log error
+        
+- call methids from somewhere 
+    - create when application starts if user logged in 
+    - stop when user logs out
+    - start when logs in or registers
+
+- app component .ts
+    - inject presence service
+    - set current user ()
+        - check if have user then set current user and create hub connection
+
+- account service .ts
+    - inject presence service
+    - create connection
+        - login()
+        - register()
+    - stop connection
+        - log out()
+    - when user closes browser or tab signal r auto disconects client
+    - only time we need to do it is when they log out and go to home page(to possible log in as someone else)
+
+## adding a presence tracker
 - 
-
-
-
-
-
 
 
 
