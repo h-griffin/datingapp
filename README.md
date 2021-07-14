@@ -2597,8 +2597,216 @@ context.Users  (IQueryable<USer>)
     - want to show username and roles with checkboxes
     - on submit update roles
 
-## editing roles in the client
+## editing roles in the client p1
+- roles modal component .ts
+    - add input for clicking
+    - event emitter will apply changes to the selected orles
+    - hide modal
+
+- roles modal template.html
+    - put username in title
+    - add props to input checkbox for roles
+        - checked - bool
+        - change - ^^
+        - disable if selected is admin.. dont allow admin to remove the admin
+    - add in footer, cancell and submit buttons to either hide or update
+
+## editing roles in the client p2
+- admin service .ts
+    - update user roles ()
+        - pass up query string with empty object
+    
+- user management component .ts
+    - open roles modal()
+        - replace initial state with config{} that has an initial state{} property
+        - pass in user and roles
+        - roles needs a funtion to get what roles the user is already in to populate the checkboxes
+    - get roles array()
+        - have empty roles array
+        - get user roles from user.roles
+        - available roles will have an array of object (name and value) of roles
+        - must loop iover available roles and find out if user have any of the roles na dcheck the checkbox
+        - check yes roles and push, then check no roles and push
+        - roles array will have all possible roles with checked or unchecked
+
+- user management template .html
+    - pass in user to open roles modal()
+
+- user management component .ts
+    - need to deal with update selected event metter, will get roles that have been checked from updateroles() and will pass back into comonent
+
+    - openrolesmodal()
+        - updateselected roles set role array using spread of values that have been checked that come back from modal
+        - filter out anything that hasnt been checked
+        - map element, get name
+        - if there are roles to update use admin service to update roles nad pass in username and roles to update
+        - in subscribe use call back to set user roles to user roles from update list
+        
+- test, may need to refresh browser or restart angular server
+
+# ========= SECTION 17 =========  
+
+## SignalR feature learning goals
+- realtime funtionality 
+- understand how to use and set up signal r on both api an dthe client
+- implement online presence
+- implement live chat between users
+- what is it?
+    - library provides relatime web funtionality to apps
+    - good for
+        - dashboards and monitoring apps
+        - collabrative apps
+        - apps that require notifications
+        - chat apps
+        - (instant updates)
+    - features
+        - handles connection management automatically
+        - sends messages to all conencted clients simultanieously 
+        - sends messages to specific clients or gorups of clietns
+        - supports
+            - web sockets
+                - protocol, http is porotcol, websockets use different protocol than hhttp but gives 2 way communication between client and server
+            - sersent events
+                - uses http browser will try to subscribe to http stream where server can send events
+            - long polling
+                - last resort, every second or two will reach server to check for someting new
+        - will pick which service is best for the client, will usually be websocket but will fall back to others if it is not supported
+    - offeres cliet side npm package
+
+- example 
+    - lisa and todd are online
+        - server knwos lisa and todd are online
+        - lisa and todd knwo lisa and todd are online
+    - bob loggs on
+        - server knows bob, lisa nad todd are online
+        - bob knows lisa and todd are online
+        - lisa nad todd know bob lisa nad todd are online
+
+
+## adding a presence hub
+- introduce signal r
+    - create online presence
+    - live messages
+    - notifications for messgaes
+
+- create folder api singal r
+    - create class presence hub.cs
+        - derive from Hub
+            - included with project from aspnetcore
+        - F12 to see methods
+        - virtual methods can be orvirden
+        - ovveride on connected async() and disconected async()
+        
+    - on connected async ()
+        - inside hub have access to Client (clients connected to hub)
+        - clients.others everyone except connection that triggered connection
+        - "UserIsOnline" is the name of method used inside client
+        - get username to pass back to other uers
+
+    - on disconnected async()
+        - one required param is exception, pass up to parent class if there is an exception
+        - pass in method used on client and username
+    
+    - first hub created
+
+- add signal R service to application
+
+- startup .cs
+    - configure services()
+        - services.AddSignalR();
+    - tell routing about api/hub endpoint
+    - configure () 
+        - app.user Endpoints()
+            - endpoints.MapHub<PresenceHub>("hubs/presence");
+    - first hub set up
+
+- authorization
+- hubs are also authenticated
+    - dont want to try and get a username if user is not authenticated
+
+## Authenticating signalR
+- add [Authorize] 
+- will be different from api controllers because signal r / websocket cannot send authentication header but wil send query string with signal r
+
+- identity service extensions .cs
+    - add to jwt bearer to user query string with signal r and api controller will user auth header as normal
+
+    - add authentication()
+        - below opetions for token validation, new jwt bearer events
+        - get access token from query
+        - get path its coming from (since it is a query)
+        - check if there is an access token inside, and check if it comes from /hubs
+            - must match from path in start up .cs
+        - this allows client to send token as a query string
+            - this now needs to add to cors config
+
+- startup .cs
+    - app.useCors + allCredentials
+    - this allows the token from a query tring
+
+- this completes basic server side configs
+
+## client side signalR
+- cd client
+    - npm install @microsoft/signalr
+
+- client/environments.ts - environment.prod.ts
+    - hub url
+    - dev 'https://localhost:5001/hubs/'
+    - prod 'hubs/'
+
+- create service to track online presence
+- cs src/app/_serviecs
+    - ng g s presence --skip-tests
+
+- presecne.service .ts
+    - inport hub url
+    - add hub connection
+    - inject toastr service
+
+    - creat hub connecftion()
+        - take in user for token because need to send jwt token for connection, cannot user jwt interceptor these are no longer http request, websocket has no support for authentication header
+    
+    - start hub connection
+        - listen for user is online and user is offline 
+        - ust match method names in presencehub.cs
+        - send toastrs for demo
+    - stop hub connection
+        - log error
+        
+- call methids from somewhere 
+    - create when application starts if user logged in 
+    - stop when user logs out
+    - start when logs in or registers
+
+- app component .ts
+    - inject presence service
+    - set current user ()
+        - check if have user then set current user and create hub connection
+
+- account service .ts
+    - inject presence service
+    - create connection
+        - login()
+        - register()
+    - stop connection
+        - log out()
+    - when user closes browser or tab signal r auto disconects client
+    - only time we need to do it is when they log out and go to home page(to possible log in as someone else)
+
+## adding a presence tracker
 - 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
