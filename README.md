@@ -2892,10 +2892,27 @@ context.Users  (IQueryable<USer>)
     - endpoints.MapHub<MessageHub>("hubs/message");
 
 ## adding send message method to message hub
+- any connected clients in same group can receive message
+
+
+- message hub .cs
+    - create send message ()
+
+- message controller .cs
+    - use same logic with some changes
+    - copy paste all login into message hub.cs sendmessage()
+    - no access to api responses inside hub (its a http response, doesnt use http)
+    
+    - changes
+        - get username from context
+        - instead of returning bad request, throw new hub exception
+        - instead of returning not found throw new hub exception
+        - after saving message to message repository create group name with sender and receiver
+        - send message dto to group
+
+
+## adding hub connection to the message service
 - 
-
-
-
 
 
 
