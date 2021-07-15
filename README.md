@@ -2773,7 +2773,7 @@ context.Users  (IQueryable<USer>)
         - send toastrs for demo
     - stop hub connection
         - log error
-        
+
 - call methids from somewhere 
     - create when application starts if user logged in 
     - stop when user logs out
@@ -2795,20 +2795,143 @@ context.Users  (IQueryable<USer>)
     - only time we need to do it is when they log out and go to home page(to possible log in as someone else)
 
 ## adding a presence tracker
+- presence hub .cs
+    - microsoft has not implemented for a reason
+    - service is confined to server it is running on
+    - could use readus? store tracking info in db that can be distributed across any servers
+    - going to create class to track who has connected an dstore in dictionary
+    - not scalable only works for single server not multiple serves
+    - for multiple use readus or db 
+
+- create signalR/presence tracker .cs
+    - every hub connection gets a connection id
+        - users can connect from different device and get diff id, want to store string of username and list of id strings
+    - create empty dictionary
+
+    - Task user connected()
+        - be careful dictionary is shared with everyone connected, and dictionary is not a thread safe source
+        - conncurrent users trying to update at same time will create problems
+            - lock dictionary to lock until method is done before going again
+        - check if we already have dict el with key of logged in user name
+            - if it is add conection id 
+            - or create new dict username with id
+    - Task USerDisconnected
+        - lock dict
+        - check if we have dict el with key of usernmae
+            - if it doesnt return task 
+            - if yes get from dict and remove
+    - Task GetOnline users return strings
+        - get keys (usernmae) and add to array
+        - all happening in memory, dictionary not being stored in database
+
+- presence tracker will be service shared between al connections to server
+- application service extensions
+    - add singleton
+
+- presence hub
+    - inject presence tracker to constructor
+
+    - user connected ()
+        - update presence tracker
+        - send updated list of current users to all clients
+    - user disconected ()
+        - ^^ 
+
+
+## displaying online presence
+- presence service
+    - add online user source variable to hold observable
+        - BehaviorSubject - subject is generic observable 
+        - requires initial value omits current value when it is subscrubed to
+    - create observable variable to use
+
+    - add hub connection get online users
+
+- member card component .ts
+    - inject presence service
+
+- member card template .html
+    - update icon
+    - add [] class 
+
+- member card template .css
+    - animate icon to flash green
+    
+- member detail component .ts
+    - inject presence service
+
+- member detial template .html
+    - display online now if online
+
+## creating a message hub
+- live chatting - no refresh
+    - time zones are weird for now
+    - goes off on UTC for now
+
+- singlanR/ message hub
+    - create group for each user
+    - define group name
+    - group name is cobo of usernmaes
+    - want thesse in alphabetical to make sure both users have same message thread
+
+    - onConnectedAsync()
+        - get other users username from query string (messages/user) 
+        - pass into helper to return the name compination in alphabetical order
+        - add users to new group and pass in id and group name
+        - when a user joins group get message thread
+        - send to clients method receive message thread and messages
+            - not optimal to send thread to both users even if one already has them 
+            - will optimize later
+
+    - Task on Disconected()
+        - pass in excpetion
+        - singal r auto removes from group when they disconecte
+
+- start up .cs
+    - add new endpoint
+    - endpoints.MapHub<MessageHub>("hubs/message");
+
+## adding send message method to message hub
+- any connected clients in same group can receive message
+
+
+- message hub .cs
+    - create send message ()
+
+- message controller .cs
+    - use same logic with some changes
+    - copy paste all login into message hub.cs sendmessage()
+    - no access to api responses inside hub (its a http response, doesnt use http)
+    
+    - changes
+        - get username from context
+        - instead of returning bad request, throw new hub exception
+        - instead of returning not found throw new hub exception
+        - after saving message to message repository create group name with sender and receiver
+        - send message dto to group
+
+
+## adding hub connection to the message service
+- message service.ts
+    - add hub url
+    - add hub connection
+    
+    - createHubConnection()
+        - with url, get token, auto reconnect, build, catch errors
+    - stop Hub connection ()
+        - 
+    
+    - deal with what happens when we receive messages when connecting to hub
+    
+    - create observable of message thread
+        - match receive messaeg thead with message hub on connected method 
+        - pass in messages to message thread source
+
+- need to create connection and receive messages
+- stop connection when user moves awau from member detai component
+
+## refoactoring the message components to use hte message hub
 - 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
