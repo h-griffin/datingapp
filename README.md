@@ -2912,8 +2912,26 @@ context.Users  (IQueryable<USer>)
 
 
 ## adding hub connection to the message service
-- 
+- message service.ts
+    - add hub url
+    - add hub connection
+    
+    - createHubConnection()
+        - with url, get token, auto reconnect, build, catch errors
+    - stop Hub connection ()
+        - 
+    
+    - deal with what happens when we receive messages when connecting to hub
+    
+    - create observable of message thread
+        - match receive messaeg thead with message hub on connected method 
+        - pass in messages to message thread source
 
+- need to create connection and receive messages
+- stop connection when user moves awau from member detai component
+
+## refoactoring the message components to use hte message hub
+- 
 
 
 

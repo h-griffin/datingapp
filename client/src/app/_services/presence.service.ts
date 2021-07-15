@@ -28,7 +28,7 @@ export class PresenceService {
 
     this.hubConnection
       .start()
-      .catch(error => console.log(error));
+      .catch(error => console.log("[presence.service.ts] createHubConnection()", error));
 
       // just for demo
     this.hubConnection.on("UserIsOnline", username => {   // method names must match in presenceHub.cs
@@ -46,7 +46,7 @@ export class PresenceService {
   }
 
   stopHubConnection(){
-    this.hubConnection.stop().catch(error => console.log(error));
+    this.hubConnection.stop().catch(error => console.log("[presence.service.ts] stopHubConnection()",error));
   }
 
 
