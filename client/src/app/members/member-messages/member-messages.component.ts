@@ -15,14 +15,14 @@ export class MemberMessagesComponent implements OnInit {
   messageContent: string;
 
 
-  constructor(private messageService: MessageService) { }
+  constructor(public messageService: MessageService) { }
 
   ngOnInit(): void {
   }
 
   sendMessage(){
     this.messageService.sendMessage(this.username, this.messageContent).subscribe(message => {
-      this.messages.push(message); // thread
+      this.messages.push(message); // add to thread
       this.messageFrom.reset()     // clear text
     })
   }

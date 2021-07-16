@@ -8,6 +8,9 @@
 - https://jwt.io/
     - jwt : view token structure/data
 
+- https://www.json-generator.com/
+    - json generator - seed data
+
 ## vscode extensions
 - c# by omnisharp
 - c# extensions by joskreativ
