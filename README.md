@@ -1162,16 +1162,16 @@ interface Car {
 - stongly typed
 - set props in cloudinary settings .cs
 - add in application service extensions
-- access config via cloudinary settings class in spplication service extensions
+- access config via cloudinary settings class in application service extensions
 
 ## adding photo service
 - adding deleting photos
 - one responsibility
-    - receice file
-    - upload and receive url from clud
+    - receive file
+    - upload and receive url from cloud
     - upload results to who needs it
 
-- interface photo servece
+- interface photo service
 - each phot has public id, use this to delete
 - implement interface in photo service
 - new account settings must be 
@@ -1184,20 +1184,20 @@ interface Car {
 
 ## updating user controller
 - allow add photo
-- client neeeds to know id and if it is main
+- client needs to know id and if it is main
 - add extension method to get username faster
 
 ## testing photo uploading
 - add breakpoint on var result line
-- watch each step as request populates file ingo and cloudinary info
+- watch each step as request populates file into and cloudinary info
 
-- photos wil lnot get their own route, only see user ohotos at member detail page
+- photos will not get their own route, only see user photos at member detail page
 
-## created at route methof
+## created at route method
 - return photo in body of request
 
 ```
-("GetUser", _mapper.Map<PhotoDto>(photo));     // return 201 with route to user that has ohotos
+("GetUser", _mapper.Map<PhotoDto>(photo));     // return 201 with route to user that has photos
                                                                                 // doesnt work route req parameters
 ```
 
@@ -1209,7 +1209,7 @@ interface Car {
 - in comps.ts : receive member from parent component
     - parent component is member edit
 
-## photot upload component
+## photo upload component
 - ng2-file-upload
 - https://valor-software.com/ng2-file-upload/
 - cd client
@@ -1242,7 +1242,7 @@ interface Car {
     - injecting data context in account controller (not return photo with login )
     - eager load photos in login
 
-## update mian image in client
+## update mail image in client
 - set main photo method in member service
 - set main photo method in photo editor components
     these can go anywhere computer can figure out, location is for passing down and where human can remember
@@ -1252,7 +1252,7 @@ interface Car {
 
 ## delete photo in client
 - users controller 
-- memebr service
+- member service
     - add delete photo
 - photo editor component
     - delete photo method
@@ -1339,13 +1339,13 @@ interface Car {
 # ========= SECTION 13 =========
 
 ## paging and sorting learning goals
-- implement pagination on api and clinet
+- implement pagination on api and client
 - deferred execution using IQueryable
 - how to implement filtering on api and client
 - sorting on api and client
 - using action filters
 - adding time ago pipe
-- caching the client for paginated rescources
+- caching the client for paginated resources
 
 ## pagination
 - helps avoid performance problems
@@ -1386,7 +1386,7 @@ context.Users  (IQueryable<USer>)
 - update i/userrepository to return paged list and take in userparams
 - pass info from the paged list created in user repository to the http response header in user controller
 - add pagination header in users controller 
-- add [FromQuery] sttribute tag to users controller to get the parameters from query string
+- add [FromQuery] attribute tag to users controller to get the parameters from query string
 - add options to change json response for pagination header be camelcase not titlecase
 
 ## client pagination
@@ -1399,9 +1399,9 @@ context.Users  (IQueryable<USer>)
 - {observe} now gives full response body
 
 - change how to return members in  member list component
-    - change menber observable back to membeber type
-    - use loadmembers to give props mannually for now
-    - adjust component tempalte from members$ to members
+    - change member observable back to member type
+    - use loadmembers to give props manually for now
+    - adjust component template from members$ to members
     
 - bootstrap pagination component
 - https://valor-software.com/ngx-bootstrap/#/pagination
@@ -1435,11 +1435,11 @@ context.Users  (IQueryable<USer>)
 - Account controller
     - update DTOs to return gender
 - User.ts
-    - add knwon as nad gender
+    - add known as and gender
     - add known as to known as in nav
 - userParams.ts in _models
     - create class to store user params
-- member service takes in userPArams model
+- member service takes in userParams model
     - refactor paginated header code to be reusable
 - member list component
     - refactor code in member list
@@ -1462,17 +1462,17 @@ context.Users  (IQueryable<USer>)
     - access repository
     - access user object
     - set user last active property
-    - add as service in application service extesions
+    - add as service in application service extensions
     - go to where controllers are deriving from (base api controller)
     - add attribute to base api controller to give access to action filter
-    - mske a reuest on postman and see last active time change
-- currently using get user by username async, ineffiecient because it incluces all photots, should switch to get user by id async.
+    - make a request on postman and see last active time change
+- currently using get user by username async, inefficient because it includes all photos, should switch to get user by id async.
 - set id in token so token has access to id and username
     - use unique name for username and name id for id on new claim in token service
-    - upodate claims prinicpal extension now that username type is different
+    - update claims principal extension now that username type is different
     - replace name identifier with name for unique name 
     - create new extension to get id and return int of id
-    - in log iser activity swap username for user id and use get user id
+    - in log user activity swap username for user id and use get user id
 
 ## sorting on client
 - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
@@ -1498,7 +1498,7 @@ context.Users  (IQueryable<USer>)
     - use user-params as key
     - for each key/query store response
     - use map to store key and values
-- go to api get members and dont have them in cache, if in cache and query is identical then retrive from cache
+- go to api get members and dont have them in cache, if in cache and query is identical then retrieve from cache
     - stores page results in memory if query is same
 
 - save member cache settings for member detail page
@@ -1510,15 +1510,15 @@ context.Users  (IQueryable<USer>)
     - having an array of users in memory and going to member detail of member not in memory will produce a second array, only want one array to find all users in
         - paginated results, paginated result
     
-    - use reduce function now that there are two ararys of members
+    - use reduce function now that there are two arrays of members
     - concat results into empty array;
         - each new member loaded will be added to the array of loaded members 
     - members can be duplicated in this arr from two different queries
         - lisa stored from age filter and one lisa from 5 users with no filter
         - this is ok because users will be found by first match to search
-    - user params stored in component get lost everytime, move them to service to keep
+    - user params stored in component get lost every time, move them to service to keep
  
-- caching filters in member list coponent .ts
+- caching filters in member list component .ts
     - acc service is injected into member service beware circular references, acc service cannot go back to member service
     - set user params in component constructor, get them from members service
         - still updating inside component, must update service from component
@@ -2064,9 +2064,9 @@ context.Users  (IQueryable<USer>)
 
 - messages template .html
     - TR (table row) ng for message of messages
-    - add [hidden]="loading" to hide messages until user photos are ready
+    - add `[hidden]="loading"` to hide messages until user photos are ready
     - hide pagination while loading 
-        - add && !loading to existing pagination check
+        - add `&& !loading` to existing pagination check
 
 ## deleting messages on the API
 - message controller .cs
@@ -2099,7 +2099,7 @@ context.Users  (IQueryable<USer>)
 - messages component template .html
     - add click event to delete button
     - router will try and route on delete click, add extra click event
-        - $event.stopPropagation
+        - `$event.stopPropagation`
 
 - test
     - 500 server error
@@ -2195,7 +2195,7 @@ context.Users  (IQueryable<USer>)
     
     - userroles are key type int instead of strings
     - provide type params 
-        - IdentityDbContext<AppUser, AppRole, int>
+        - `IdentityDbContext<AppUser, AppRole, int>`
         - we want a list of roles later so add all types
         - DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, 
         AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
@@ -2763,8 +2763,8 @@ context.Users  (IQueryable<USer>)
 
 - client/environments.ts - environment.prod.ts
     - hub url
-    - dev 'https://localhost:5001/hubs/'
-    - prod 'hubs/'
+    - dev `'https://localhost:5001/hubs/'`
+    - prod `'hubs/'`
 
 - create service to track online presence
 - cs src/app/_serviecs
