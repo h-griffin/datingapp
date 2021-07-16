@@ -1348,7 +1348,7 @@ interface Car {
 - caching the client for paginated rescources
 
 ## pagination
-- helos avoid preformance problems
+- helps avoid performance problems
 - parameters are passed by query string (in url)
 - page size should be limited
 - always page results
@@ -1381,10 +1381,10 @@ context.Users  (IQueryable<USer>)
 - pass extension props to helper in the same order helper expects them
 - serialize header name as json
 - add cors header to make custom header available
-- create helper class to receive pagination perameters from user(UserParams)
+- create helper class to receive pagination parameters from user(UserParams)
     - check if user set page size is not greater than default max page size
 - update i/userrepository to return paged list and take in userparams
-- pass info fron the paged list created in user repository to the http response header in user controller
+- pass info from the paged list created in user repository to the http response header in user controller
 - add pagination header in users controller 
 - add [FromQuery] sttribute tag to users controller to get the parameters from query string
 - add options to change json response for pagination header be camelcase not titlecase
