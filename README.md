@@ -2978,9 +2978,39 @@ context.Users  (IQueryable<USer>)
     - message doesnt add to thead, todd doenst get the messages immediatly
 
 ## sending messages via hub
--    
+- message hub
+    - sendmessage()
+        - receiveing new message from hub
+        - client needs to udate message thread observabel to show message when received
 
+- message servie
+    - adnd hub connectino hub on 
+        - careful adding message, add message to array then pass new array to behavior subject 
+    - no mutating state inside
 
+    - send msesage () still using api call
+        - invoke returns promise after serever is done
+        - catch errors becuase there is no access to the error interceptor, it is not an http req
+        - async : guarentee promise is returned
+        - use promise returned in mem message returned to restet form ehen message is addded
+
+- member messages comopnent
+    - replace subscrib ewith .thne(primises)
+
+- testing 
+    - issue with finding method
+    - restart api server to set up hub end points
+    - only connect w one user
+        - query splitting behavior >> address later
+        - .net 5 specific
+    - refresh browsers 
+
+- all good, live chat wokrs
+    - still flagges as unread
+    - need to track group members to track read messages if both are connected 
+
+## tracking the message groups
+- 
 
 
 
