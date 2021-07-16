@@ -1466,11 +1466,11 @@ context.Users  (IQueryable<USer>)
 
 
 ## sorting on client
-    - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
+- ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
 
-    - two way binding with 3 buttons to switch off true and false for what way to sort on client
-    - sort by sctive or created on with filters by age 
-    - modify members service to send order by param in query string
+- two way binding with 3 buttons to switch off true and false for what way to sort on client
+- sort by `active` or `created on` with filters by age 
+- modify members service .ts to send order-by param in query string
 
 - dates
     - time ago (last active time)
@@ -1483,19 +1483,19 @@ context.Users  (IQueryable<USer>)
         - {{member.lastActive | timeago}}
 
 ## restore caching for members settings
-    - remember filters
-        - remember queries of page and gender etc
-        - look in members service
-        - use user params as key
-        - for each key/query store response
-        - use map to store key adn vfalues
-    - go to api get members and dont have them in cache, if in cache and query is identical then retrive from cache
-        - stores page results in memory if query is same
+- remember filters
+    - remember queries of page and gender etc
+    - look in members service .ts
+    - use user-params as key
+    - for each key/query store response
+    - use map to store key and values
+- go to api get members and dont have them in cache, if in cache and query is identical then retrive from cache
+    - stores page results in memory if query is same
 
 - save member cache settings for member detail page
     - extract member from map with matching key 
     - load member detail from cache and not api
-    - navigation extras can get details of teh member >> will not work in future <<
+    - navigation extras can get details of the member >> will not work in future <<
     - member object is available in detail page after visiting the members results, just need to extract it from the list of results 
     - get all values of member cache, dont need keys
     - having an array of users in memory and going to member detail of member not in memory will produce a second array, only want one array to find all users in
@@ -1509,9 +1509,9 @@ context.Users  (IQueryable<USer>)
         - this is ok because users will be found by first match to search
     - user params stored in component get lost everytime, move them to service to keep
  
-- caching filters in member list coponent
-    - acc service is injected into memberserviec beware circular references, acc service cannot go back to member serviec
-    - set user params in component constructor, get them from mem service
+- caching filters in member list coponent .ts
+    - acc service is injected into member service beware circular references, acc service cannot go back to member service
+    - set user params in component constructor, get them from members service
         - still updating inside component, must update service from component
         - before getting members set current user params
         - update component reset filters from service filters
@@ -2930,7 +2930,7 @@ context.Users  (IQueryable<USer>)
 - need to create connection and receive messages
 - stop connection when user moves awau from member detai component
 
-## refoactoring the message components to use hte message hub
+## refoactoring the message components to use the message hub
 - 
 
 
@@ -2960,11 +2960,14 @@ context.Users  (IQueryable<USer>)
 - paginate get user with roles() in admincontroller
 - show user main photo in edit role display
 - display nicer list of user roles
-
+- rules on first login/register
+- go though console logs
+- add roles to admin panel for whos viewing it
 
 ## uses
 - custom directive
-- 
+- SignalR
+- Presence Tracking
 
 
 
