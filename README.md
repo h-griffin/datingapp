@@ -4,13 +4,20 @@
 
 ## about app
 - asp.net c# API
-- angular typescript Client
-- sqlite database
-- jwt authentication and validation
+- angular typescript Client 
+- sqlite database // postgreSQL
+- jwt authentication and validation // asp.net identity & roles
 - angular routing
 - error handling and client testing
-- multiple entities
+- multiple entity relationships
+    - one to many
+    - many to many
 - photo upload
+
+- custom directives
+- SignalR
+- Presence Tracking
+
 
 # ======= SECTION 1 =======
 ## API learning goals
@@ -51,14 +58,14 @@
     - `dotnet dev-certs https --trust`
     - `dotnet run`
     - 5001 cant be found (api project)
-        - look at controller: json shows for localhost:5001/weatherforecast (default from template)
+        - look at controller: json shows for `localhost:5001/weatherforecast` (default from template)
     - controller end point (httpGet)
 
 - **appsettings.Development.json**
     - change "Microsoft" log level from warning to information
 
 - **Startup.cs** 
-    - configure services "dependency injection" - give other parts of application acess
+    - configure services "dependency injection" - give other parts of application access
 
 - **properties/launchsettings.json**
     - `"launchBrowser": false,`
@@ -94,7 +101,7 @@
 - add AddDbContext in ConfigureServices in Startup.cs
     - appSettings.development.json 
         - sqlite connection string ok to be public in files.
-        - name of file to store database - "Data source=datingapp.db"
+        - name of file to store database - `"Data source=datingapp.db"`
     
 - install dotnet-ef
 - `dotnet tool install --global dotnet-ef --version 5.0.1`
@@ -353,7 +360,7 @@ id  user  password   passwordSalt
 - change account controller returning user to UserDTO
 
 ## authentication middleware
-- add authorized attribute
+- add `[Authorized]` attribute
 - add middleware to authenticate jwt token
 - nuget gallery extension: Microsoft.AspNetCore.Authentication.JwtBearer
 
@@ -394,7 +401,7 @@ id  user  password   passwordSalt
 
 ## filling out form and getting token
 - import angular forms module in app module.ts
-- #loginform="ngForm" attribute makes it an angular form
+- `#loginform="ngForm"` attribute makes it an angular form
 
 - `[(ngModel)]="binding"`
     - ng model "banana in a box" 
@@ -452,10 +459,10 @@ id  user  password   passwordSalt
 - store in local storage
 - interface in typescript - specify something is a type of something
 - replay subject - buffer object stores values and each subscribe omits last value inside it (or more)
-- observable gets $ at end of variable
-- !!user;  turns obj into boolean
+- observable gets `$` at end of variable
+- `!!user;`  turns obj into boolean
 
-- async pipe in nav component
+- async pipe `( | async)` in nav component
 
 ## adding home page component
 - cd client/src/app 
@@ -471,10 +478,10 @@ id  user  password   passwordSalt
 - down from home to register
 - move get users functionality from app to home
 
-- inside home app register tag [usersFromHomeComponent]="users"
+- inside home app register tag `[usersFromHomeComponent]="users"`
 
 - inside register option selector tag
-*ngFor="let user of usersFromHomeComponent" [value]="user.userName" 
+`*ngFor="let user of usersFromHomeComponent" [value]="user.userName"` 
 
 - must call getUsers() in init()
 
@@ -552,7 +559,7 @@ id  user  password   passwordSalt
 - restart client
 
 - welcome 'user' username
-- grab user value from ng if account service
+- grab user value from ng if account service .ts
 - use title case pipe
 
 ## use shared module
@@ -1008,6 +1015,8 @@ interface Car {
 
 - move get images to end of load member 
 
+
+
 # ========= SECTION 9 =========
 
 ## update resources learning goals
@@ -1326,6 +1335,7 @@ interface Car {
 - in photo editor component in on success item() 
 
 
+
 # ========= SECTION 13 =========
 
 ## paging and sorting learning goals
@@ -1464,7 +1474,6 @@ context.Users  (IQueryable<USer>)
     - create new extension to get id and return int of id
     - in log iser activity swap username for user id and use get user id
 
-
 ## sorting on client
 - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
 
@@ -1518,6 +1527,7 @@ context.Users  (IQueryable<USer>)
         - in member list component add user param updates to reset filters and page changed before loading members again
 
 
+
 # ========= SECTION 14 =========  
 
 ## adding like user entity learning goals
@@ -1527,14 +1537,13 @@ context.Users  (IQueryable<USer>)
     - AppUser can like many AppUsers
     - .net5 can create table automatically, but doesnt work well with this relationship
     - self referencing many to many
-    - use join table called user like
+    - use join table called user-like
         - source user id
         - liked user id
 - fluent api
     - tell api 
         - APPUSER has one SOURCEUSER with many LIKEDUSERS
         - APPUSER has one LIKEDUSER with many LIKEDBYUSERS
-
 
 - adding new entity
     - padingation for likes
@@ -1544,7 +1553,6 @@ context.Users  (IQueryable<USer>)
     - component
     - paging
  
-
 ## adding a likes entity
 - give app user two new collections
     - users they like
@@ -1688,6 +1696,8 @@ context.Users  (IQueryable<USer>)
 - check network tab 
     - request > headers > pagination headers are there
     - drop page size to 2 to check pagination works
+
+
 
 # ========= SECTION 15 =========  
 
@@ -1923,12 +1933,12 @@ context.Users  (IQueryable<USer>)
     - get active tab heading(from data) to see if it is messages tab
     - tranfer load messgaes info from member detail
 
-- messages component.ts and member detail component need message [] = [] to use length checks for checking messages
+- messages component.ts and member detail component need message[] = [] to use length checks for checking messages
 
 - member detail component .ts
-    - inject message servie
+    - inject message service
     - get username from member 
-    - add extra && check in tab activated to check if switching tabs an dmesssages are already loaded do not reload messages
+    - add extra && check in tab activated to check if switching tabs and messsages are already loaded do not reload messages
 
 - member messages component .ts
     - pass messages as input property instead of getting username
@@ -1942,8 +1952,8 @@ context.Users  (IQueryable<USer>)
 - member detail compnoent .ts
     - create select tab method and bind to message button
 
-- member detaul template .html
-    - add click even tto message button
+- member detail template .html
+    - add click event to message button
     - because no other tabs need this, hard code message tab id (3) 
         - 0 about
         - 1 interests
@@ -1993,7 +2003,7 @@ context.Users  (IQueryable<USer>)
     - implements angular resolver
     - not a component so needs @Injectable
     - provided in : root
-        - resolvers are instatniated in teh same was as services
+        - resolvers are instatniated in the same was as services
     
     - member detailed uses member service to get member from cache because resolver cannot use navigation extras
     
@@ -2023,7 +2033,7 @@ context.Users  (IQueryable<USer>)
         - will get back a type message DTO so send in Message type
         - send opject of content to give to create message dto
 
-- membermessages component t.s
+- member messages component t.s
     - add member service
     - add send message()
     - add message to message array to view in thread
@@ -2043,17 +2053,17 @@ context.Users  (IQueryable<USer>)
 
 - test 
     - send message
-    - refresh to check persist
+    - refresh to check persistence
 
 ## fixing photo loading in messages tab (outbox)
-- addd flag to say loading
-- hide messages until everything ready
+- add flag to say loading
+- hide messages until everything is ready
 
 - messages component .ts
     - add laoding flag, set to true or false in load messages before and after
 
 - messages template .html
-    - TR ng for message of messages
+    - TR (table row) ng for message of messages
     - add [hidden]="loading" to hide messages until user photos are ready
     - hide pagination while loading 
         - add && !loading to existing pagination check
@@ -2107,6 +2117,7 @@ context.Users  (IQueryable<USer>)
 - messages are not poping up on another users browse
     - dont maintain a connection to api
     - dont have a way to do that now... will do later
+
 
 
 # ========= SECTION 16 =========  
