@@ -3010,9 +3010,34 @@ context.Users  (IQueryable<USer>)
     - need to track group members to track read messages if both are connected 
 
 ## tracking the message groups
-- 
+- we have no way of knowing who is in group at one time with a hub
+- same with online presence, imposible with multiple servers
+- must do manually
+- origional plan
+    - presence tracker
+        - just add new dictionary
+    - too much and too complicated
+    - new way of tracking user in gorups with database
+    - optimal is not using database
+        - persistence storage - redus operates in memory on different servers and go distribute across different servers
 
+- create group entity
+    - one prop is primary key
+        - no douplicate groups
+    - add `[Key]`
+        - nameis group name and will index automatically easier for EF to find entity
+    - give empty default construcor
 
+- create connection entity
+    - connection id convention to be primary key 
+    - use constructor with this class to quicly pass in info
+    - give empty default construcor
+    - create construcotr to give groupname
+
+- EF needs empty construcor when creating tables
+
+- Inconsistent accessibility: property type 'ICollection<Connection>' is less accessible than property 'Group.Connections' [API]
+    - line 20 [Group.cs]
 
 
 
