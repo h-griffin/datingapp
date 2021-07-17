@@ -1,6 +1,7 @@
 # Dating app 
 ## [neil cummings - dating app](https://github.com/TryCatchLearn/DatingApp)
 ![tools](API/assets/tools.png)
+![tools and resources](tools-rescources.md)
 
 ## about app
 - asp.net c# API
@@ -141,15 +142,15 @@
 # ========= SECTION 2 =========
 
 ## Angular Client learning goals
-    - use angular cli
-    - how to create angular app
-    - angular project files
-    - angular bootstrap process
-    - using angular http client service
-    - run angular app over https
-    - add packages with npm
-        - font awesome
-        - bootstrap
+- use angular cli
+- how to create angular app
+- angular project files
+- angular bootstrap process
+- using angular http client service
+- run angular app over https
+- add packages with npm
+    - font awesome
+    - bootstrap
 
 ## create angular app client (angular cli)
 - inside datingapp dir 
@@ -935,7 +936,8 @@ CreateMap<AppUser, MemberDto>()
 - type script inferring - can guess you value type if not specified
 - can user pipe to allow more than one type
 
-```let data: number | string = 42;
+```
+let data: number | string = 42;
 
 data = "10"
 ```
@@ -1162,16 +1164,16 @@ interface Car {
 - stongly typed
 - set props in cloudinary settings .cs
 - add in application service extensions
-- access config via cloudinary settings class in spplication service extensions
+- access config via cloudinary settings class in application service extensions
 
 ## adding photo service
 - adding deleting photos
 - one responsibility
-    - receice file
-    - upload and receive url from clud
+    - receive file
+    - upload and receive url from cloud
     - upload results to who needs it
 
-- interface photo servece
+- interface photo service
 - each phot has public id, use this to delete
 - implement interface in photo service
 - new account settings must be 
@@ -1184,20 +1186,20 @@ interface Car {
 
 ## updating user controller
 - allow add photo
-- client neeeds to know id and if it is main
+- client needs to know id and if it is main
 - add extension method to get username faster
 
 ## testing photo uploading
 - add breakpoint on var result line
-- watch each step as request populates file ingo and cloudinary info
+- watch each step as request populates file into and cloudinary info
 
-- photos wil lnot get their own route, only see user ohotos at member detail page
+- photos will not get their own route, only see user photos at member detail page
 
-## created at route methof
+## created at route method
 - return photo in body of request
 
 ```
-("GetUser", _mapper.Map<PhotoDto>(photo));     // return 201 with route to user that has ohotos
+("GetUser", _mapper.Map<PhotoDto>(photo));     // return 201 with route to user that has photos
                                                                                 // doesnt work route req parameters
 ```
 
@@ -1209,7 +1211,7 @@ interface Car {
 - in comps.ts : receive member from parent component
     - parent component is member edit
 
-## photot upload component
+## photo upload component
 - ng2-file-upload
 - https://valor-software.com/ng2-file-upload/
 - cd client
@@ -1242,7 +1244,7 @@ interface Car {
     - injecting data context in account controller (not return photo with login )
     - eager load photos in login
 
-## update mian image in client
+## update main image in client
 - set main photo method in member service
 - set main photo method in photo editor components
     these can go anywhere computer can figure out, location is for passing down and where human can remember
@@ -1252,7 +1254,7 @@ interface Car {
 
 ## delete photo in client
 - users controller 
-- memebr service
+- member service
     - add delete photo
 - photo editor component
     - delete photo method
@@ -1339,13 +1341,13 @@ interface Car {
 # ========= SECTION 13 =========
 
 ## paging and sorting learning goals
-- implement pagination on api and clinet
+- implement pagination on api and client
 - deferred execution using IQueryable
 - how to implement filtering on api and client
 - sorting on api and client
 - using action filters
 - adding time ago pipe
-- caching the client for paginated rescources
+- caching the client for paginated resources
 
 ## pagination
 - helps avoid performance problems
@@ -1386,7 +1388,7 @@ context.Users  (IQueryable<USer>)
 - update i/userrepository to return paged list and take in userparams
 - pass info from the paged list created in user repository to the http response header in user controller
 - add pagination header in users controller 
-- add [FromQuery] sttribute tag to users controller to get the parameters from query string
+- add [FromQuery] attribute tag to users controller to get the parameters from query string
 - add options to change json response for pagination header be camelcase not titlecase
 
 ## client pagination
@@ -1399,9 +1401,9 @@ context.Users  (IQueryable<USer>)
 - {observe} now gives full response body
 
 - change how to return members in  member list component
-    - change menber observable back to membeber type
-    - use loadmembers to give props mannually for now
-    - adjust component tempalte from members$ to members
+    - change member observable back to member type
+    - use loadmembers to give props manually for now
+    - adjust component template from members$ to members
     
 - bootstrap pagination component
 - https://valor-software.com/ngx-bootstrap/#/pagination
@@ -1435,11 +1437,11 @@ context.Users  (IQueryable<USer>)
 - Account controller
     - update DTOs to return gender
 - User.ts
-    - add knwon as nad gender
+    - add known as and gender
     - add known as to known as in nav
 - userParams.ts in _models
     - create class to store user params
-- member service takes in userPArams model
+- member service takes in userParams model
     - refactor paginated header code to be reusable
 - member list component
     - refactor code in member list
@@ -1462,17 +1464,17 @@ context.Users  (IQueryable<USer>)
     - access repository
     - access user object
     - set user last active property
-    - add as service in application service extesions
+    - add as service in application service extensions
     - go to where controllers are deriving from (base api controller)
     - add attribute to base api controller to give access to action filter
-    - mske a reuest on postman and see last active time change
-- currently using get user by username async, ineffiecient because it incluces all photots, should switch to get user by id async.
+    - make a request on postman and see last active time change
+- currently using get user by username async, inefficient because it includes all photos, should switch to get user by id async.
 - set id in token so token has access to id and username
     - use unique name for username and name id for id on new claim in token service
-    - upodate claims prinicpal extension now that username type is different
+    - update claims principal extension now that username type is different
     - replace name identifier with name for unique name 
     - create new extension to get id and return int of id
-    - in log iser activity swap username for user id and use get user id
+    - in log user activity swap username for user id and use get user id
 
 ## sorting on client
 - ngx buttons https://ng-bootstrap.github.io/#/components/buttons/examples
@@ -1498,7 +1500,7 @@ context.Users  (IQueryable<USer>)
     - use user-params as key
     - for each key/query store response
     - use map to store key and values
-- go to api get members and dont have them in cache, if in cache and query is identical then retrive from cache
+- go to api get members and dont have them in cache, if in cache and query is identical then retrieve from cache
     - stores page results in memory if query is same
 
 - save member cache settings for member detail page
@@ -1510,15 +1512,15 @@ context.Users  (IQueryable<USer>)
     - having an array of users in memory and going to member detail of member not in memory will produce a second array, only want one array to find all users in
         - paginated results, paginated result
     
-    - use reduce function now that there are two ararys of members
+    - use reduce function now that there are two arrays of members
     - concat results into empty array;
         - each new member loaded will be added to the array of loaded members 
     - members can be duplicated in this arr from two different queries
         - lisa stored from age filter and one lisa from 5 users with no filter
         - this is ok because users will be found by first match to search
-    - user params stored in component get lost everytime, move them to service to keep
+    - user params stored in component get lost every time, move them to service to keep
  
-- caching filters in member list coponent .ts
+- caching filters in member list component .ts
     - acc service is injected into member service beware circular references, acc service cannot go back to member service
     - set user params in component constructor, get them from members service
         - still updating inside component, must update service from component
@@ -1678,7 +1680,7 @@ context.Users  (IQueryable<USer>)
         - total count
         - total pages
 
-## paginatin glikes on the client
+## paginating likes on the client
 - members service
     - get likes needs pagination headers now
     - reuse methods to get pagination headers and return paginated result
@@ -1701,7 +1703,7 @@ context.Users  (IQueryable<USer>)
 
 # ========= SECTION 15 =========  
 
-## adding messagin feature learning goals
+## adding messaging feature learning goals
 - more amny to many realationships 
     - can send many messages 
     - can receive many messages
@@ -2064,9 +2066,9 @@ context.Users  (IQueryable<USer>)
 
 - messages template .html
     - TR (table row) ng for message of messages
-    - add [hidden]="loading" to hide messages until user photos are ready
+    - add `[hidden]="loading"` to hide messages until user photos are ready
     - hide pagination while loading 
-        - add && !loading to existing pagination check
+        - add `&& !loading` to existing pagination check
 
 ## deleting messages on the API
 - message controller .cs
@@ -2099,7 +2101,7 @@ context.Users  (IQueryable<USer>)
 - messages component template .html
     - add click event to delete button
     - router will try and route on delete click, add extra click event
-        - $event.stopPropagation
+        - `$event.stopPropagation`
 
 - test
     - 500 server error
@@ -2195,7 +2197,7 @@ context.Users  (IQueryable<USer>)
     
     - userroles are key type int instead of strings
     - provide type params 
-        - IdentityDbContext<AppUser, AppRole, int>
+        - `IdentityDbContext<AppUser, AppRole, int>`
         - we want a list of roles later so add all types
         - DataContext : IdentityDbContext<AppUser, AppRole, int, IdentityUserClaim<int>, 
         AppUserRole, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
@@ -2763,8 +2765,8 @@ context.Users  (IQueryable<USer>)
 
 - client/environments.ts - environment.prod.ts
     - hub url
-    - dev 'https://localhost:5001/hubs/'
-    - prod 'hubs/'
+    - dev `'https://localhost:5001/hubs/'`
+    - prod `'hubs/'`
 
 - create service to track online presence
 - cs src/app/_serviecs
@@ -2942,13 +2944,100 @@ context.Users  (IQueryable<USer>)
 - stop connection when user moves awau from member detai component
 
 ## refoactoring the message components to use the message hub
-- 
+- member detailed comopnent .ts
+    - on activated tab()
+        - currently getting messages from api call
+        - ewant to get it from signal r hub now
+        - need access to yser obj so inject acc serviec  and set current user
+        -  will disconnect rom hub when away from message tab
+        - stop if they move from componetnt
+        - angular life cycle compoent : on destory 
+        - be careful: inside ng destroy stops hub connectino and tab stops hub conn, this is like destroying the hub if we execute ng on destroy when tab disconnect has already taken place, exception will be thronw
+            - if on message tab and create connection, they go to aboyt page, stop conn, go to other page in app, try to execute page disconnect/destroy, error
+    
+- message service .ts
+    - stop hub connection ()
+        - add conditional if there is a conenction to stop
 
+- mem detail component .ts
+    - getting messages from service, dont need to pass from here to child, messaegs component
 
+- em detail tempalte .html  
+    - dont need to pass messages, because compoennt can access it alone 
 
+- mem messages comopnent .ts
+    - has acess to message service, will use asyn pipe to subscribe to messages
+    - make it public to access in template
 
+- member messages templage .html
+    - replace reference messages from component with `(messageService.messageThread$ | async)` and get messages from service directly to check length etc
 
+- test in client
+    - send message
+    - cannot read propety of undefined [message service .ts] send message() : this.messages.push(message)
+    - message doesnt add to thead, todd doenst get the messages immediatly
 
+## sending messages via hub
+- message hub
+    - sendmessage()
+        - receiveing new message from hub
+        - client needs to udate message thread observabel to show message when received
+
+- message servie
+    - adnd hub connectino hub on 
+        - careful adding message, add message to array then pass new array to behavior subject 
+    - no mutating state inside
+
+    - send msesage () still using api call
+        - invoke returns promise after serever is done
+        - catch errors becuase there is no access to the error interceptor, it is not an http req
+        - async : guarentee promise is returned
+        - use promise returned in mem message returned to restet form ehen message is addded
+
+- member messages comopnent
+    - replace subscrib ewith .thne(primises)
+
+- testing 
+    - issue with finding method
+    - restart api server to set up hub end points
+    - only connect w one user
+        - query splitting behavior >> address later
+        - .net 5 specific
+    - refresh browsers 
+
+- all good, live chat wokrs
+    - still flagges as unread
+    - need to track group members to track read messages if both are connected 
+
+## tracking the message groups
+- we have no way of knowing who is in group at one time with a hub
+- same with online presence, imposible with multiple servers
+- must do manually
+- origional plan
+    - presence tracker
+        - just add new dictionary
+    - too much and too complicated
+    - new way of tracking user in gorups with database
+    - optimal is not using database
+        - persistence storage - redus operates in memory on different servers and go distribute across different servers
+
+- create group entity
+    - one prop is primary key
+        - no douplicate groups
+    - add `[Key]`
+        - nameis group name and will index automatically easier for EF to find entity
+    - give empty default construcor
+
+- create connection entity
+    - connection id convention to be primary key 
+    - use constructor with this class to quicly pass in info
+    - give empty default construcor
+    - create construcotr to give groupname
+
+- EF needs empty construcor when creating tables
+
+- Inconsistent accessibility: property type 'ICollection<Connection>' is less accessible than property 'Group.Connections' [API]
+    - line 20 [Group.cs]
 
 
 
