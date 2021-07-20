@@ -3042,6 +3042,7 @@ context.Users  (IQueryable<USer>)
 
 
 - fix error
+- fix property type
 
 
 
