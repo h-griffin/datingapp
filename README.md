@@ -3017,9 +3017,9 @@ context.Users  (IQueryable<USer>)
     - presence tracker
         - just add new dictionary
     - too much and too complicated
-    - new way of tracking user in gorups with database
-    - optimal is not using database
-        - persistence storage - redus operates in memory on different servers and go distribute across different servers
+- new way of tracking user in gorups with database
+- optimal is not using database
+    - persistence storage - redus operates in memory on different servers and go distribute across different servers
 
 - create group entity
     - one prop is primary key
@@ -3039,7 +3039,10 @@ context.Users  (IQueryable<USer>)
 - Inconsistent accessibility: property type 'ICollection<Connection>' is less accessible than property 'Group.Connections' [API]
     - line 20 [Group.cs]
 
-
+- add methods to imessage repository
+    - add group 
+    - remoce adn get connection
+    - 
 
  
 
