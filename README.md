@@ -3047,6 +3047,7 @@ context.Users  (IQueryable<USer>)
  
 
 
+- go back and watch prev video somethings broken
 
 
 
