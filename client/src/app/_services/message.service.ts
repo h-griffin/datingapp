@@ -36,7 +36,7 @@ export class MessageService {
 
     this.hubConnection.on("NewMessage", message => {
       this.messageThread$.pipe(take(1)).subscribe(messages => {
-        this.messageThreadSource.next([...messages, message])
+        this.messageThreadSource.next([...messages, message]) // new arr with added message
       })
     })
   }
