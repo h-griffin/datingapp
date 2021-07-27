@@ -3038,16 +3038,54 @@ context.Users  (IQueryable<USer>)
 
 - Inconsistent accessibility: property type 'ICollection<Connection>' is less accessible than property 'Group.Connections' [API]
     - line 20 [Group.cs]
+- connection class was internal, needs to be public
 
 - add methods to imessage repository
     - add group 
-    - remoce adn get connection
-    - 
+    - remove and get connection
+    - get message group
 
- 
+- message repository
+    - implement interface
+    - update datacontext to have a ccess to entities
+
+- data context
+    - new db sets for Groups and Connections
+
+- message repository 
+    - implement methods with the context
+
+- new migration
+    - groups added
 
 
-- go back and watch prev video somethings broken
+## updating the message hub with group tracking
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
