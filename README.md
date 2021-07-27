@@ -3081,14 +3081,29 @@ context.Users  (IQueryable<USer>)
 - test
     - send messages on chrome and safari
     - enter group, exit group to about page
+    - `"dateRead":"2021-07-16T15:13:58.749441"`
 
 ## dealing with UTC date formats
+- inspect messages in network tab
+    - network tab, filter by websocket (WS) 
+    - refresh
+    - select messages
+    - expand {type}
+    - view properties (time stamps)
+
+    - add UTC time so client browser will display local time
+
+- message sent = datetime.now ( update to UtcNow)
+    - message cs
+    - message repository
+
+- automapper
+    - use auto mapper to tell client 
+    - use spicify kind so that mapper will pass Z to the end of the time so browser knwos it is UTC
+    - `"dateRead":"2021-07-16T15:13:58.749441Z"`
+
+## notifying users when they receive a message
 - 
-
-
-
-
-
 
 
 
