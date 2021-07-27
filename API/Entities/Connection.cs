@@ -1,6 +1,6 @@
 namespace API.Entities
 {
-    internal class Connection
+    public class Connection
     {
         public Connection()
         {
