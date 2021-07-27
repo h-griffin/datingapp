@@ -3060,9 +3060,30 @@ context.Users  (IQueryable<USer>)
 
 
 ## updating the message hub with group tracking
+- message hub
+    - create private task AddToGroup()
+        - create new group
+        - create new connection
+            - because new connection id unless reconecting
+        - check if gorup is null adn add new group (first message)
+    - private task remove from message group
+    
+    - on connected async()
+        - add to group 
+    - disconnected
+        - remove from message group
+    - send message()
+        - move get group name ou tof if statement because we need access earlier on 
+        - new if statement for date read of current user is recipient name
+            - start using UTC, go back and change other methods 
+            - there will be different time zones
+            - 
+- test
+    - send messages on chrome and safari
+    - enter group, exit group to about page
+
+## dealing with UTC date formats
 - 
-
-
 
 
 
