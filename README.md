@@ -3103,8 +3103,53 @@ context.Users  (IQueryable<USer>)
     - `"dateRead":"2021-07-16T15:13:58.749441Z"`
 
 ## notifying users when they receive a message
-- 
+- message hub
+    - checking if user is connected to message hub (chat is open on message tab)
+    - if thats negative 
+        - send notif
+        - only if they are online
+        - presence tracker has dictionary of all users online and their connections
+        - user can be connected from other devices so they could have different connection ids
 
+- presence tracker
+    - get connections for user ()
+    - lock the dictionary 
+    - get username from online users dicitonary
+        - it will be null if not online(default returning)
+    - will return all connection ids for that username
+
+- in message hub you can only send notifications to usres that aare connected to the hub
+    - if the user is not connected to hub/group
+    - can get access to another hub context anywhere in application
+        - will use inside message hub
+        - inject IHubContext
+
+- message hub
+    - inject IHubContext<PresenceHub>
+    - inject <PresenceTracker>
+    - now have access to presence tracker inside message hub
+    - send message ()
+        - when checking if user is connected to group also check if online
+        - send anonymus object to "NEwMEssageReceived" with sender username and knows as if recipient is online but in a different group
+
+- presence service
+    - create hub connection.on "NewMessageReceived"
+    - send toaster with sender knwon as
+    - use onTap, (route)
+    - inject router
+    - use touter and pass in query string to take them directly to message tab
+
+- test
+    - exit tab and send messages from different broswer
+    - click on notification and check if messages load onlick
+    - (directly updated route) messages dont load in if another message tab is open, tell angular router to not to reuse routes
+         - open on bob, click on daves notif
+
+- member detail 
+    - use route reuse strategy to set false
+    
+## optimizing the presence
+- 
 
 
 

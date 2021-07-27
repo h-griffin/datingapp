@@ -15,8 +15,12 @@ namespace API.SignalR
         private readonly IMapper _mapper;
         private readonly IMessageRepository _messageRepository;
         public IUserRepository _userRepository;
-        public MessageHub(IMessageRepository messageRepository, IMapper mapper, IUserRepository userRepository)
+        private readonly IHubContext<PresenceHub> _presenceHub;
+        private readonly PresenceTracker _tracker;
+        public MessageHub(IMessageRepository messageRepository, IMapper mapper, IUserRepository userRepository, IHubContext<PresenceHub> presenceHub, PresenceTracker tracker)
         {
+            _tracker = tracker;
+            _presenceHub = presenceHub;
             _userRepository = userRepository;
             _messageRepository = messageRepository;
             _mapper = mapper;
@@ -66,16 +70,28 @@ namespace API.SignalR
             var groupName = GetGroupName(sender.UserName, recipient.UserName);
             var group = await _messageRepository.GetMessageGroup(groupName);
 
-            if(group.Connections.Any(x => x.Username == recipient.UserName)){
+            // if connected to chat (message tab open)
+            if (group.Connections.Any(x => x.Username == recipient.UserName))
+            {
                 message.DateRead = DateTime.UtcNow;
             }
-            
+            else
+            {
+                var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+                if(connections != null){
+                    // user is online but not in same message group/chat
+                    await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived", 
+                        new {username = sender.UserName, knownAs = sender.KnownAs});
+                }
+            }
+
             _messageRepository.AddMessage(message);
-            
-            if (await _messageRepository.SaveAllAsync()){
+
+            if (await _messageRepository.SaveAllAsync())
+            {
                 await Clients.Group(groupName).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
-            } 
-            
+            }
+
         }
 
         private string GetGroupName(string caller, string other)
@@ -85,11 +101,13 @@ namespace API.SignalR
             return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";
         }
 
-        private async Task<bool> AddToGroup(HubCallerContext context, string groupName){
+        private async Task<bool> AddToGroup(HubCallerContext context, string groupName)
+        {
             var group = await _messageRepository.GetMessageGroup(groupName);
             var connection = new Connection(Context.ConnectionId, Context.User.GetUsername());
 
-            if (group == null){
+            if (group == null)
+            {
                 group = new Group(groupName);
                 _messageRepository.AddGroup(group);
             }
@@ -99,7 +117,8 @@ namespace API.SignalR
             return await _messageRepository.SaveAllAsync();
         }
 
-        private async Task RemoveFromMessageGroup(string connectionId){
+        private async Task RemoveFromMessageGroup(string connectionId)
+        {
             var connection = await _messageRepository.GetConnection(connectionId);
             _messageRepository.RemoveConnection(connection);
             await _messageRepository.SaveAllAsync();
