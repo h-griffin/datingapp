@@ -3149,7 +3149,55 @@ context.Users  (IQueryable<USer>)
     - use route reuse strategy to set false
     
 ## optimizing the presence
+- messag ehub
+    - when client connects we send message thread to both of connected users wven thoug one will already have it
+        - ad/remove group
+            - remove hub caller context
+            - remove connection id string, receive from context instead
+        - add to group
+            - task returns bool
+            - return group instead
+            - will always know who is connected to group htey are in, can check if recipient has joned and mark as read
+            - instread of returning repo save all async (bool) check if save all worked then return group
+        - remove from message group ()
+            - need method to get group from connection, then get connection from inside group
+
+- imessage repository
+    - add get froup for connection
+- message repository 
+    - get group from connection id adn return group
+
+- message hub
+    - remove from message group ()
+        - get group from context connection id then get connection id that matches group connectino id, remocve connection and return group if save all was successful
+    - on connected async ()
+        - dont need to pass in context to add to gorup
+        - instead of sending message thread to group send to caller (only hte one that needs the thread)
+        - since group is being updated send back new group with methods updated group
+    - on disconnected async ()
+        - dont need to pass in id to remove from message group anymore
+        - update group
+    
+    - now both tasks return an updated group to anyone still connected to group
+    - if hte group is empty signal r will not send anything to anyone
+
+- group .ts
+    - create interface group and connections
+
+- message service .ts
+    - when a user joins another message group it marks messages as read
+    - add UpdatedGroup ethod
+        - look inside message thread and mark unread messages as read for new user connection
+        - check if messages have a date reaad an dif not mark them as read when someone connects to group
+
+- test
+    - send bob (whos on home page) a message and its marked unread, bob clicks on notification nad joing the gorup message thread an dlucy sees it update immediatly that he has read hte message
+
+# ========= SECTION 17 =========  
+
+## unit of wokr pattern and finishing touches learning goals
 - 
+
 
 
 
