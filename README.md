@@ -3149,6 +3149,27 @@ context.Users  (IQueryable<USer>)
     - use route reuse strategy to set false
     
 ## optimizing the presence
+- presence hub 
+    - send online users to caller instead of all
+    - remove second send of offline users, will be sending updated users alreayd when they disconnect
+
+- presence tracker
+    - user connected()
+        - add bool for isOnline
+        - if already has dictonary entry leave it as false
+        - if it is a new connection set true
+        - return 
+    - userdiconnected()
+        - user is only off line if they dont have any connections associated with username
+- presence hub
+    - add isonline and offline checks
+    - only return send notifs is user is online or offline
+- presence service
+    - replace user is online toast with updating user list
+    - filter username from online user list when they go offline
+
+
+## optimizing the messages
 - messag ehub
     - when client connects we send message thread to both of connected users wven thoug one will already have it
         - ad/remove group
@@ -3193,12 +3214,21 @@ context.Users  (IQueryable<USer>)
 - test
     - send bob (whos on home page) a message and its marked unread, bob clicks on notification nad joing the gorup message thread an dlucy sees it update immediatly that he has read hte message
 
-# ========= SECTION 17 =========  
+
+
+# ========= SECTION 18 =========  
 
 ## unit of wokr pattern and finishing touches learning goals
+- implement unit of work pattern
+    - maintaining a list of objects affected by a buisness transaction
+- optimizing queries to DB
+- adding a confirm dialogue service
+- finihsing touches
+
+
+
+## 
 - 
-
-
 
 
 
@@ -3233,6 +3263,8 @@ context.Users  (IQueryable<USer>)
 - rules on first login/register
 - go though console logs
 - add roles to admin panel for whos viewing it
+- notification badges
+- 
 
 ## uses
 - custom directive
