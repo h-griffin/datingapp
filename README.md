@@ -3220,15 +3220,44 @@ context.Users  (IQueryable<USer>)
 
 ## unit of wokr pattern and finishing touches learning goals
 - implement unit of work pattern
-    - maintaining a list of objects affected by a buisness transaction
+    - maintaining a list of objects affected by a buisness transaction and coordinates the writing fo cahnges
+    - take a tansactional approach, when a req comes into api is a transaction (getting or updating things in a db) 
+    - dont do it several times, one req is a transaction, when req is done write changes to db
+    - now: 
+        - controllers have repos injects, each repo has several get things method from db and all have save changes
+        - some controllers have more than one repo
+            - each repo needsits own instance of datacontext/db
+            - inconsistent if one save donest work and one does
+        - need one plavce to save changes after EF has tracked them from all repositories
+        - unit of wokr injects data context and its reposnsible for egtting new instanve and passes down as parameter to the different repsitories
+        - define repositories inside unit of work and UOW has a save all changes
+            - will have all transactions inside all repositores
+            - inject UOW into controllers instead of multiple repositoreis
 - optimizing queries to DB
 - adding a confirm dialogue service
 - finihsing touches
 
-
-
 ## implementing unit fo work
-- 
+- create interface IUnitOfWork.cs in API/interfaces
+    - add repositories and save/check methods
+    - 
+
+- create data/unit of wokr.cs
+    - implement interface
+    - create instances of repositores and pass what it has in its construtors
+    - instead of dependency injection 
+        - inject contet and mapper to unit of work and pass to each repository instance
+
+- application service extensions
+    - replace all repositories with unit of work injection
+
+- each repository i sgetting the same instacne of the context from unit of wokr
+
+- remove save all async methods from interface and implementations
+    - user
+    - messages
+
+
 
 ## refactoring the controllers to use unit fo work
 - 

@@ -91,10 +91,6 @@ namespace API.Data
                 
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0; // to return boolean
-        }
 
         public void AddGroup(Group group)
         {
