@@ -3220,29 +3220,223 @@ context.Users  (IQueryable<USer>)
 
 ## unit of wokr pattern and finishing touches learning goals
 - implement unit of work pattern
-    - maintaining a list of objects affected by a buisness transaction
+    - maintaining a list of objects affected by a buisness transaction and coordinates the writing fo cahnges
+    - take a tansactional approach, when a req comes into api is a transaction (getting or updating things in a db) 
+    - dont do it several times, one req is a transaction, when req is done write changes to db
+    - now: 
+        - controllers have repos injects, each repo has several get things method from db and all have save changes
+        - some controllers have more than one repo
+            - each repo needsits own instance of datacontext/db
+            - inconsistent if one save donest work and one does
+        - need one plavce to save changes after EF has tracked them from all repositories
+        - unit of wokr injects data context and its reposnsible for egtting new instanve and passes down as parameter to the different repsitories
+        - define repositories inside unit of work and UOW has a save all changes
+            - will have all transactions inside all repositores
+            - inject UOW into controllers instead of multiple repositoreis
 - optimizing queries to DB
 - adding a confirm dialogue service
 - finihsing touches
 
-
-
 ## implementing unit fo work
-- 
+- create interface IUnitOfWork.cs in API/interfaces
+    - add repositories and save/check methods
+    - 
+
+- create data/unit of wokr.cs
+    - implement interface
+    - create instances of repositores and pass what it has in its construtors
+    - instead of dependency injection 
+        - inject contet and mapper to unit of work and pass to each repository instance
+
+- application service extensions
+    - replace all repositories with unit of work injection
+
+- each repository i sgetting the same instacne of the context from unit of wokr
+
+- remove save all async methods from interface and implementations
+    - user
+    - messages
+
 
 ## refactoring the controllers to use unit fo work
+- likes controller
+    - replace repository instances in constructor with _unit of wokr
+    - shift command L to select all of highlight and replace instances through unit of work
+    - example: `_likesRepository` is now  `_unitOfWork.LikesRepository`
+
+- messages controller
+    - remove get message thread() this feature is in signal R hub now
+    - replace repositoreis with unit of wokr ^^^
+
+- replace repos with unit ofwork
+    - message hub
+    - users controller
+    - log user activity
+        - get unit of work service 
+        - replace repostroy and save
+        - update date time to utc
+
+- message repository
+    - remove save changes in get message thread() no longer responsibility of repository, uow will do this
+    - will come back to this later to adjust more
+
+- message hub 
+    - in on connected async() 
+        - add check if there are changes and save
+
+
+## optimixing queries p1 (messages)
+- check terminal that is running dotnet run
+    - controlled in appsettings.development.json
+    - loglevel > microsoft > information
+    - need this too see information about queries being made
+    - can see that there is lots of jin queries
+
+- message repository
+    - get message thread()
+        - 4 includes for sender and recipient details and photo
+        - order by and listing
+        - then cheching inread messages and marking deatread 
+        - then ampping to messasge dto
+        
+
+        - insead of mapping later try project to message dto
+            - error because dto does not have prop recipient
+            - doesn tknwo what unread messages is
+            - message dto has message recip username
+            -  no need to map before returnign now, just return messages
+            - also dont need include statements anymroe when using projection
+                - 
+
+```
+
+-- BEFORE --
+
+ SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."RecipientId", (
+          SELECT "p"."Url"
+          FROM "Photots" AS "p"
+          WHERE ("t"."Id0" = "p"."AppUserId") AND "p"."IsMain"
+          LIMIT 1), "t"."RecipientUsername", "t"."SenderId", (
+          SELECT "p0"."Url"
+          FROM "Photots" AS "p0"
+          WHERE ("a0"."Id" = "p0"."AppUserId") AND "p0"."IsMain"
+          LIMIT 1), "t"."SenderUsername"
+      FROM (
+          SELECT "m"."Id", "m"."Content", "m"."DateRead", "m"."MessageSent", "m"."RecipientId", "m"."RecipientUsername", "m"."SenderId", "m"."SenderUsername", "a"."Id" AS "Id0"
+          FROM "Messages" AS "m"
+          INNER JOIN "AspNetUsers" AS "a" ON "m"."RecipientId" = "a"."Id"
+          WHERE (("a"."UserName" = @__messageParams_Username_0) AND NOT ("m"."RecipientDeleted")) AND "m"."DateRead" IS NULL
+          ORDER BY "m"."MessageSent" DESC
+          LIMIT @__p_2 OFFSET @__p_1
+      ) AS "t"
+      INNER JOIN "AspNetUsers" AS "a0" ON "t"."SenderId" = "a0"."Id"
+      ORDER BY "t"."MessageSent" DESC
+```
+
+
+```
+
+-- AFTER --
+
+SELECT "m"."Content", "m"."DateRead", "m"."Id", "m"."MessageSent", "m"."RecipientId", (
+          SELECT "p"."Url"
+          FROM "Photots" AS "p"
+          WHERE ("a"."Id" = "p"."AppUserId") AND "p"."IsMain"
+          LIMIT 1), "m"."RecipientUsername", "m"."SenderId", (
+          SELECT "p0"."Url"
+          FROM "Photots" AS "p0"
+          WHERE ("a0"."Id" = "p0"."AppUserId") AND "p0"."IsMain"
+          LIMIT 1), "m"."SenderUsername"
+      FROM "Messages" AS "m"
+      INNER JOIN "AspNetUsers" AS "a" ON "m"."RecipientId" = "a"."Id"
+      INNER JOIN "AspNetUsers" AS "a0" ON "m"."SenderId" = "a0"."Id"
+      WHERE ((("a"."UserName" = @__currentUsername_0) AND NOT ("m"."RecipientDeleted")) AND ("a0"."UserName" = @__recipientUsername_1)) OR ((("a"."UserName" = @__recipientUsername_1) AND ("a0"."UserName" = @__currentUsername_0)) AND NOT ("m"."SenderDeleted"))
+      ORDER BY "m"."MessageSent"
+```
+
+- get messages for user()
+    - creating query, ordering, set as queryable, different statements, then projecting
+    - project earlier, project query to dto so it wont selevt so much from db during WHERE
+    
+    - move project to after order by
+    - adjust recip.send usernames
+    - dto does not have deleted properties
+
+- add props in messageDTO
+    - add [JsonIgnore] these will not be sent back to client, only have access in repo after projecting to dtp
+
+- message repositoyr.cs
+    - delete second origional projection at the end, just return query instead of messages
+
+- outbox messages
+```
+-- BEFORE --
+
+SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."RecipientId", (
+          SELECT "p"."Url"
+          FROM "Photots" AS "p"
+          WHERE ("a0"."Id" = "p"."AppUserId") AND "p"."IsMain"
+          LIMIT 1), "t"."RecipientUsername", "t"."SenderId", (
+          SELECT "p0"."Url"
+          FROM "Photots" AS "p0"
+          WHERE ("t"."Id0" = "p0"."AppUserId") AND "p0"."IsMain"
+          LIMIT 1), "t"."SenderUsername"
+      FROM (
+          SELECT "m"."Id", "m"."Content", "m"."DateRead", "m"."MessageSent", "m"."RecipientId", "m"."RecipientUsername", "m"."SenderId", "m"."SenderUsername", "a"."Id" AS "Id0"
+          FROM "Messages" AS "m"
+          INNER JOIN "AspNetUsers" AS "a" ON "m"."SenderId" = "a"."Id"
+          WHERE ("a"."UserName" = @__messageParams_Username_0) AND NOT ("m"."SenderDeleted")
+          ORDER BY "m"."MessageSent" DESC
+          LIMIT @__p_2 OFFSET @__p_1
+      ) AS "t"
+      INNER JOIN "AspNetUsers" AS "a0" ON "t"."RecipientId" = "a0"."Id"
+      ORDER BY "t"."MessageSent" DESC
+```
+
+```
+
+-- AFTER --
+
+SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."RecipientDeleted", "t"."RecipientId", (
+          SELECT "p"."Url"
+          FROM "Photots" AS "p"
+          WHERE ("a"."Id" = "p"."AppUserId") AND "p"."IsMain"
+          LIMIT 1), "t"."RecipientUsername", "t"."SenderDeleted", "t"."SenderId", (
+          SELECT "p0"."Url"
+          FROM "Photots" AS "p0"
+          WHERE ("a0"."Id" = "p0"."AppUserId") AND "p0"."IsMain"
+          LIMIT 1), "t"."SenderUsername"
+      FROM (
+          SELECT "m"."Id", "m"."Content", "m"."DateRead", "m"."MessageSent", "m"."RecipientDeleted", "m"."RecipientId", "m"."RecipientUsername", "m"."SenderDeleted", "m"."SenderId", "m"."SenderUsername"
+          FROM "Messages" AS "m"
+          WHERE ("m"."SenderUsername" = @__messageParams_Username_0) AND NOT ("m"."SenderDeleted")
+          ORDER BY "m"."MessageSent" DESC
+```
+
+- query is still large, but much cleaner
+
+- in postman see that date read has lost its Z prop
+    - sometimes even when specifying that date is utc, it is not stored as utc  (been this way for years)
+
+## fixing utc dates again
+- after refresh date read goes from -seconds ago to 7hours from now
+- date stored in database is unspecified
+    - when they cone out of db they are unspecified
+    - must speciy them on way out not way in
+    - take datetime converter from github ticket and convert times on teh way out of db in datacontext level, dont need to do it anywhere else
+    
+- datacontext
+    - paste converter code into namespace outside of context class
+    - after the entities have been build add `builder.ApplyUtcDateTimeConverter();` to the end
+
+- automapper
+    - remove datetime converter from mapper
+
+- test in postman
+    - just check both dates have Z at the end
+
+## optimixing queries p1 (users)
 - 
-
-## optimixing queries p1
-- 
-
-
-
-
-
-
-
-
 
 
 
@@ -3269,7 +3463,7 @@ context.Users  (IQueryable<USer>)
 - go though console logs
 - add roles to admin panel for whos viewing it
 - notification badges
-- 
+- flaot left or right message thread
 
 ## uses
 - custom directive
