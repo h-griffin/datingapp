@@ -3233,6 +3233,8 @@ context.Users  (IQueryable<USer>)
 ## refactoring the controllers to use unit fo work
 - 
 
+## optimixing queries p1
+- 
 
 
 
