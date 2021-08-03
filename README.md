@@ -3285,7 +3285,7 @@ context.Users  (IQueryable<USer>)
         - add check if there are changes and save
 
 
-## optimixing queries p1
+## optimixing queries p1 (messages)
 - check terminal that is running dotnet run
     - controlled in appsettings.development.json
     - loglevel > microsoft > information
@@ -3419,10 +3419,24 @@ SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."Recipien
     - sometimes even when specifying that date is utc, it is not stored as utc  (been this way for years)
 
 ## fixing utc dates again
+- after refresh date read goes from -seconds ago to 7hours from now
+- date stored in database is unspecified
+    - when they cone out of db they are unspecified
+    - must speciy them on way out not way in
+    - take datetime converter from github ticket and convert times on teh way out of db in datacontext level, dont need to do it anywhere else
+    
+- datacontext
+    - paste converter code into namespace outside of context class
+    - after the entities have been build add `builder.ApplyUtcDateTimeConverter();` to the end
+
+- automapper
+    - remove datetime converter from mapper
+
+- test in postman
+    - just check both dates have Z at the end
+
+## optimixing queries p1 (users)
 - 
-
-
-
 
 
 
@@ -3449,7 +3463,7 @@ SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."Recipien
 - go though console logs
 - add roles to admin panel for whos viewing it
 - notification badges
-- 
+- flaot left or right message thread
 
 ## uses
 - custom directive
