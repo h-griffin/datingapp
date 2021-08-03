@@ -3258,9 +3258,32 @@ context.Users  (IQueryable<USer>)
     - messages
 
 
-
 ## refactoring the controllers to use unit fo work
-- 
+- likes controller
+    - replace repository instances in constructor with _unit of wokr
+    - shift command L to select all of highlight and replace instances through unit of work
+    - example: `_likesRepository` is now  `_unitOfWork.LikesRepository`
+
+- messages controller
+    - remove get message thread() this feature is in signal R hub now
+    - replace repositoreis with unit of wokr ^^^
+
+- replace repos with unit ofwork
+    - message hub
+    - users controller
+    - log user activity
+        - get unit of work service 
+        - replace repostroy and save
+        - update date time to utc
+
+- message repository
+    - remove save changes in get message thread() no longer responsibility of repository, uow will do this
+    - will come back to this later to adjust more
+
+- message hub 
+    - in on connected async() 
+        - add check if there are changes and save
+
 
 ## optimixing queries p1
 - 
