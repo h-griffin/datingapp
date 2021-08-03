@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace API.DTOs
 {
@@ -19,6 +20,13 @@ namespace API.DTOs
         public string Content { get; set; }
         public DateTime? DateRead { get; set; } // optional to be null if not read
         public DateTime MessageSent { get; set; } 
+
+
+        // wont be sent back to client, only access in repo after projection to dto
+        [JsonIgnore]
+        public bool SenderDeleted { get; set; }
+        [JsonIgnore]
+        public bool RecipientDeleted { get; set; }
 
         
     }
