@@ -3480,12 +3480,31 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 - could also swap out get user by username including the photos everything
 
 ## adding a confirmatino service to the angular app
+- only usering confirm in edit accound after making changes and clikcing away
+    - currently just using default/build in javascropt web browser
+
+- client/src/app/_services
+    - ng g s confirm --skip-tests
+    
+- confirm service
+    - use same modal for roles
+    - set initial state and pass in when showing
+
+- cd modals
+    - ng g c confirm-dialogue --skip-tests
+
+- confirmation dialogue.ts component
+    - anything in the initial asate is available as a property when it is open
+    - set properties in component that are in intial state and add a result prop for what they select
+    - add a confirm and decline method and hide the modal after each result set
+
+- confirmation dialoge .html template
+    - https://valor-software.com/ngx-bootstrap/#/modals#service-component
+    - remove top button 
+    - add ectra button at the bottom and set confirm/decline, set click events and css colors
+
+## getting the data from the confimation modal
 - 
-
-
-
-
-
 
 
 
