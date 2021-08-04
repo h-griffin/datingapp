@@ -3306,7 +3306,7 @@ context.Users  (IQueryable<USer>)
             - message dto has message recip username
             -  no need to map before returnign now, just return messages
             - also dont need include statements anymroe when using projection
-                - 
+                
 
 ```
 
@@ -3435,11 +3435,52 @@ SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."Recipien
 - test in postman
     - just check both dates have Z at the end
 
-## optimixing queries p1 (users)
+## optimixing queries p2 (users)
+- in postman 
+    - get users as lisa
+
+```
+
+-- BEFORE --
+
+SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t"."Country", "t"."Created", "t"."DateOfBirth", "t"."Email", "t"."EmailConfirmed", "t"."Gender", "t"."Interests", "t"."Introduction", "t"."KnownAs", "t"."LastActive", "t"."LockoutEnabled", "t"."LockoutEnd", "t"."LookingFor", "t"."NormalizedEmail", "t"."NormalizedUserName", "t"."PasswordHash", "t"."PhoneNumber", "t"."PhoneNumberConfirmed", "t"."SecurityStamp", "t"."TwoFactorEnabled", "t"."UserName", "p"."Id", "p"."AppUserId", "p"."IsMain", "p"."PublicId", "p"."Url"
+      FROM (
+          SELECT "a"."Id", "a"."AccessFailedCount", "a"."City", "a"."ConcurrencyStamp", "a"."Country", "a"."Created", "a"."DateOfBirth", "a"."Email", "a"."EmailConfirmed", "a"."Gender", "a"."Interests", "a"."Introduction", "a"."KnownAs", "a"."LastActive", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."LookingFor", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+          FROM "AspNetUsers" AS "a"
+          WHERE "a"."UserName" = @__username_0
+          LIMIT 2
+      ) AS "t"
+      LEFT JOIN "Photots" AS "p" ON "t"."Id" = "p"."AppUserId"
+      ORDER BY "t"."Id", "p"."Id"
+```
+- selecting everything from everything getting user, jointo photos, to find what gender user is
+    - dont need all this for one thing
+
+- users controller
+    - get username from token
+    - replace get user by username with a new method for getting the gender only
+
+- get user gender ()
+    - i user repository / user repository
+    - pass in username and return gender
+
+- users controller
+    - instead of getting whole user just get user gender and pass that to if check for filter display
+
+```
+
+-- AFTER -- 
+
+ SELECT "a"."Gender"
+      FROM "AspNetUsers" AS "a"
+      WHERE "a"."UserName" = @__username_0
+      LIMIT 1
+```
+
+- could also swap out get user by username including the photos everything
+
+## adding a confirmatino service to the angular app
 - 
-
-
-
 
 
 
