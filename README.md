@@ -3489,6 +3489,7 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 - confirm service
     - use same modal for roles
     - set initial state and pass in when showing
+    - set comfirm place holder string for component later
 
 - cd modals
     - ng g c confirm-dialogue --skip-tests
@@ -3497,6 +3498,7 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - anything in the initial asate is available as a property when it is open
     - set properties in component that are in intial state and add a result prop for what they select
     - add a confirm and decline method and hide the modal after each result set
+    
 
 - confirmation dialoge .html template
     - https://valor-software.com/ngx-bootstrap/#/modals#service-component
@@ -3504,7 +3506,34 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - add ectra button at the bottom and set confirm/decline, set click events and css colors
 
 ## getting the data from the confimation modal
-- 
+- confirm service .ts
+    - replace comfirm string with confirm dialoge component
+    - becasue its a service we can use anywhere
+    - how to get result from modal? want true or false respone
+    - inside bsmodal ref there is on hidden or on hide
+        - these emmit events when it starts hiding or finishes hiding
+        - in order to get the result you need to subscribe
+        - want to return observable of boolean, hten compnents can sub to get result
+    
+    - create helper method to extract result
+        - create custom observable and mannually unsubscribe when done
+        - return new observable and use helper method to get result
+
+- prevent unsaved changes guard .ts
+    - bring in modal service, add contructor
+    - return observable from confir service
+        - change return type to add both bool and observable of bool
+        - still want retunr to be true or false dont need another bool
+    - because inside route guard, automatically subscribes
+
+- test in client
+    - Type 'void' is not assignable to type 'boolean | Observable<boolean>'.
+    
+    17       return this.confirmService.confirm() // observable
+    - Uncaught (in promise): TypeError: Cannot read property 'createText' of null
+    TypeError: Cannot read property 'createText' of null
+
+- fix?
 
 
 
