@@ -3306,7 +3306,7 @@ context.Users  (IQueryable<USer>)
             - message dto has message recip username
             -  no need to map before returnign now, just return messages
             - also dont need include statements anymroe when using projection
-                - 
+                
 
 ```
 
@@ -3435,16 +3435,105 @@ SELECT "t"."Content", "t"."DateRead", "t"."Id", "t"."MessageSent", "t"."Recipien
 - test in postman
     - just check both dates have Z at the end
 
-## optimixing queries p1 (users)
-- 
+## optimixing queries p2 (users)
+- in postman 
+    - get users as lisa
 
+```
 
+-- BEFORE --
 
+SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t"."Country", "t"."Created", "t"."DateOfBirth", "t"."Email", "t"."EmailConfirmed", "t"."Gender", "t"."Interests", "t"."Introduction", "t"."KnownAs", "t"."LastActive", "t"."LockoutEnabled", "t"."LockoutEnd", "t"."LookingFor", "t"."NormalizedEmail", "t"."NormalizedUserName", "t"."PasswordHash", "t"."PhoneNumber", "t"."PhoneNumberConfirmed", "t"."SecurityStamp", "t"."TwoFactorEnabled", "t"."UserName", "p"."Id", "p"."AppUserId", "p"."IsMain", "p"."PublicId", "p"."Url"
+      FROM (
+          SELECT "a"."Id", "a"."AccessFailedCount", "a"."City", "a"."ConcurrencyStamp", "a"."Country", "a"."Created", "a"."DateOfBirth", "a"."Email", "a"."EmailConfirmed", "a"."Gender", "a"."Interests", "a"."Introduction", "a"."KnownAs", "a"."LastActive", "a"."LockoutEnabled", "a"."LockoutEnd", "a"."LookingFor", "a"."NormalizedEmail", "a"."NormalizedUserName", "a"."PasswordHash", "a"."PhoneNumber", "a"."PhoneNumberConfirmed", "a"."SecurityStamp", "a"."TwoFactorEnabled", "a"."UserName"
+          FROM "AspNetUsers" AS "a"
+          WHERE "a"."UserName" = @__username_0
+          LIMIT 2
+      ) AS "t"
+      LEFT JOIN "Photots" AS "p" ON "t"."Id" = "p"."AppUserId"
+      ORDER BY "t"."Id", "p"."Id"
+```
+- selecting everything from everything getting user, jointo photos, to find what gender user is
+    - dont need all this for one thing
 
+- users controller
+    - get username from token
+    - replace get user by username with a new method for getting the gender only
 
+- get user gender ()
+    - i user repository / user repository
+    - pass in username and return gender
 
+- users controller
+    - instead of getting whole user just get user gender and pass that to if check for filter display
 
+```
 
+-- AFTER -- 
+
+ SELECT "a"."Gender"
+      FROM "AspNetUsers" AS "a"
+      WHERE "a"."UserName" = @__username_0
+      LIMIT 1
+```
+
+- could also swap out get user by username including the photos everything
+
+## adding a confirmatino service to the angular app
+- only usering confirm in edit accound after making changes and clikcing away
+    - currently just using default/build in javascropt web browser
+
+- client/src/app/_services
+    - ng g s confirm --skip-tests
+    
+- confirm service
+    - use same modal for roles
+    - set initial state and pass in when showing
+    - set comfirm place holder string for component later
+
+- cd modals
+    - ng g c confirm-dialogue --skip-tests
+
+- confirmation dialogue.ts component
+    - anything in the initial asate is available as a property when it is open
+    - set properties in component that are in intial state and add a result prop for what they select
+    - add a confirm and decline method and hide the modal after each result set
+    
+
+- confirmation dialoge .html template
+    - https://valor-software.com/ngx-bootstrap/#/modals#service-component
+    - remove top button 
+    - add ectra button at the bottom and set confirm/decline, set click events and css colors
+
+## getting the data from the confimation modal
+- confirm service .ts
+    - replace comfirm string with confirm dialoge component
+    - becasue its a service we can use anywhere
+    - how to get result from modal? want true or false respone
+    - inside bsmodal ref there is on hidden or on hide
+        - these emmit events when it starts hiding or finishes hiding
+        - in order to get the result you need to subscribe
+        - want to return observable of boolean, hten compnents can sub to get result
+    
+    - create helper method to extract result
+        - create custom observable and mannually unsubscribe when done
+        - return new observable and use helper method to get result
+
+- prevent unsaved changes guard .ts
+    - bring in modal service, add contructor
+    - return observable from confir service
+        - change return type to add both bool and observable of bool
+        - still want retunr to be true or false dont need another bool
+    - because inside route guard, automatically subscribes
+
+- test in client
+    - Type 'void' is not assignable to type 'boolean | Observable<boolean>'.
+    
+    17       return this.confirmService.confirm() // observable
+    - Uncaught (in promise): TypeError: Cannot read property 'createText' of null
+    TypeError: Cannot read property 'createText' of null
+
+- fix?
 
 
 
