@@ -3553,7 +3553,18 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 - solo: float sent messages right and received left
 
 ## photo management challenge
-- 
+- any photos a user uploads should be unapproved
+- only mods and damins can approve photos
+- no other user should see unaproved photots
+- user that uploaded should be able to see it 
+    - should be clearly identified as awaiting approval
+- first photo upload should not beb set as main photo while waiting for approval
+- when admin or mod approves photo for a user that does not have a main photo it should set to main 
+
+- add is approved code to 
+    - phtot.cs, add dbset photots, photodto, update seed users
+    - add migration
+    - 
 
 
 
