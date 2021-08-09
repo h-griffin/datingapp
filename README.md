@@ -3533,6 +3533,28 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - Uncaught (in promise): TypeError: Cannot read property 'createText' of null
     TypeError: Cannot read property 'createText' of null
 
+- fixed itself idk how, rebuild?
+
+- messages coponent .ts
+    - add confirmation to delete message
+    - bring in confirm service 
+    - 
+
+## tidying up member message component
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
