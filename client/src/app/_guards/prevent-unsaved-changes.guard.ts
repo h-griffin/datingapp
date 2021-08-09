@@ -14,8 +14,7 @@ export class PreventUnsavedChangesGuard implements CanDeactivate<unknown> {
   canDeactivate(
     component: MemberEditComponent): Observable<boolean> | boolean {   //access to member form for change status
     if(component.editForm.dirty){
-      return this.confirmService.confirm() // observable
-
+      return this.confirmService.confirm() // observable, auto subscribe
     }
 
     return true;

@@ -1,18 +1,27 @@
 <div class="row">
-  <div class="col-2" *ngFor="let photo of member.photos" >
-    <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1" >
-    <div class="text-center">
-      <button
-        [disabled]="photo.isMain"
-        (click)="setMainPhoto(photo)"
-        [ngClass]='photo.isMain ? "btn-success active" : "btn-outline-success"'
-        class="btn btn-sm">Main</button>
+  <div class="col-2 img-wrapper" *ngFor="let photo of member.photos">
+      <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1"
+          [class.not-approved]="!photo.isApproved"
+      >
 
-        <button
-          [disabled]="photo.isMain"
-          (click)="deletePhoto(photo.id)"
-          class="btn btn-sm btn-danger ml-1"><i class="fa fa-trash"></i></button>
-    </div>
+      <div class="text-center img-text" *ngIf="!photo.isApproved">
+          <span class="text-danger ">Awaiting approval</span>
+      </div>
+
+      <div class="text-center">
+          <button
+              [disabled]="photo.isMain || !photo.isApproved"
+              (click)="setMainPhoto(photo)"
+              [ngClass]='photo.isMain ? "btn-success active" : "btn-outline-success"'
+              class="btn btn-sm "
+          >Main</button>
+          &nbsp;
+          <button
+              [disabled]="photo.isMain"
+              (click)="deletePhoto(photo.id)"
+              class="btn btn-sm btn-danger"
+          ><i class="fa fa-trash"></i></button>
+      </div>
   </div>
 </div>
 
@@ -61,7 +70,7 @@
     <div>
         <div>
             Queue progress:
-            <div class="progress" style="">
+            <div class="progress">
                 <div class="progress-bar mb-3 mt-2" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
             </div>
         </div>

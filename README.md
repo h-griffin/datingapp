@@ -3533,6 +3533,49 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - Uncaught (in promise): TypeError: Cannot read property 'createText' of null
     TypeError: Cannot read property 'createText' of null
 
+- fixed itself idk how, rebuild?
+
+- messages coponent .ts
+    - add confirmation to delete message
+    - bring in confirm service 
+    - 
+
+## tidying up member message component
+- more messages just expand the page
+    - give messages containre and stick to the bottom of contailer
+    
+- member messages component .html
+    - give ul scroll properties
+    - error about expression changed after it has been checked
+    - in member messges
+        - give comp property to change detection strategy and change from default to on push straagetyd
+
+- solo: float sent messages right and received left
+
+## photo management challenge
+- any photos a user uploads should be unapproved
+- only mods and damins can approve photos
+- no other user should see unaproved photots
+- user that uploaded should be able to see it 
+    - should be clearly identified as awaiting approval
+- first photo upload should not beb set as main photo while waiting for approval
+- when admin or mod approves photo for a user that does not have a main photo it should set to main 
+
+- add is approved code to 
+    - phtot.cs, add dbset photots, photodto, update seed users
+    - add migration
+    - 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
