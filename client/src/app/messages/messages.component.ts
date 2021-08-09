@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Message } from '../_models/message';
 import { Pagination } from '../_models/pagination';
 import { ConfirmService } from '../_services/confirm.service';

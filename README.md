@@ -3541,9 +3541,19 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - 
 
 ## tidying up member message component
+- more messages just expand the page
+    - give messages containre and stick to the bottom of contailer
+    
+- member messages component .html
+    - give ul scroll properties
+    - error about expression changed after it has been checked
+    - in member messges
+        - give comp property to change detection strategy and change from default to on push straagetyd
+
+- solo: float sent messages right and received left
+
+## photo management challenge
 - 
-
-
 
 
 
