@@ -3561,13 +3561,15 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 - first photo upload should not beb set as main photo while waiting for approval
 - when admin or mod approves photo for a user that does not have a main photo it should set to main 
 
-- add is approved code to 
-    - phtot.cs, add dbset photots, photodto, update seed users
-    - add migration
-    - 
+- consult student assets for 
 
+# ========= SECTION 19 =========  
 
+## publishing learning goals
+- 
 
+## preparing the angular app and serving from the api
+- 
 
 
 
