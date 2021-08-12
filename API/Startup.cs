@@ -70,6 +70,9 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseDefaultFiles(); // index.html
+            app.UseStaticFiles(); // serve client
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

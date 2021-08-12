@@ -3601,9 +3601,42 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 
 
 ## preparing the angular app and serving from the api
+- building angular and serving from api kestrel server
+
+- src/ -find in folder-
+    - look for hard coded urls
+    - in environments.ts - OK
+    - test-errors.comp .ts - replace with environment.apiUrl
+- anfular.json
+    - build options output path
+        - currently served from memory
+        - now we want to build files
+    - serve to ../API/wwwroot
+        - default folder kestrel will use for static files
+        - fron tend is static, just JS and ohotos
+- startup .cs (API)
+    - tell api to use static files
+    - serve index with use default files
+    - serve client with use static files
+
+- stop angular application
+    - ng build
+    - (files are large from non prod build)
+
+- look inside wwroot folder
+    - inside assets, is not compressed or minified
+
+- restart detnet server (api)
+    - dotnet watch run
+
+- login works adn all 
+- refresh breaks
+    - api knows what to do at base url
+    - only knows api routes
+    - tell it what to do with angular roits
+
+## adding a fallback controller
 - 
-
-
 
 
 
