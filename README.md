@@ -3561,12 +3561,44 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 - first photo upload should not beb set as main photo while waiting for approval
 - when admin or mod approves photo for a user that does not have a main photo it should set to main 
 
-- consult student assets for 
+- consult student assets for code and steps for help
 
 # ========= SECTION 19 =========  
 
 ## publishing learning goals
-- 
+- prepare the publicaton
+- waht to consider before publishing
+- switch databasees
+    - been using object relational mapper , entity framework
+    - this makes it very eaasy to switch servers
+    - heroku needs postgresQL
+- serving static content from the api server
+    - angular application is hosted by dotnet server
+    - can publish them seperate if you want
+- publishing to heroku(free)
+    - free db
+- integrating heroku into github 
+- using git branches
+
+#### what to consider 
+- env variables
+    - token key
+    - cloudenary settings
+- can also save in app settings.json because that file is not served
+- localhost
+    - wehre is it hardcoded?
+- CORS
+    - if hosting on a different domain
+    - not for us (staying on API)
+- database
+    - does EF support the database
+    - cant user NoSQL(mongo) (not relaational - EF object relational mapper)
+    - capacity / scalability & $$$
+- seed data
+    - going to leave the seed data in
+- remove fake delays
+
+
 
 ## preparing the angular app and serving from the api
 - 
