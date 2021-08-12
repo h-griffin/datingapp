@@ -3561,16 +3561,99 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
 - first photo upload should not beb set as main photo while waiting for approval
 - when admin or mod approves photo for a user that does not have a main photo it should set to main 
 
-- consult student assets for 
+- consult student assets for code and steps for help
 
 # ========= SECTION 19 =========  
 
 ## publishing learning goals
-- 
+- prepare the publicaton
+- waht to consider before publishing
+- switch databasees
+    - been using object relational mapper , entity framework
+    - this makes it very eaasy to switch servers
+    - heroku needs postgresQL
+- serving static content from the api server
+    - angular application is hosted by dotnet server
+    - can publish them seperate if you want
+- publishing to heroku(free)
+    - free db
+- integrating heroku into github 
+- using git branches
+
+#### what to consider 
+- env variables
+    - token key
+    - cloudenary settings
+- can also save in app settings.json because that file is not served
+- localhost
+    - wehre is it hardcoded?
+- CORS
+    - if hosting on a different domain
+    - not for us (staying on API)
+- database
+    - does EF support the database
+    - cant user NoSQL(mongo) (not relaational - EF object relational mapper)
+    - capacity / scalability & $$$
+- seed data
+    - going to leave the seed data in
+- remove fake delays
+
+
 
 ## preparing the angular app and serving from the api
-- 
+- building angular and serving from api kestrel server
 
+- src/ -find in folder-
+    - look for hard coded urls
+    - in environments.ts - OK
+    - test-errors.comp .ts - replace with environment.apiUrl
+- anfular.json
+    - build options output path
+        - currently served from memory
+        - now we want to build files
+    - serve to ../API/wwwroot
+        - default folder kestrel will use for static files
+        - fron tend is static, just JS and ohotos
+- startup .cs (API)
+    - tell api to use static files
+    - serve index with use default files
+    - serve client with use static files
+
+- stop angular application
+    - ng build
+    - (files are large from non prod build)
+
+- look inside wwroot folder
+    - inside assets, is not compressed or minified
+
+- restart detnet server (api)
+    - dotnet watch run
+
+- login works adn all 
+- refresh breaks
+    - api knows what to do at base url
+    - only knows api routes
+    - tell it what to do with angular roits
+
+## adding a fallback controller
+- what to do if it cannot find a route
+
+- all routes start with api
+    - all controllers knwo what to do with these
+    - api/ is inbedded to base api controlelr route
+- controllers/fallback controler
+    - derive from controller (not base api controller)
+    - for MVC controllers with view support, angular client is view for application
+        - tell controller what files to serve and tell api what file to serve and routes it doesn tunderstaand (send to index html)
+    - action result getting the directory to the file location 
+- startup.cs
+    - add endpoint for fallback controller
+- restart server, new endpoint
+    - inspect network
+    - files sizes are very big
+
+## creating an angular production build
+- 
 
 
 
