@@ -3636,7 +3636,25 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - tell it what to do with angular roits
 
 ## adding a fallback controller
+- what to do if it cannot find a route
+
+- all routes start with api
+    - all controllers knwo what to do with these
+    - api/ is inbedded to base api controlelr route
+- controllers/fallback controler
+    - derive from controller (not base api controller)
+    - for MVC controllers with view support, angular client is view for application
+        - tell controller what files to serve and tell api what file to serve and routes it doesn tunderstaand (send to index html)
+    - action result getting the directory to the file location 
+- startup.cs
+    - add endpoint for fallback controller
+- restart server, new endpoint
+    - inspect network
+    - files sizes are very big
+
+## creating an angular production build
 - 
+
 
 
 
