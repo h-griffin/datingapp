@@ -3764,7 +3764,32 @@ heroku/7.51.0 darwin-x64 node-v12.21.0
 - need a stable connectino strings
 
 ## deploying the app to heroku
-- 
+- because heroku can change database url (nop control)
+- add code to app dbcontexgt so app can look at heroku variables and get its strings from there
+
+- applicaiton service extensions
+    - inside student assets folder
+    - replace adddbcontext body with snippet code
+    - allows to run in development locally using development instance of postgres ql
+    - allows deploy to heroku ensure no matter what they do with connection string applicaiton will always have an accurate one
+- termianl
+    - `$ heroku config:set ASPNETCORE_ENVIRONMENT=Production --app=dating-app-proj`
+    - anotehr way to set config vars form command line
+    - ensures when running in prod it will use that config
+    - van view on heroku dash as well
+- terminal
+    - `heroku git:remote -a dating-app-proj`
+    - `https://dating-app-proj.herokuapp.com/`
+- internal 500 error
+    - view app on dashboard
+    - more>view logs
+    - string ref not set to instacne of string
+    - secret key for token not set
+        - identity service extension
+        - setting token validaation parameters, trying to get token key from heroku
+    - https://passwordsgenerator.net/
+    - creat pw for token key
+    - 
 
 
 
