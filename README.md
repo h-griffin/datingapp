@@ -3673,7 +3673,60 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - when rereun or redeploy gets new hash so client wont attempt to load from cache, it will get the latest files
     
 ## switching the DB to postgres
+- https://docs.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli
+- SQl, SQlite, memory db, azure cosmos, postgreSQL (heroku gives fress), mysql, oracle... etc
+- windows users: can use sql server, wont work on linux box or heroku, need to find somehwere to publish that supporst it, can run on azure or physical windows server running IIS
+
+- using heroku - postgreSQL
+
+- https://www.docker.com/
+- https://hub.docker.com/
+
+- dashboard
+    - view containers
+    - installs will run inside a priavte container
+    - go to docker hub for postgres
+        - https://hub.docker.com/_/postgres
+- postgres instance
+- $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+
+- go to terminal
+    - $ docker run --name datingapp -e POSTGRES_USER=appuser -e POSTGRES_PASSWORD=Pa$$w0rd -p 5432:5432 -d postgres:latest
+    - 2743dd925cb77f65041304ad3d2171697376c75a39bd6f2eeddf0fac8ca4e51d
+
+- see docker dashboard to see
+    - password doesnt like $$ 
+    - must change
+- get pg admin 
+    - can get tools for postgresql
+    - will give view of db server
+    - you can see db tables etc
+
+    - application log in (T&)
+    - create server
+    - name it datingapp
+    - specify host (localhost)
+    - give username (appuser)
+    - password (copy from docker)
+    - select db and dashboard tab to see activity
+
+## changing the db server in the app
 - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
