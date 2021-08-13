@@ -3734,6 +3734,36 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - servesrs>datingapp>schemas>tables>aspnetusers>view first 100 rows
     
 ## setting up heroku
+- https://dashboard.heroku.com/apps
+    - new app
+    - named dating-app-proj
+```
+$ cd my-project/
+$ git init
+$ heroku git:remote -a dating-app-proj
+```
+
+- https://devcenter.heroku.com/articles/heroku-cli
+    -  heroku --version                      (deployment|✔)
+heroku/7.51.0 darwin-x64 node-v12.21.0
+- `heroku buildpacks:set https://github.com/jincod/dotnetcore-buildpack --app=dating-app-proj`
+- Run `git push heroku main` to create a new release using this buildpack.
+    - app name is app as found in heroku
+    - works with dotnet core
+    - heroku buildpacks:set jincod/dotnetcore
+
+- heroku app > rescourses
+    - add on heroku postgres
+        - free first 10,000 rows
+- settings > config vars
+    - env variables
+    - cloudinary settings
+    - pull from appsettings.json
+        - values in appsettings.json are second to heroku config vars
+
+- need a stable connectino strings
+
+## deploying the app to heroku
 - 
 
 
