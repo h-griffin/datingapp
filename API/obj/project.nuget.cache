@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Tc6va/VFWwoSMwXwEP8o2uXyOzp5WaoNUYxO2IeRozErxeCBQedfK2dh7/j7i4N5cnGpOyFSrnSA4jarFPe90g==",
+  "dgSpecHash": "22QxDnRx4CMy5oG5eaIdUGYAJM6ighLQekDDPYjxDvF4xLYLTokgwq0OtJe+t0coUjHLQx+rTa3iDnyXiU4oGQ==",
   "success": true,
   "projectFilePath": "/Users/haleygriffin/udemy/csharp/datingapp/API/API.csproj",
   "expectedPackageFiles": [
@@ -42,6 +42,8 @@
     "/Users/haleygriffin/.nuget/packages/microsoft.identitymodel.tokens/6.8.0/microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512",
+    "/Users/haleygriffin/.nuget/packages/npgsql/5.0.7/npgsql.5.0.7.nupkg.sha512",
+    "/Users/haleygriffin/.nuget/packages/npgsql.entityframeworkcore.postgresql/5.0.7/npgsql.entityframeworkcore.postgresql.5.0.7.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.0.4/sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/sqlitepclraw.core/2.0.4/sqlitepclraw.core.2.0.4.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.0.4/sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
@@ -56,6 +58,7 @@
     "/Users/haleygriffin/.nuget/packages/system.identitymodel.tokens.jwt/6.8.0/system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512",
+    "/Users/haleygriffin/.nuget/packages/system.runtime.compilerservices.unsafe/4.6.0/system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512",
     "/Users/haleygriffin/.nuget/packages/system.security.cryptography.cng/4.5.0/system.security.cryptography.cng.4.5.0.nupkg.sha512"
   ],
   "logs": []

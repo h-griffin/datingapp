@@ -3653,7 +3653,156 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - files sizes are very big
 
 ## creating an angular production build
-- 
+- https://angular.io/guide/deployment
+- ng build --prod
+    - Ahead-of-Time (AOT) Compilation: pre-compiles Angular component templates.
+    - Production mode: deploys the production environment which enables production mode.
+    - Bundling: concatenates your many application and library files into a few bundles.
+    - Minification: removes excess whitespace, comments, and optional tokens.
+    - Uglification: rewrites code to use short, cryptic variable and function names.
+    - Dead code elimination: removes unreferenced modules and much unused code.
+
+- loading interceptor 
+    - remove delay
+
+- ng build --prod
+
+- look at wwroot
+    - 3 main js files get hashes to the file name
+    - cache busting
+    - when rereun or redeploy gets new hash so client wont attempt to load from cache, it will get the latest files
+    
+## switching the DB to postgres
+- https://docs.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli
+- SQl, SQlite, memory db, azure cosmos, postgreSQL (heroku gives fress), mysql, oracle... etc
+- windows users: can use sql server, wont work on linux box or heroku, need to find somehwere to publish that supporst it, can run on azure or physical windows server running IIS
+
+- using heroku - postgreSQL
+
+- https://www.docker.com/
+- https://hub.docker.com/
+
+- dashboard
+    - view containers
+    - installs will run inside a priavte container
+    - go to docker hub for postgres
+        - https://hub.docker.com/_/postgres
+- postgres instance
+- $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+
+- go to terminal
+    - $ docker run --name datingapp -e POSTGRES_USER=appuser -e POSTGRES_PASSWORD=Pa$$w0rd -p 5432:5432 -d postgres:latest
+    - 2743dd925cb77f65041304ad3d2171697376c75a39bd6f2eeddf0fac8ca4e51d
+
+- see docker dashboard to see
+    - password doesnt like $$ 
+    - must change
+- get pg admin 
+    - can get tools for postgresql
+    - will give view of db server
+    - you can see db tables etc
+
+    - application log in (T&)
+    - create server
+    - name it datingapp
+    - specify host (localhost)
+    - give username (appuser)
+    - password (copy from docker)
+    - select db and dashboard tab to see activity
+
+## changing the db server in the app
+- switch from sql lite to postgresql
+- remove all migrations
+    - remove entire folder
+    - migrations are safe inside git commits
+    - migrations based off of code so new migration can be made easily
+- stop api
+- dotnet ef database drop
+- need postgresql provider
+    - Npgsql.EntityFrameworkCore.PostgreSQL
+    - Npgsql.EntityFrameworkCore.PostgreSQL by Shay Rojansky,Austin
+    - recommended to install with EF version as provider and runtime
+- appsettings development.json
+    - update connection string
+- application service extensions
+    - db context options
+    - instead of sqlite use npgsql
+- api terminal
+    -  $ dotnet ef migrations add PostgresInitial -o Data/Migrations
+    - one migration for entier progress
+- viewing tables in pg admin
+    - servesrs>datingapp>schemas>tables>aspnetusers>view first 100 rows
+    
+## setting up heroku
+- https://dashboard.heroku.com/apps
+    - new app
+    - named dating-app-proj
+```
+$ cd my-project/
+$ git init
+$ heroku git:remote -a dating-app-proj
+```
+
+- https://devcenter.heroku.com/articles/heroku-cli
+    -  heroku --version                      (deployment|✔)
+heroku/7.51.0 darwin-x64 node-v12.21.0
+- `heroku buildpacks:set https://github.com/jincod/dotnetcore-buildpack --app=dating-app-proj`
+- Run `git push heroku main` to create a new release using this buildpack.
+    - app name is app as found in heroku
+    - works with dotnet core
+    - heroku buildpacks:set jincod/dotnetcore
+
+- heroku app > rescourses
+    - add on heroku postgres
+        - free first 10,000 rows
+- settings > config vars
+    - env variables
+    - cloudinary settings
+    - pull from appsettings.json
+        - values in appsettings.json are second to heroku config vars
+
+- need a stable connectino strings
+
+## deploying the app to heroku
+- because heroku can change database url (nop control)
+- add code to app dbcontexgt so app can look at heroku variables and get its strings from there
+
+- applicaiton service extensions
+    - inside student assets folder
+    - replace adddbcontext body with snippet code
+    - allows to run in development locally using development instance of postgres ql
+    - allows deploy to heroku ensure no matter what they do with connection string applicaiton will always have an accurate one
+- termianl
+    - `$ heroku config:set ASPNETCORE_ENVIRONMENT=Production --app=dating-app-proj`
+    - anotehr way to set config vars form command line
+    - ensures when running in prod it will use that config
+    - van view on heroku dash as well
+- terminal
+    - `heroku git:remote -a dating-app-proj`
+    - `https://dating-app-proj.herokuapp.com/`
+- internal 500 error
+    - view app on dashboard
+    - more>view logs
+    - string ref not set to instacne of string
+    - secret key for token not set
+        - identity service extension
+        - setting token validaation parameters, trying to get token key from heroku
+    - https://passwordsgenerator.net/
+    - creat pw for token key
+    - 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
