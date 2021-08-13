@@ -3711,8 +3711,30 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - select db and dashboard tab to see activity
 
 ## changing the db server in the app
+- switch from sql lite to postgresql
+- remove all migrations
+    - remove entire folder
+    - migrations are safe inside git commits
+    - migrations based off of code so new migration can be made easily
+- stop api
+- dotnet ef database drop
+- need postgresql provider
+    - Npgsql.EntityFrameworkCore.PostgreSQL
+    - Npgsql.EntityFrameworkCore.PostgreSQL by Shay Rojansky,Austin
+    - recommended to install with EF version as provider and runtime
+- appsettings development.json
+    - update connection string
+- application service extensions
+    - db context options
+    - instead of sqlite use npgsql
+- api terminal
+    -  $ dotnet ef migrations add PostgresInitial -o Data/Migrations
+    - one migration for entier progress
+- viewing tables in pg admin
+    - servesrs>datingapp>schemas>tables>aspnetusers>view first 100 rows
+    
+## setting up heroku
 - 
-
 
 
 
