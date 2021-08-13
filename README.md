@@ -3653,8 +3653,27 @@ SELECT "t"."Id", "t"."AccessFailedCount", "t"."City", "t"."ConcurrencyStamp", "t
     - files sizes are very big
 
 ## creating an angular production build
-- 
+- https://angular.io/guide/deployment
+- ng build --prod
+    - Ahead-of-Time (AOT) Compilation: pre-compiles Angular component templates.
+    - Production mode: deploys the production environment which enables production mode.
+    - Bundling: concatenates your many application and library files into a few bundles.
+    - Minification: removes excess whitespace, comments, and optional tokens.
+    - Uglification: rewrites code to use short, cryptic variable and function names.
+    - Dead code elimination: removes unreferenced modules and much unused code.
 
+- loading interceptor 
+    - remove delay
+
+- ng build --prod
+
+- look at wwroot
+    - 3 main js files get hashes to the file name
+    - cache busting
+    - when rereun or redeploy gets new hash so client wont attempt to load from cache, it will get the latest files
+    
+## switching the DB to postgres
+- 
 
 
 
