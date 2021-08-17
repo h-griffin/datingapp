@@ -3806,8 +3806,12 @@ heroku/7.51.0 darwin-x64 node-v12.21.0
 
 
 
+## add later complete
+- message thread float left rigth for sendr receiver
+- title case usernames in admin pannel
 
-
+## fix
+- photomanagement tab not populated with awaiting approval phots
 
 
 
@@ -3815,21 +3819,21 @@ heroku/7.51.0 darwin-x64 node-v12.21.0
 
 
 # add later list
-- unlike user feature
-- paginate message thread
-- hide pagination bar for no messages in message outbox
-- identity
-    - email validation
-    - forgotten passwords
-- possible choose avatars pfp ?
-- paginate get user with roles() in admincontroller
-- show user main photo in edit role display
-- display nicer list of user roles
-- rules on first login/register
-- go though console logs
-- add roles to admin panel for whos viewing it
-- notification badges
-- flaot left or right message thread
+- [ ] unlike user feature
+- [ ] paginate message thread
+- [ ] hide pagination bar for no messages in message outbox
+- [ ] identity
+    - [ ] email validation
+    - [ ] forgotten passwords
+- [ ] possible choose avatars pfp ?
+- [ ] paginate get user with roles() in admincontroller
+- [ ] show user main photo in edit role display
+- [ ] display nicer list of user roles
+- [ ] rules on first login/register
+- [ ] go though console logs
+- [ ] add roles to admin panel for whos viewing it
+- [ ] notification badges
+- [x] flaot left or right message thread
 
 ## uses
 - custom directive
