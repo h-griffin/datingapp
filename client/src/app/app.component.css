@@ -1,0 +1,28 @@
+:host {
+  position: relative;
+  display: block;
+  left: 0;
+  transition: left 0.3s ease;
+}
+
+:host.drawer-open {
+  left: 70%;
+}
+
+.nav-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
+}
+
+.navbar-padding {
+  display: block;
+  position: relative;
+  margin-top: 3.5rem;
+}
+
+.main-section {
+  min-height: 125vh;
+}

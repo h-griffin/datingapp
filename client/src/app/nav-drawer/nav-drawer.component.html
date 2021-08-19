@@ -1,0 +1,56 @@
+
+<ul id="navbar-list" class="navbar-nav override">
+  <ng-container *ngIf="accountService.currentUser$ | async">
+
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+      <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}" class="rounded-circle" style="width: 17%;">
+      <a class="dropdown-toggle text-black ml-3" dropdownToggle> <strong> Welcome {{user.knownAs || user.username | titlecase}} </strong></a>
+
+      <div class="dropdown-menu mt-3 " *dropdownMenu>
+
+        <a class="nav-item override" (click)="onNavLinkClicked($event)" routerLink="/member/edit">Edit Profile</a>
+        <div class="dropdown-divider"></div>
+        <a class="nav-item override" (click)="logout()">Logout</a>
+      </div>
+    </div>
+
+    <li class="nav-item override mt-4" (click)="onNavLinkClicked($event)">
+      <a class="nav-link override" routerLink="/members" routerLinkActive="active">Matches</a>
+    </li>
+    <li class="nav-item override" (click)="onNavLinkClicked($event)">
+      <a class="nav-link override" routerLink="/lists" routerLinkActive="active">Likes</a>
+    </li>
+    <li class="nav-item override" (click)="onNavLinkClicked($event)">
+      <a class="nav-link override" routerLink="/messages" routerLinkActive="active">Messages</a>
+    </li>
+    <li class="nav-item override" (click)="onNavLinkClicked($event)" *appHasRole="['Admin', 'Moderator']" >
+      <a class="nav-link override" routerLink="/admin" routerLinkActive="active">Admin</a>
+    </li>
+  </ng-container>
+
+  <li class="nav-item override" (click)="onNavLinkClicked($event)">
+    <a class="nav-link override" routerLink="/errors" routerLinkActive="active">Errors</a>
+  </li>
+
+
+
+  <form #loginForm="ngForm" *ngIf="(accountService.currentUser$ | async) === null"  class="form-inline mt-4 mt-md-0" (ngSubmit)="login()" autocomplete="off">
+    <input
+      name="username"
+      [(ngModel)]="model.username"
+
+      class="form-control mr-sm-2 drawer-login"
+      type="text"
+      placeholder="Username" >
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+
+      class="form-control mr-sm-2 drawer-login "
+      type="password"
+      placeholder="Password" >
+    <button class="btn btn-success my-2 my-sm-0 drawer-login " type="submit">Login</button>
+  </form>
+
+</ul>
+<span class="drawer-inset-shadow"></span>

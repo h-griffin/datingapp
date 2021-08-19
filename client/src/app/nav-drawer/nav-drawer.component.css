@@ -1,0 +1,94 @@
+.userPhoto{
+  height: 5%;
+}
+
+:host {
+	position: fixed;
+	display: block;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 0;
+	background-color: white;
+	transition: 0.3s ease;
+	overflow: hidden;
+	opacity: 0.3;
+	touch-action: none;
+}
+
+:host.drawer-open {
+	width: 70vw;
+	opacity: 1;
+}
+
+.navbar-nav.override {
+	padding: 1rem 2rem;
+}
+
+.nav-item.override {
+	font-size: 1.25rem;
+	padding: 0.5rem 0 0.5rem 0;
+	color: rgba(50, 50, 50, 0.8);
+	border-bottom: 1px solid grey;
+}
+
+.nav-link.override {
+	text-decoration: none;
+	color: inherit;
+}
+
+.nav-item.override:active > .nav-link.override {
+	color: gray;
+}
+
+.drawer-inset-shadow {
+	position: absolute;
+	display: block;
+	right: 0;
+	top: 0;
+	width: 10px;
+	min-height: 100vh;
+	height: 100vh;
+	background: linear-gradient(to left, rgba(128, 128, 128, 0.4), rgba(128, 128, 128, 0.2), rgba(128, 128, 128, 0.05), rgba(128, 128, 128, 0));
+}
+
+.drawer-login{
+  margin-top: 5px;
+}
+
+@media screen and (min-width: 48rem) {
+
+	:host {
+		position: relative;
+		display: block;
+		left: unset;
+		top: unset;
+		height: unset;
+		width: unset;
+		margin-left: auto;
+		background-color: unset;
+		box-shadow: none;
+		opacity: 1;
+	}
+
+	:host.drawer-open {
+		width: unset;
+	}
+
+	.navbar-nav.override {
+		padding: unset;
+	}
+
+	.nav-item.override {
+		font-size: 1.25rem;
+		padding: unset;
+		margin-left: 1.5rem;
+		border-bottom: none;
+	}
+
+	.drawer-inset-shadow {
+		display: none;
+	}
+
+
+}

@@ -55,17 +55,20 @@
  -->
 
 
- <nav class="navbar navbar-expand-md" id="navbar">
+ <nav class="navbar navbar-expand-md " id="navbar">
   <div class="container">
-    <div class="nav-toggler" id="nav-toggler">
+    <div class="nav-toggler" [class.drawer-open]="isDrawerOpen" id="nav-toggler" (click)="toggleNavDrawer(!isDrawerOpen)">
         <span></span>
         <span></span>
         <span></span>
         <span></span>
     </div>
-    <a class="navbar-brand override" routerLink="/">
-        DATING APP
-    </a>
+
+    <a class="navbar-brand override" routerLink="/" routerLinkActive="active">
+      DATING APP</a>
+
+
+    <nav-drawer [isDrawerOpen]="isDrawerOpen" (drawerToggleEmitter)="toggleNavDrawer($event)"></nav-drawer>
   </div>
 </nav>
 

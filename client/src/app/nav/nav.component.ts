@@ -1,8 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { User } from '../_models/user';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { AccountService } from '../_services/account.service';
 
 @Component({
@@ -11,16 +7,18 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  // store input info
-  model: any = {}
-  navElement: HTMLElement = null;
 
-  constructor(
-    public accountService: AccountService,
-    private router: Router,
-    private toastr: ToastrService) { }
+  navElement: HTMLElement = null;
+  isDrawerOpen: boolean;
+  @Output()
+  drawerToggleEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+
+  constructor( public accountService: AccountService) { }
 
   ngOnInit() {
+    this.navElement = null;
+    this.isDrawerOpen = false;
   }
 
   ngAfterViewInit() {
@@ -45,18 +43,9 @@ export class NavComponent implements OnInit {
     }
   }
 
-
-  login(){
-    // console.log("[nav.component.ts login()]",this.model)
-    this.accountService.login(this.model).subscribe(response => {
-      console.log("[nav.components.ts] accountservice.login()",response);
-      this.router.navigateByUrl('members');
-    })
-  }
-
-  logout(){
-    this.accountService.logout();
-    this.router.navigateByUrl('/');
+  toggleNavDrawer(isDrawerOpen: boolean) {
+    this.isDrawerOpen = isDrawerOpen;
+    this.drawerToggleEmitter.emit(this.isDrawerOpen);
   }
 
 }
