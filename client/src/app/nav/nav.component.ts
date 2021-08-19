@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit {
   // store input info
   model: any = {}
+  navElement: HTMLElement = null;
 
   constructor(
     public accountService: AccountService,
@@ -21,6 +22,29 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ngAfterViewInit() {
+    this.navElement = <HTMLElement> document.getElementById("navbar");
+  }
+
+
+  @HostListener("window:scroll", ["$event"])
+  onScroll($event: Event) {
+    let scrollFactor = 200;
+    let opacity = (window.pageYOffset / scrollFactor);
+    opacity = opacity < 1 ? opacity : 1;
+
+    if (opacity <= 1) {
+      this.navElement.style.backgroundColor = "rgba(255, 255, 255, " + opacity + ")";
+    }
+
+    if (window.pageYOffset / scrollFactor > 1) {
+      this.navElement.classList.add("navbar-shadow");
+    } else {
+      this.navElement.classList.remove("navbar-shadow");
+    }
+  }
+
 
   login(){
     // console.log("[nav.component.ts login()]",this.model)
