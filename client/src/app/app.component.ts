@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 import { PresenceService } from './_services/presence.service';
@@ -13,10 +13,19 @@ export class AppComponent implements OnInit{
   title = 'Dating App';
   users: any;
 
+  name = 'NavigationBarProject';
+
   constructor(private accountService: AccountService, private presence: PresenceService){}
 
   ngOnInit() {
     this.setCurrentUSer();
+  }
+
+  @HostBinding("class.drawer-open")
+  isDrawerOpen: boolean = false;
+
+  toggleDrawer(isDrawerOpen: boolean) {
+    this.isDrawerOpen = isDrawerOpen;
   }
 
   // set user in account service

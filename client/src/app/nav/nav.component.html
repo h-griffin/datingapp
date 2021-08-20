@@ -1,25 +1,23 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
     <a class="navbar-brand" routerLink="/" routerLinkActive="active">Dating App</a>
-    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse"> -->
-      <ul class="navbar-nav mr-auto">
+
+      <ul class="navbar-nav mr-auto NavigationItems" >
         <ng-container *ngIf="accountService.currentUser$ | async">
-          <li class="nav-item">
+          <li class="nav-item NavigationItem">
             <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item NavigationItem">
             <a class="nav-link" routerLink="/lists" routerLinkActive="active">Likes</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item NavigationItem">
             <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
           </li>
-          <li class="nav-item" *appHasRole="['Admin', 'Moderator']" >
+          <li class="nav-item NavigationItem" *appHasRole="['Admin', 'Moderator']" >
             <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
           </li>
         </ng-container>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
         </li>
@@ -53,6 +51,28 @@
         <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
       </form>
     </div>
-  <!-- </div> -->
 </nav>
+ -->
+
+
+ <nav class="navbar navbar-expand-md " id="navbar">
+  <div class="container">
+    <div class="nav-toggler" [class.drawer-open]="isDrawerOpen" id="nav-toggler" (click)="toggleNavDrawer(!isDrawerOpen)">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <a class="navbar-brand override text-light" routerLink="/" routerLinkActive="active">
+      DATING APP</a>
+
+
+    <nav-drawer [isDrawerOpen]="isDrawerOpen" (drawerToggleEmitter)="toggleNavDrawer($event)"></nav-drawer>
+
+
+  </div>
+</nav>
+
+
 

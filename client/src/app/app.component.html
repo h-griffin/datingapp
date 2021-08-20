@@ -3,9 +3,9 @@
 </ngx-spinner>
 
 
-<app-nav></app-nav>
+<app-nav class="nav-bar" (drawerToggleEmitter)="toggleDrawer($event)"></app-nav>
 
-<div class="container" style="margin-top: 100px">
+<div class="container main-section navbar-padding">
    <router-outlet></router-outlet>
 </div>
 

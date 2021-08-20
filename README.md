@@ -5,12 +5,12 @@
 ## Description
 ### <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Puzzle Icon
 {: #puzzle}
-
-- <i class="fas fa-eye"></i> This dating app allows users to filter and view other members of the app. 
-- <i class="fas fa-heart"></i> Users may like other users and view who has liked them. 
-- <i class="fas fa-comments"></i> message one another, and will receive live notifications of new messages. 
-- <i class="fas fa-portrait"></i> Presence tracking will mark a messages date read as well as indicate other users who are online. 
-- <i class="fas fa-comments"></i> Users may also upload photos to their gallery and set a profile picture, after being approved my a moderator or admin. 
+- This dating app allows users to...
+    - <i class="fas fa-eye"></i> filter and view other members of the app. 
+    - <i class="fas fa-heart"></i> Users may like other users and view who has liked them. 
+    - <i class="fas fa-comments"></i> message one another, and receive live notifications of new messages. 
+    - <i class="fas fa-portrait"></i> Presence tracking will mark a messages date read as well as indicate other users who are online. 
+    - <i class="fas fa-comments"></i> Users may also upload photos to their gallery and set a profile picture, after being approved my a moderator or admin. 
 
 ## Languages
 - ### **.Net**

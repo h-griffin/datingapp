@@ -33,6 +33,7 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogueComponent } from './modals/confirm-dialogue/confirm-dialogue.component';
+import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ConfirmDialogueComponent } from './modals/confirm-dialogue/confirm-dial
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogueComponent
+    ConfirmDialogueComponent,
+    NavDrawerComponent
   ],
   imports: [
     BrowserModule,
