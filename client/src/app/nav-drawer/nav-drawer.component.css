@@ -2,6 +2,25 @@
   height: 5%;
 }
 
+.drawer-user{
+  display: block;
+  z-index: 2;
+}
+
+
+.desktop-user{
+  display: none;
+}
+
+
+.drawer-first{
+  margin-top: 5px;
+}
+
+.dropdown{
+  cursor: pointer;
+}
+
 :host {
 	position: fixed;
 	display: block;
@@ -52,10 +71,6 @@
 	background: linear-gradient(to left, rgba(128, 128, 128, 0.4), rgba(128, 128, 128, 0.2), rgba(128, 128, 128, 0.05), rgba(128, 128, 128, 0));
 }
 
-.drawer-login{
-  margin-top: 5px;
-}
-
 @media screen and (min-width: 48rem) {
 
 	:host {
@@ -89,6 +104,14 @@
 	.drawer-inset-shadow {
 		display: none;
 	}
+
+  .drawer-user{
+    display: none;
+  }
+
+  .desktop-user{
+    display: block;
+  }
 
 
 }
