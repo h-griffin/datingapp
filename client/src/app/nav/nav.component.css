@@ -95,7 +95,7 @@ img{
 	width: 100%;
 	left: 0;
 	height: 3px;
-	background-color: black;
+	background-color: #e9ecef;
 	transition: 0.3s ease;
 	transform-origin: center;
 }
@@ -151,6 +151,12 @@ img{
 	color: black;
 }
 
+.navbar{
+  background-color: #e95420;
+}
+
+
+
 @media screen and (min-width: 48rem) {
 
 	.nav-toggler,
@@ -162,5 +168,7 @@ img{
 	.navbar-brand.override {
 		margin: 0 1rem 0 0;
 	}
+
+
 
 }

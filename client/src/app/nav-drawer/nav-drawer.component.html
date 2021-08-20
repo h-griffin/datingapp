@@ -1,5 +1,5 @@
 
-<ul id="navbar-list" class="navbar-nav override">
+<ul id="navbar-list" class="navbar-nav override responsive-color ">
   <ng-container *ngIf="accountService.currentUser$ | async">
 
     <div class="dropdown drawer-user" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
@@ -18,21 +18,21 @@
       <!-- <a class="nav-link override" routerLinkActive="active"></a> -->
     </li>
     <li class="nav-item override mb-1" (click)="onNavLinkClicked($event)">
-      <a class="nav-link override" routerLink="/members" routerLinkActive="active">Matches</a>
+      <a class="nav-link override responsive-color " routerLink="/members" routerLinkActive="active">Matches</a>
     </li>
     <li class="nav-item override" (click)="onNavLinkClicked($event)">
-      <a class="nav-link override" routerLink="/lists" routerLinkActive="active">Likes</a>
+      <a class="nav-link override responsive-color " routerLink="/lists" routerLinkActive="active">Likes</a>
     </li>
     <li class="nav-item override" (click)="onNavLinkClicked($event)">
-      <a class="nav-link override" routerLink="/messages" routerLinkActive="active">Messages</a>
+      <a class="nav-link override responsive-color " routerLink="/messages" routerLinkActive="active">Messages</a>
     </li>
     <li class="nav-item override" (click)="onNavLinkClicked($event)" *appHasRole="['Admin', 'Moderator']" >
-      <a class="nav-link override" routerLink="/admin" routerLinkActive="active">Admin</a>
+      <a class="nav-link override responsive-color " routerLink="/admin" routerLinkActive="active">Admin</a>
     </li>
   </ng-container>
 
   <li class="nav-item override" (click)="onNavLinkClicked($event)">
-    <a class="nav-link override" routerLink="/errors" routerLinkActive="active">Errors</a>
+    <a class="nav-link override responsive-color " routerLink="/errors" routerLinkActive="active">Errors</a>
   </li>
 
   <div class="dropdown desktop-user "  *ngIf="(accountService.currentUser$ | async) as user" dropdown>

@@ -6,7 +6,7 @@
 <div class="container ">
   <form #form="ngForm" class="form-inline " (ngSubmit)="loadMembers()" autocomplete="off">
 
-    <div class="pb-1 mx-auto d-flex">
+    <div class="p-1 mx-auto d-flex">
       <div class="form-group">
         <label>Age From: </label>
         <input type="number" class="form-control ml-1" style="width: 60px;" name="minAge" [(ngModel)]="userParams.minAge">
@@ -28,7 +28,7 @@
     </div>
 
 
-    <div class="pb-1 mx-auto">
+    <div class="p-1 mx-auto">
       <div class="col mx-auto" >
         <div class="btn-group ">
           <button class="btn btn-primary"
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="mx-auto">
+    <div class="p-1 mx-auto">
       <button class="btn btn-primary " type="submit">Apply Filters</button>
       <button (click)="resetFilters()" class="btn btn-info ml-1" type="submit">Reset Filters</button>
     </div>
