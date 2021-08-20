@@ -33,7 +33,7 @@ export class NavComponent implements OnInit {
     opacity = opacity < 1 ? opacity : 1;
 
     if (opacity <= 1) {
-      this.navElement.style.backgroundColor = "rgba(255, 255, 255, " + opacity + ")";
+      this.navElement.style.backgroundColor = "rgba(233,84,32 " + opacity + ")";
     }
 
     if (window.pageYOffset / scrollFactor > 1) {
