@@ -1,5 +1,5 @@
 .card img {
-  margin: 25px;
+  margin: 7%;
   width: 85%;
   height: 85%;
 }
@@ -13,4 +13,25 @@
   padding: 10px 15px;
   background-color: #fff;
   border-top: none;
+}
+
+.isMobile{
+  width: 85%;
+}
+
+.isMobileContainer{
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 48rem) {
+
+  .isMobileContainer{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    grid-gap: 20px;
+  }
+
+
 }
