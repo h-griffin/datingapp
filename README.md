@@ -47,13 +47,13 @@
 ## App Preview
 <div display="flex">
     <!-- <img src="API/assets/images/signup.png" alt="signup" width="375"> -->
-    <img src="API/assets/images/matches.png" alt="matches" width="375" style="margin-top: 5px; margin-right: 5px; border: 1px solid #eee; box-shadow: 0 1px 1pc #ccc;">
-    <img src="API/assets/images/messages.png" alt="messages" width="375" style="margin-top: 5px; margin-right: 5px; border: 1px solid #eee; box-shadow: 0 1px 1pc #ccc;">
-    <img src="API/assets/images/photo-upload.png" alt="photo-upload" width="375" style="margin-top: 5px; margin-right: 5px; border: 1px solid #eee; box-shadow: 0 1px 1pc #ccc;">
+    <img src="API/assets/images/matches.png" alt="matches" width="375" style="border: 1px solid black;">
+    <img src="API/assets/images/messages.png" alt="messages" width="375" style="border: 1px solid black;">
+    <img src="API/assets/images/photo-upload.png" alt="photo-upload" width="375" style="border: 1px solid black;">
     <!-- <img src="API/assets/images/admin-roles.png" alt="admin-roles" width="375"> -->
     <!-- <img src="API/assets/images/admin-photos.png" alt="admin-photos" width="375"> -->
-    <img src="API/assets/images/photo-gallery.png" alt="photo-gallery" width="375" style="margin-top: 5px; margin-right: 5px; border: 1px solid #eee; box-shadow: 0 1px 1pc #ccc;">
+    <img src="API/assets/images/photo-gallery.png" alt="photo-gallery" width="375" style="border: 1px solid black;">
     <!-- <img src="API/assets/images/errors.png" alt="errors" width="375"> -->
-    <img src="API/assets/images/mobile-matches.png" alt="mobile-matches" width="375" style="margin-top: 5px; margin-right: 5px; border: 1px solid #eee; box-shadow: 0 1px 1pc #ccc;"> 
-    <img src="API/assets/images/mobile-sidebar.png" alt="mobile-sidebar" width="375" style="margin-top: 5px; margin-right: 5px; border: 1px solid #eee; box-shadow: 0 1px 1pc #ccc;">
+    <img src="API/assets/images/mobile-matches.png" alt="mobile-matches" width="375" style="border: 1px solid black;"> 
+    <img src="API/assets/images/mobile-sidebar.png" alt="mobile-sidebar" width="375" style="border: 1px solid black;">
 </div>
