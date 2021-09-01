@@ -114,6 +114,10 @@
   .desktop-user{
     display: block;
   }
+  .desktop-user img{
+    width: 50px;
+    height: 50px;
+  }
 
   .drawer-login{
     margin-top: 0px;
