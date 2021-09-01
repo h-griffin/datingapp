@@ -41,8 +41,10 @@
     - Photo upload - Cloudinary.com
     - SignalR Messaging
     - Presence Tracking 
+## Entity Relationship Diagram
+<img src="API/assets/images/erd.png" alt="erd" >
 
-## Preview
+## App Preview
 <div display="flex">
     <!-- <img src="API/assets/images/signup.png" alt="signup" width="375"> -->
     <img src="API/assets/images/matches.png" alt="matches" width="375">
@@ -52,4 +54,6 @@
     <!-- <img src="API/assets/images/admin-photos.png" alt="admin-photos" width="375"> -->
     <img src="API/assets/images/photo-gallery.png" alt="photo-gallery" width="375">
     <!-- <img src="API/assets/images/errors.png" alt="errors" width="375"> -->
+    <img src="API/assets/images/mobile-matches.png" alt="mobile-matches" width="375"> 
+    <img src="API/assets/images/mobile-sidebar.png" alt="mobile-sidebar" width="375">
 </div>
