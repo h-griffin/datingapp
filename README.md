@@ -52,17 +52,27 @@
     <tr>
         <td>
             <img src="API/assets/images/matches.png" alt="matches" width="375">
+        </td>
+        <td>
             <img src="API/assets/images/messages.png" alt="messages" width="375">
         </td>
     </tr>
-    <tr><td>    
-        <img src="API/assets/images/photo-upload.png" alt="photo-upload" width="375">
-        <img src="API/assets/images/photo-gallery.png" alt="photo-gallery" width="375">
-    </td></tr>
-    <tr><td>    
-        <img src="API/assets/images/mobile-matches.png" alt="mobile-matches" width="375"> 
-        <img src="API/assets/images/mobile-sidebar.png" alt="mobile-sidebar" width="375">
-    </td></tr>
+    <tr>
+        <td>    
+            <img src="API/assets/images/photo-upload.png" alt="photo-upload" width="375">
+        </td>
+        <td>
+            <img src="API/assets/images/photo-gallery.png" alt="photo-gallery" width="375">
+        </td>
+    </tr>
+    <tr>
+        <td>    
+            <img src="API/assets/images/mobile-matches.png" alt="mobile-matches" width="375"> 
+        </td>
+        <td>
+            <img src="API/assets/images/mobile-sidebar.png" alt="mobile-sidebar" width="375">
+        </td>
+    </tr>
 
 </table>
 
