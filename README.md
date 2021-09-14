@@ -76,5 +76,3 @@
     </table>
 </div>
 
-
-<!-- comments -->
