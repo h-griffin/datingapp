@@ -8,7 +8,7 @@
     - Users may like other users and view who has liked them. 
     - message one another, and receive live notifications of new messages. 
     - Presence tracking will mark a messages date read and sent as well as indicate other users online. 
-    - Users may also upload photos to their gallery and set a profile picture, after being approved my a moderator or admin. 
+    - Users may upload photos to their gallery and set a profile picture, after being approved my a moderator or admin. 
 
 ## Languages
 - **.Net**
