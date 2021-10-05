@@ -3834,6 +3834,9 @@ heroku/7.51.0 darwin-x64 node-v12.21.0
 - [ ] add roles to admin panel for whos viewing it
 - [ ] notification badges
 - [x] flaot left or right message thread
+- [ ] add personalities or activities to add to profile
+    - activities (hikes, fishing..)
+    - likes (movies, hockey..)
 
 ## uses
 - custom directive
